@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D401A4061A530DC600CD5616 /* PCIDeviceStub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D401A4051A530DC600CD5616 /* PCIDeviceStub.cpp */; };
 		D4096F861A52FCED005C037A /* IntelHDMobileGraphics.h in Headers */ = {isa = PBXBuildFile; fileRef = D4096F851A52FCED005C037A /* IntelHDMobileGraphics.h */; };
 		D4096F881A52FCED005C037A /* IntelHDMobileGraphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4096F871A52FCED005C037A /* IntelHDMobileGraphics.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D401A4031A530B9800CD5616 /* PCIDeviceStub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PCIDeviceStub.h; sourceTree = "<group>"; };
+		D401A4051A530DC600CD5616 /* PCIDeviceStub.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PCIDeviceStub.cpp; sourceTree = "<group>"; };
 		D4096F801A52FCED005C037A /* IntelHDMobileGraphics.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IntelHDMobileGraphics.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4096F841A52FCED005C037A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4096F851A52FCED005C037A /* IntelHDMobileGraphics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntelHDMobileGraphics.h; sourceTree = "<group>"; };
@@ -51,6 +54,8 @@
 				D4096F851A52FCED005C037A /* IntelHDMobileGraphics.h */,
 				D4096F871A52FCED005C037A /* IntelHDMobileGraphics.cpp */,
 				D4096F831A52FCED005C037A /* Supporting Files */,
+				D401A4031A530B9800CD5616 /* PCIDeviceStub.h */,
+				D401A4051A530DC600CD5616 /* PCIDeviceStub.cpp */,
 			);
 			path = IntelHDMobileGraphics;
 			sourceTree = "<group>";
@@ -141,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D401A4061A530DC600CD5616 /* PCIDeviceStub.cpp in Sources */,
 				D4096F881A52FCED005C037A /* IntelHDMobileGraphics.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,6 +273,7 @@
 				D4096F8D1A52FCED005C037A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
