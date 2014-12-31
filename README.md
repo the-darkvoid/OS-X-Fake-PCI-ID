@@ -12,7 +12,7 @@ When looking in detail, both AppleIntelHD5000Graphics and OpenCL.Framework retri
 Due to this any injection though kext or DSDT is ineffective.
 
 IntelHDMobileGraphics however is able to act as a layer in between AppleIntelHD5000Graphics and the IOPCIDevice representing the graphics card.
-This allows modifying the PCI configuration data as it is read from the device, successfully making it appear as Intel HD4600 Desktop.
+This allows modifying the [PCI configuration space data](http://en.wikipedia.org/wiki/PCI_configuration_space) (specifically the `VID` and `PID`) as it is read from the device, successfully making it appear as Intel HD4600 Desktop.
 
 Due to this no patches are needed to either AppleIntelHD5000Graphics or OpenCL.Framework and the Intel HD4600 should work out of the box.
 
