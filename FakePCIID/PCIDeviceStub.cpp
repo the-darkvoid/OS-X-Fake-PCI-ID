@@ -197,4 +197,31 @@ UInt8 PCIDeviceStub::extendedConfigRead8(IOByteCount offset)
     
     return result;
 }
+
+UInt32 PCIDeviceStub::ioRead32(UInt16 offset, IOMemoryMap* map)
+{
+    UInt32 result = super::ioRead32(offset);
+    
+    AlwaysLog("ioRead32 offset 0x%04x --> 0x%08x\n", offset, result);
+    
+    return result;
+}
+
+UInt16 PCIDeviceStub::ioRead16(UInt16 offset, IOMemoryMap* map)
+{
+    UInt16 result = super::ioRead16(offset);
+    
+    AlwaysLog("ioRead16 offset 0x%04x --> 0x%04x\n", offset, result);
+    
+    return result;
+}
+
+UInt8 PCIDeviceStub::ioRead8(UInt16 offset, IOMemoryMap* map)
+{
+    UInt8 result = super::ioRead8(offset);
+    
+    AlwaysLog("ioRead8 offset 0x%04x --> 0x%02x\n", offset, result);
+    
+    return result;
+}
 #endif

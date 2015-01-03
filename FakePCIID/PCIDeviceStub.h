@@ -86,6 +86,33 @@ public:
      @param offset A byte offset into configuration space.
      @result An 8-bit value. */
     UInt8 extendedConfigRead8(IOByteCount offset);
+    
+    /*! @function ioRead32
+     @abstract Reads a 32-bit value from an I/O space aperture.
+     @discussion This method will read a 32-bit value from a 4 byte aligned offset in an I/O space aperture. If a map object is passed in, the value is read relative to it, otherwise to the value is read relative to the I/O space aperture for the bus. This function encapsulates the differences between architectures in generating I/O space operations. An eieio instruction is included on PPC.
+     @param offset An offset into a bus or device's I/O space aperture.
+     @param map If the offset is relative to the beginning of a device's aperture, an IOMemoryMap object for that object should be passed in. Otherwise, passing zero will write the value relative to the beginning of the bus' I/O space.
+     @result The value read in host byte order (big endian on PPC). */
+    
+    virtual UInt32 ioRead32( UInt16 offset, IOMemoryMap * map = 0 );
+    
+    /*! @function ioRead16
+     @abstract Reads a 16-bit value from an I/O space aperture.
+     @discussion This method will read a 16-bit value from a 2 byte aligned offset in an I/O space aperture. If a map object is passed in, the value is read relative to it, otherwise to the value is read relative to the I/O space aperture for the bus. This function encapsulates the differences between architectures in generating I/O space operations. An eieio instruction is included on PPC.
+     @param offset An offset into a bus or device's I/O space aperture.
+     @param map If the offset is relative to the beginning of a device's aperture, an IOMemoryMap object for that object should be passed in. Otherwise, passing zero will write the value relative to the beginning of the bus' I/O space.
+     @result The value read in host byte order (big endian on PPC). */
+    
+    virtual UInt16 ioRead16( UInt16 offset, IOMemoryMap * map = 0 );
+    
+    /*! @function ioRead8
+     @abstract Reads a 8-bit value from an I/O space aperture.
+     @discussion This method will read a 8-bit value from an offset in an I/O space aperture. If a map object is passed in, the value is read relative to it, otherwise to the value is read relative to the I/O space aperture for the bus. This function encapsulates the differences between architectures in generating I/O space operations. An eieio instruction is included on PPC.
+     @param offset An offset into a bus or device's I/O space aperture.
+     @param map If the offset is relative to the beginning of a device's aperture, an IOMemoryMap object for that object should be passed in. Otherwise, passing zero will write the value relative to the beginning of the bus' I/O space.
+     @result The value read. */
+    
+    virtual UInt8 ioRead8( UInt16 offset, IOMemoryMap * map = 0 );
 #endif
 };
 
