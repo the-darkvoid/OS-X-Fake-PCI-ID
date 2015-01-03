@@ -112,7 +112,7 @@ UInt16 PCIDeviceStub::configRead16(IOPCIAddressSpace space, UInt8 offset)
 {
     UInt16 result = super::configRead16(space, offset);
     
-    DebugLog("configRead16 address space(0x%08x, 0x%02x) result: 0x%04x\n", offset, space.bits, result);
+    DebugLog("configRead16 address space(0x%08x, 0x%02x) result: 0x%04x\n", space.bits, offset, result);
 
     UInt16 newResult = result;
     
