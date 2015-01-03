@@ -7,12 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		843192371A588EF50022C7A1 /* PCIDeviceStub.h in Headers */ = {isa = PBXBuildFile; fileRef = D401A4031A530B9800CD5616 /* PCIDeviceStub.h */; };
 		D401A4061A530DC600CD5616 /* PCIDeviceStub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D401A4051A530DC600CD5616 /* PCIDeviceStub.cpp */; };
 		D4096F861A52FCED005C037A /* FakePCIID.h in Headers */ = {isa = PBXBuildFile; fileRef = D4096F851A52FCED005C037A /* FakePCIID.h */; };
 		D4096F881A52FCED005C037A /* FakePCIID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4096F871A52FCED005C037A /* FakePCIID.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8431923D1A5890E80022C7A1 /* FakePCIID_AR9280_as_AR946x.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID_AR9280_as_AR946x.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		8431924D1A58913C0022C7A1 /* FakePCIID_HD4600_HD4400.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID_HD4600_HD4400.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		843192601A5892A40022C7A1 /* FakePCIID_HD4600_HD4400-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "FakePCIID_HD4600_HD4400-Info.plist"; path = "injectors/FakePCIID_HD4600_HD4400-Info.plist"; sourceTree = SOURCE_ROOT; };
+		843192621A5892AD0022C7A1 /* FakePCIID_AR9280_as_AR946x-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "FakePCIID_AR9280_as_AR946x-Info.plist"; path = "injectors/FakePCIID_AR9280_as_AR946x-Info.plist"; sourceTree = SOURCE_ROOT; };
+		84F11DE71A588B8A003DC874 /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; usesTabs = 1; };
+		84F11DE81A588B8A003DC874 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D401A4031A530B9800CD5616 /* PCIDeviceStub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PCIDeviceStub.h; sourceTree = "<group>"; };
 		D401A4051A530DC600CD5616 /* PCIDeviceStub.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PCIDeviceStub.cpp; sourceTree = "<group>"; };
 		D4096F801A52FCED005C037A /* FakePCIID.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID.kext; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +29,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		843192391A5890E80022C7A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		843192491A58913C0022C7A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D4096F7C1A52FCED005C037A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -32,10 +53,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8431923E1A5890E80022C7A1 /* FakePCIID_AR9280_as_AR946x */ = {
+			isa = PBXGroup;
+			children = (
+				843192621A5892AD0022C7A1 /* FakePCIID_AR9280_as_AR946x-Info.plist */,
+			);
+			path = FakePCIID_AR9280_as_AR946x;
+			sourceTree = "<group>";
+		};
+		8431924E1A58913C0022C7A1 /* FakePCIID_HD4600_HD4400 */ = {
+			isa = PBXGroup;
+			children = (
+				843192601A5892A40022C7A1 /* FakePCIID_HD4600_HD4400-Info.plist */,
+			);
+			path = FakePCIID_HD4600_HD4400;
+			sourceTree = "<group>";
+		};
+		84A7B1A61A588D6F00110310 /* Injectors */ = {
+			isa = PBXGroup;
+			children = (
+				8431924E1A58913C0022C7A1 /* FakePCIID_HD4600_HD4400 */,
+				8431923E1A5890E80022C7A1 /* FakePCIID_AR9280_as_AR946x */,
+			);
+			name = Injectors;
+			sourceTree = "<group>";
+		};
 		D4096F761A52FCEC005C037A = {
 			isa = PBXGroup;
 			children = (
+				84F11DE71A588B8A003DC874 /* makefile */,
+				84F11DE81A588B8A003DC874 /* README.md */,
 				D4096F821A52FCED005C037A /* FakePCIID */,
+				84A7B1A61A588D6F00110310 /* Injectors */,
 				D4096F811A52FCED005C037A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -44,6 +93,8 @@
 			isa = PBXGroup;
 			children = (
 				D4096F801A52FCED005C037A /* FakePCIID.kext */,
+				8431923D1A5890E80022C7A1 /* FakePCIID_AR9280_as_AR946x.kext */,
+				8431924D1A58913C0022C7A1 /* FakePCIID_HD4600_HD4400.kext */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -71,17 +122,68 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		8431923A1A5890E80022C7A1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8431924A1A58913C0022C7A1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D4096F7D1A52FCED005C037A /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D4096F861A52FCED005C037A /* FakePCIID.h in Headers */,
+				843192371A588EF50022C7A1 /* PCIDeviceStub.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		8431923C1A5890E80022C7A1 /* FakePCIID_AR9280_as_AR946x */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 843192451A5890E80022C7A1 /* Build configuration list for PBXNativeTarget "FakePCIID_AR9280_as_AR946x" */;
+			buildPhases = (
+				843192381A5890E80022C7A1 /* Sources */,
+				843192391A5890E80022C7A1 /* Frameworks */,
+				8431923A1A5890E80022C7A1 /* Headers */,
+				8431923B1A5890E80022C7A1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FakePCIID_AR9280_as_AR946x;
+			productName = FakePCIID_AR9280_as_AR946x;
+			productReference = 8431923D1A5890E80022C7A1 /* FakePCIID_AR9280_as_AR946x.kext */;
+			productType = "com.apple.product-type.kernel-extension";
+		};
+		8431924C1A58913C0022C7A1 /* FakePCIID_HD4600_HD4400 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 843192551A58913C0022C7A1 /* Build configuration list for PBXNativeTarget "FakePCIID_HD4600_HD4400" */;
+			buildPhases = (
+				843192481A58913C0022C7A1 /* Sources */,
+				843192491A58913C0022C7A1 /* Frameworks */,
+				8431924A1A58913C0022C7A1 /* Headers */,
+				8431924B1A58913C0022C7A1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FakePCIID_HD4600_HD4400;
+			productName = FakePCIID_HD4600_HD4400;
+			productReference = 8431924D1A58913C0022C7A1 /* FakePCIID_HD4600_HD4400.kext */;
+			productType = "com.apple.product-type.kernel-extension";
+		};
 		D4096F7F1A52FCED005C037A /* FakePCIID */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4096F8B1A52FCED005C037A /* Build configuration list for PBXNativeTarget "FakePCIID" */;
@@ -107,8 +209,14 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0610;
-				ORGANIZATIONNAME = "Rob van Oostenrijk";
+				ORGANIZATIONNAME = nobody;
 				TargetAttributes = {
+					8431923C1A5890E80022C7A1 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					8431924C1A58913C0022C7A1 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
 					D4096F7F1A52FCED005C037A = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
@@ -127,11 +235,27 @@
 			projectRoot = "";
 			targets = (
 				D4096F7F1A52FCED005C037A /* FakePCIID */,
+				8431923C1A5890E80022C7A1 /* FakePCIID_AR9280_as_AR946x */,
+				8431924C1A58913C0022C7A1 /* FakePCIID_HD4600_HD4400 */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8431923B1A5890E80022C7A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8431924B1A58913C0022C7A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D4096F7E1A52FCED005C037A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -142,6 +266,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		843192381A5890E80022C7A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		843192481A58913C0022C7A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D4096F7B1A52FCED005C037A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -154,6 +292,50 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		843192461A5890E80022C7A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "injectors/FakePCIID_AR9280_as_AR946x-Info.plist";
+				MODULE_NAME = rehabman.FakePCIID_AR9280_as_AR946x;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Debug;
+		};
+		843192471A5890E80022C7A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "injectors/FakePCIID_AR9280_as_AR946x-Info.plist";
+				MODULE_NAME = rehabman.FakePCIID_AR9280_as_AR946x;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Release;
+		};
+		843192561A58913C0022C7A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "injectors/FakePCIID_HD4600_HD4400-Info.plist";
+				MODULE_NAME = rehabman.FakePCIID_HD4600_HD4400;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Debug;
+		};
+		843192571A58913C0022C7A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "injectors/FakePCIID_HD4600_HD4400-Info.plist";
+				MODULE_NAME = rehabman.FakePCIID_HD4600_HD4400;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Release;
+		};
 		D4096F891A52FCED005C037A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -167,6 +349,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1.0.0d1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -182,6 +365,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MODULE_VERSION = 1.0.0d1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx10.6;
@@ -202,6 +386,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1.0.0d1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -212,6 +397,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MODULE_VERSION = 1.0.0d1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx10.6;
 				SYMROOT = build/Products;
@@ -222,10 +408,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1.0.0d1;
 				INFOPLIST_FILE = FakePCIID/Info.plist;
 				MODULE_NAME = org.rehabman.driver.FakePCIID;
-				MODULE_VERSION = 1.0.0d1;
 				PRODUCT_NAME = FakePCIID;
 				WRAPPER_EXTENSION = kext;
 			};
@@ -235,10 +419,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1.0.0d1;
 				INFOPLIST_FILE = FakePCIID/Info.plist;
 				MODULE_NAME = org.rehabman.driver.FakePCIID;
-				MODULE_VERSION = 1.0.0d1;
 				PRODUCT_NAME = FakePCIID;
 				WRAPPER_EXTENSION = kext;
 			};
@@ -247,6 +429,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		843192451A5890E80022C7A1 /* Build configuration list for PBXNativeTarget "FakePCIID_AR9280_as_AR946x" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				843192461A5890E80022C7A1 /* Debug */,
+				843192471A5890E80022C7A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		843192551A58913C0022C7A1 /* Build configuration list for PBXNativeTarget "FakePCIID_HD4600_HD4400" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				843192561A58913C0022C7A1 /* Debug */,
+				843192571A58913C0022C7A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D4096F7A1A52FCEC005C037A /* Build configuration list for PBXProject "FakePCIID" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

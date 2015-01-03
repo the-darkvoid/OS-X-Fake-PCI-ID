@@ -1,6 +1,8 @@
 # really just some handy scripts...
 
 KEXT=FakePCIID.kext
+KEXT_WIFI=FakePCIID_AR9280_as_AR946x.kext
+KEXT_GFX=FakePCIID_HD4600_HD4400.kext
 DIST=RehabMan-FakePCIID
 BUILDDIR=./Build/Products
 INSTDIR=/System/Library/Extensions
@@ -12,6 +14,8 @@ endif
 ifeq ($(findstring 64,$(BITS)),64)
 OPTIONS:=$(OPTIONS) -arch x86_64
 endif
+
+OPTIONS:=$(OPTIONS) -scheme FakePCIID
 
 .PHONY: all
 all:
@@ -32,13 +36,29 @@ update_kernelcache:
 install_debug:
 	sudo rm -Rf $(INSTDIR)/$(KEXT)
 	sudo cp -R $(BUILDDIR)/Debug/$(KEXT) $(INSTDIR)
+	sudo rm -Rf $(INSTDIR)/$(KEXT_GFX)
+	sudo cp -R $(BUILDDIR)/Debug/$(KEXT_GFX) $(INSTDIR)
 	make update_kernelcache
 
 .PHONY: install
 install:
 	sudo rm -Rf $(INSTDIR)/$(KEXT)
 	sudo cp -R $(BUILDDIR)/Release/$(KEXT) $(INSTDIR)
+	sudo rm -Rf $(INSTDIR)/$(KEXT_GFX)
+	sudo cp -R $(BUILDDIR)/Release/$(KEXT_GFX) $(INSTDIR)
 	make update_kernelcache
+
+.PHONY: install_debug_wifi
+install_debug_wifi:
+	sudo rm -Rf $(INSTDIR)/$(KEXT_WIFI)
+	sudo cp -R $(BUILDDIR)/Debug/$(KEXT_WIFI) $(INSTDIR)
+	make install_debug
+
+.PHONY: install_wifi
+install_wifi:
+	sudo rm -Rf $(INSTDIR)/$(KEXT_WIFI)
+	sudo cp -R $(BUILDDIR)/Release/$(KEXT_WIFI) $(INSTDIR)
+	make install
 
 .PHONY: distribute
 distribute:
