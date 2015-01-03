@@ -18,24 +18,28 @@
  *  Based on iSightDefender concept by Stephen Checkoway (https://github.com/stevecheckoway/iSightDefender)
  */
 
-#ifndef IntelHDMobileGraphics_h
-#define IntelHDMobileGraphics_h
+#ifndef FakePCIID_h
+#define FakePCIID_h
 
 #include <IOKit/IOService.h>
 #include <IOKit/pci/IOPCIDevice.h>
 
-class IntelHDMobileGraphics: public IOService
+class FakePCIID: public IOService
 {
-        OSDeclareDefaultStructors(IntelHDMobileGraphics);
+    OSDeclareDefaultStructors(FakePCIID);
+
+private:
+    //const void *mDeviceVtable;  //REVIEW: not currently used...
+    const void *mStubVtable;
     
-        const void *mDeviceVtable;
-        const void *mStubVtable;
-    
-    public:
-        virtual bool init(OSDictionary *propTable);
-        virtual void free();
-        virtual bool start(IOService *provider);
-        virtual void stop(IOService *provider);
+public:
+    virtual bool init(OSDictionary *propTable);
+    virtual bool attach(IOService * provider);
+#ifdef DEBUG
+    virtual bool start(IOService *provider);
+    virtual void free();
+    virtual void stop(IOService *provider);
+#endif
 };
 
 #endif

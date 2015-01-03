@@ -8,17 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		D401A4061A530DC600CD5616 /* PCIDeviceStub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D401A4051A530DC600CD5616 /* PCIDeviceStub.cpp */; };
-		D4096F861A52FCED005C037A /* IntelHDMobileGraphics.h in Headers */ = {isa = PBXBuildFile; fileRef = D4096F851A52FCED005C037A /* IntelHDMobileGraphics.h */; };
-		D4096F881A52FCED005C037A /* IntelHDMobileGraphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4096F871A52FCED005C037A /* IntelHDMobileGraphics.cpp */; };
+		D4096F861A52FCED005C037A /* FakePCIID.h in Headers */ = {isa = PBXBuildFile; fileRef = D4096F851A52FCED005C037A /* FakePCIID.h */; };
+		D4096F881A52FCED005C037A /* FakePCIID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4096F871A52FCED005C037A /* FakePCIID.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D401A4031A530B9800CD5616 /* PCIDeviceStub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PCIDeviceStub.h; sourceTree = "<group>"; };
 		D401A4051A530DC600CD5616 /* PCIDeviceStub.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PCIDeviceStub.cpp; sourceTree = "<group>"; };
-		D4096F801A52FCED005C037A /* IntelHDMobileGraphics.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IntelHDMobileGraphics.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4096F801A52FCED005C037A /* FakePCIID.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4096F841A52FCED005C037A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D4096F851A52FCED005C037A /* IntelHDMobileGraphics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntelHDMobileGraphics.h; sourceTree = "<group>"; };
-		D4096F871A52FCED005C037A /* IntelHDMobileGraphics.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IntelHDMobileGraphics.cpp; sourceTree = "<group>"; };
+		D4096F851A52FCED005C037A /* FakePCIID.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FakePCIID.h; sourceTree = "<group>"; };
+		D4096F871A52FCED005C037A /* FakePCIID.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FakePCIID.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,7 +35,7 @@
 		D4096F761A52FCEC005C037A = {
 			isa = PBXGroup;
 			children = (
-				D4096F821A52FCED005C037A /* IntelHDMobileGraphics */,
+				D4096F821A52FCED005C037A /* FakePCIID */,
 				D4096F811A52FCED005C037A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,21 +43,21 @@
 		D4096F811A52FCED005C037A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D4096F801A52FCED005C037A /* IntelHDMobileGraphics.kext */,
+				D4096F801A52FCED005C037A /* FakePCIID.kext */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D4096F821A52FCED005C037A /* IntelHDMobileGraphics */ = {
+		D4096F821A52FCED005C037A /* FakePCIID */ = {
 			isa = PBXGroup;
 			children = (
-				D4096F851A52FCED005C037A /* IntelHDMobileGraphics.h */,
-				D4096F871A52FCED005C037A /* IntelHDMobileGraphics.cpp */,
-				D4096F831A52FCED005C037A /* Supporting Files */,
+				D4096F851A52FCED005C037A /* FakePCIID.h */,
+				D4096F871A52FCED005C037A /* FakePCIID.cpp */,
 				D401A4031A530B9800CD5616 /* PCIDeviceStub.h */,
 				D401A4051A530DC600CD5616 /* PCIDeviceStub.cpp */,
+				D4096F831A52FCED005C037A /* Supporting Files */,
 			);
-			path = IntelHDMobileGraphics;
+			path = FakePCIID;
 			sourceTree = "<group>";
 		};
 		D4096F831A52FCED005C037A /* Supporting Files */ = {
@@ -75,16 +75,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4096F861A52FCED005C037A /* IntelHDMobileGraphics.h in Headers */,
+				D4096F861A52FCED005C037A /* FakePCIID.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D4096F7F1A52FCED005C037A /* IntelHDMobileGraphics */ = {
+		D4096F7F1A52FCED005C037A /* FakePCIID */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D4096F8B1A52FCED005C037A /* Build configuration list for PBXNativeTarget "IntelHDMobileGraphics" */;
+			buildConfigurationList = D4096F8B1A52FCED005C037A /* Build configuration list for PBXNativeTarget "FakePCIID" */;
 			buildPhases = (
 				D4096F7B1A52FCED005C037A /* Sources */,
 				D4096F7C1A52FCED005C037A /* Frameworks */,
@@ -95,9 +95,9 @@
 			);
 			dependencies = (
 			);
-			name = IntelHDMobileGraphics;
-			productName = IntelHDMobileGraphics;
-			productReference = D4096F801A52FCED005C037A /* IntelHDMobileGraphics.kext */;
+			name = FakePCIID;
+			productName = FakePCIID;
+			productReference = D4096F801A52FCED005C037A /* FakePCIID.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
 /* End PBXNativeTarget section */
@@ -114,7 +114,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D4096F7A1A52FCEC005C037A /* Build configuration list for PBXProject "IntelHDMobileGraphics" */;
+			buildConfigurationList = D4096F7A1A52FCEC005C037A /* Build configuration list for PBXProject "FakePCIID" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -126,7 +126,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D4096F7F1A52FCED005C037A /* IntelHDMobileGraphics */,
+				D4096F7F1A52FCED005C037A /* FakePCIID */,
 			);
 		};
 /* End PBXProject section */
@@ -147,7 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D401A4061A530DC600CD5616 /* PCIDeviceStub.cpp in Sources */,
-				D4096F881A52FCED005C037A /* IntelHDMobileGraphics.cpp in Sources */,
+				D4096F881A52FCED005C037A /* FakePCIID.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,11 +157,6 @@
 		D4096F891A52FCED005C037A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -173,7 +168,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -187,21 +181,17 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.6;
+				SYMROOT = build/Products;
 			};
 			name = Debug;
 		};
 		D4096F8A1A52FCED005C037A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -215,16 +205,16 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.6;
+				SYMROOT = build/Products;
 			};
 			name = Release;
 		};
@@ -233,10 +223,10 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1.0.0d1;
-				INFOPLIST_FILE = IntelHDMobileGraphics/Info.plist;
-				MODULE_NAME = "com.no-one.IntelHDMobileGraphics";
+				INFOPLIST_FILE = FakePCIID/Info.plist;
+				MODULE_NAME = org.rehabman.driver.FakePCIID;
 				MODULE_VERSION = 1.0.0d1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FakePCIID;
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Debug;
@@ -246,10 +236,10 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1.0.0d1;
-				INFOPLIST_FILE = IntelHDMobileGraphics/Info.plist;
-				MODULE_NAME = "com.no-one.IntelHDMobileGraphics";
+				INFOPLIST_FILE = FakePCIID/Info.plist;
+				MODULE_NAME = org.rehabman.driver.FakePCIID;
 				MODULE_VERSION = 1.0.0d1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FakePCIID;
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Release;
@@ -257,7 +247,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D4096F7A1A52FCEC005C037A /* Build configuration list for PBXProject "IntelHDMobileGraphics" */ = {
+		D4096F7A1A52FCEC005C037A /* Build configuration list for PBXProject "FakePCIID" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D4096F891A52FCED005C037A /* Debug */,
@@ -266,7 +256,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D4096F8B1A52FCED005C037A /* Build configuration list for PBXNativeTarget "IntelHDMobileGraphics" */ = {
+		D4096F8B1A52FCED005C037A /* Build configuration list for PBXNativeTarget "FakePCIID" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D4096F8C1A52FCED005C037A /* Debug */,

@@ -19,71 +19,89 @@
  */
 
 #include <IOKit/IOLib.h>
-#include "IntelHDMobileGraphics.h"
+#include "FakePCIID.h"
 #include "PCIDeviceStub.h"
 
-static const void *getVTable(const IOPCIDevice *object)
+static inline const void *getVTable(const IOPCIDevice *object)
 {
     return *(const void *const *)object;
 }
 
-static void setVTable(IOPCIDevice *object, const void *vtable)
+static inline void setVTable(IOPCIDevice *object, const void *vtable)
 {
     *(const void **)object = vtable;
 }
 
 #define super IOService
-OSDefineMetaClassAndStructors(IntelHDMobileGraphics, IOService);
+OSDefineMetaClassAndStructors(FakePCIID, IOService);
 
-bool IntelHDMobileGraphics::init(OSDictionary *propTable)
+bool FakePCIID::init(OSDictionary *propTable)
 {
-    IOLog("IntelHDMobileGraphics::init()\n");
+    DebugLog("FakePCIID::init()\n");
     
     bool ret = super::init(propTable);
-    
-    if (ret)
+    if (!ret)
     {
-        PCIDeviceStub *stub = OSTypeAlloc(PCIDeviceStub);
-        mStubVtable = getVTable(stub);
-        stub->release();
-    }
-    
-    return ret;
-}
-
-void IntelHDMobileGraphics::free()
-{
-    IOLog("IntelHDMobileGraphics::free()\n");
-    
-    super::free();
-}
-
-bool IntelHDMobileGraphics::start(IOService *provider)
-{
-    IOLog("IntelHDMobileGraphics::start()\n");
-    
-    if (!super::start(provider))
-        return false;
-    
-    IOPCIDevice *device = OSDynamicCast(IOPCIDevice, provider);
-    
-    if (!device)
-    {
-        IOLog("IntelHDMobileGraphics: provider is not a IOPCIDevice: %s",
-              provider->getMetaClass()->getClassName());
-        
+        AlwaysLog("super::init returned false\n");
         return false;
     }
     
-    mDeviceVtable = getVTable(device);
-    setVTable(device, mStubVtable);
+    IOLog("FakePCIID v1.0 starting.\n");
     
+    // capture vtable pointer for PCIDeviceStub
+    PCIDeviceStub *stub = OSTypeAlloc(PCIDeviceStub);
+    mStubVtable = getVTable(stub);
+    stub->release();
+
     return true;
 }
 
-void IntelHDMobileGraphics::stop(IOService *provider)
+#ifdef DEBUG
+void FakePCIID::free()
 {
-    IOLog("IntelHDMobileGraphics::stop()\n");
+    DebugLog("FakePCIID::free()\n");
+    
+    super::free();
+}
+#endif
+
+bool FakePCIID::attach(IOService* provider)
+{
+    DebugLog("FakePCIID::attach()\n");
+
+    IOPCIDevice *device = OSDynamicCast(IOPCIDevice, provider);
+    if (!device)
+    {
+        AlwaysLog("provider is not a IOPCIDevice: %s\n", provider->getMetaClass()->getClassName());
+        return false;
+    }
+
+    //mDeviceVtable = getVTable(device);
+    setVTable(device, mStubVtable);
+    
+    return super::attach(provider);
+}
+
+#ifdef DEBUG
+bool FakePCIID::start(IOService *provider)
+{
+    DebugLog("FakePCIID::start()\n");
+    
+    if (!super::start(provider))
+    {
+        AlwaysLog("super::start returned false\n");
+        return false;
+    }
+
+    return true;
+}
+
+void FakePCIID::stop(IOService *provider)
+{
+    DebugLog("FakePCIID::stop()\n");
+    
     //setVTable(OSDynamicCast(IOPCIDevice, provider), mDeviceVtable);
     super::stop(provider);
 }
+#endif
+
