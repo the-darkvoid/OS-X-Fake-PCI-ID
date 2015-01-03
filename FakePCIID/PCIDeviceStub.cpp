@@ -75,6 +75,7 @@ UInt32 PCIDeviceStub::configRead32(IOPCIAddressSpace space, UInt8 offset)
     switch (offset)
     {
         case kIOPCIConfigVendorID:
+        case kIOPCIConfigDeviceID: // OS X does a non-aligned read, which still returns full vendor / device ID
         {
             int vendor = getIntegerProperty("RM,vendor-id", "vendor-id");
             
