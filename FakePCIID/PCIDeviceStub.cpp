@@ -71,28 +71,40 @@ UInt32 PCIDeviceStub::configRead32(IOPCIAddressSpace space, UInt8 offset)
     
     // Replace return value with injected vendor-id/device-id in ioreg
     UInt32 newResult = result;
-    if (0 == offset)
+   
+    switch (offset)
     {
-        int vendor = getIntegerProperty("DV,vendor-id", "vendor-id");
-        if (-1 != vendor)
-            newResult = (newResult & 0xFFFF0000) | vendor;
-        int device = getIntegerProperty("DV,device-id", "device-id");
-        if (-1 != device)
-            newResult = (device << 16) | (newResult & 0xFFFF);
+        case kIOPCIConfigVendorID:
+        {
+            int vendor = getIntegerProperty("RM,vendor-id", "vendor-id");
+            
+            if (-1 != vendor)
+                newResult = (newResult & 0xFFFF0000) | vendor;
+            
+            int device = getIntegerProperty("RM,device-id", "device-id");
+            
+            if (-1 != device)
+                newResult = (device << 16) | (newResult & 0xFFFF);
+            break;
+        }
+        case kIOPCIConfigSubSystemVendorID:
+        {
+            int vendor = getIntegerProperty("RM,subsystem-vendor-id", "subsystem-vendor-id");
+            
+            if (-1 != vendor)
+                newResult = (newResult & 0xFFFF0000) | vendor;
+            
+            int device = getIntegerProperty("RM,subsystem-id", "subsystem-id");
+
+            if (-1 != device)
+                newResult = (device << 16) | (newResult & 0xFFFF);
+            break;
+        }
     }
-    if (0x2c == offset)
-    {
-        int vendor = getIntegerProperty("DV,subsystem-vendor-id", "subsystem-vendor-id");
-        if (-1 != vendor)
-            newResult = (newResult & 0xFFFF0000) | vendor;
-        int device = getIntegerProperty("DV,subsystem-id", "subsystem-id");
-        if (-1 != device)
-            newResult = (device << 16) | (newResult & 0xFFFF);
-    }
+    
     if (newResult != result)
-    {
         AlwaysLog("configRead32(0x%02x), result 0x%08x -> 0x%08x\n", offset, result, newResult);
-    }
+
     return newResult;
 }
 
@@ -103,34 +115,50 @@ UInt16 PCIDeviceStub::configRead16(IOPCIAddressSpace space, UInt8 offset)
     DebugLog("configRead16 address space(0x%08x, 0x%02x) result: 0x%04x\n", offset, space.bits, result);
 
     UInt16 newResult = result;
-    if (0 == offset)
+    
+    switch (offset)
     {
-        int vendor = getIntegerProperty("DV,vendor-id", "vendor-id");
-        if (-1 != vendor && vendor != result)
-            newResult = vendor;
+        case kIOPCIConfigVendorID:
+        {
+            int vendor = getIntegerProperty("RM,vendor-id", "vendor-id");
+            
+            if (-1 != vendor && vendor != result)
+                newResult = vendor;
+            
+            break;
+        }
+        case kIOPCIConfigDeviceID:
+        {
+            int device = getIntegerProperty("RM,device-id", "device-id");
+            
+            if (-1 != device && device != result)
+                newResult = device;
+            
+            break;
+        }
+        case kIOPCIConfigSubSystemVendorID:
+        {
+            int vendor = getIntegerProperty("RM,subsystem-vendor-id", "subsystem-vendor-id");
+            
+            if (-1 != vendor && vendor != result)
+                newResult = vendor;
+            
+            break;
+        }
+        case kIOPCIConfigSubSystemID:
+        {
+            int device = getIntegerProperty("RM,subsystem-id", "subsystem-id");
+            
+            if (-1 != device && device != result)
+                newResult = device;
+            
+            break;
+        }
     }
-    if (2 == offset)
-    {
-        int device = getIntegerProperty("DV,device-id", "device-id");
-        if (-1 != device && device != result)
-            newResult = device;
-    }
-    if (0x2c == offset)
-    {
-        int vendor = getIntegerProperty("DV,subsystem-vendor-id", "subsystem-vendor-id");
-        if (-1 != vendor && vendor != result)
-            newResult = vendor;
-    }
-    if (0x2e == offset)
-    {
-        int device = getIntegerProperty("DV,subsystem-id", "subsystem-id");
-        if (-1 != device && device != result)
-            newResult = device;
-    }
+
     if (newResult != result)
-    {
         AlwaysLog("configRead16(0x%02x), result 0x%04x -> 0x%04x\n", offset, result, newResult);
-    }
+
     return newResult;
 }
 
