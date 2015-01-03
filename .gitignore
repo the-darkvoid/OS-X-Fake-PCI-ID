@@ -1,2 +1,6 @@
+# Ignore build folder
+build
 # Ignore XCode user-data
-IntelHDMobileGraphics.xcodeproj/xcuserdata
+FakePCIID.xcodeproj/project.xcworkspace/xcuserdata
+FakePCIID.xcodeproj/project.xcworkspace/xcshareddata
+FakePCIID.xcodeproj/xcuserdata
