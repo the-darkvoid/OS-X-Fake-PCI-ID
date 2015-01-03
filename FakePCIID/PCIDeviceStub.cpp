@@ -21,6 +21,16 @@
 #include <IOKit/IOLib.h>
 #include "PCIDeviceStub.h"
 
+// We want ioreg to still see the normal class hierarchy for hooked
+// provider IOPCIDevice
+//
+// Normal:
+//  IOPCIDevice : IOService : IORegistryEntry : OSObject
+//
+// Without this hack:
+//  PCIDeviceStub : IOPCIDevice : IOService : IORegistryEntry : OSObject
+//
+
 #define hack_OSDefineMetaClassAndStructors(className, superclassName) \
     hack_OSDefineMetaClassAndStructorsWithInit(className, superclassName, )
 
@@ -78,12 +88,10 @@ UInt32 PCIDeviceStub::configRead32(IOPCIAddressSpace space, UInt8 offset)
         case kIOPCIConfigDeviceID: // OS X does a non-aligned read, which still returns full vendor / device ID
         {
             int vendor = getIntegerProperty("RM,vendor-id", "vendor-id");
-            
             if (-1 != vendor)
                 newResult = (newResult & 0xFFFF0000) | vendor;
             
             int device = getIntegerProperty("RM,device-id", "device-id");
-            
             if (-1 != device)
                 newResult = (device << 16) | (newResult & 0xFFFF);
             break;
@@ -91,12 +99,10 @@ UInt32 PCIDeviceStub::configRead32(IOPCIAddressSpace space, UInt8 offset)
         case kIOPCIConfigSubSystemVendorID:
         {
             int vendor = getIntegerProperty("RM,subsystem-vendor-id", "subsystem-vendor-id");
-            
             if (-1 != vendor)
                 newResult = (newResult & 0xFFFF0000) | vendor;
             
             int device = getIntegerProperty("RM,subsystem-id", "subsystem-id");
-
             if (-1 != device)
                 newResult = (device << 16) | (newResult & 0xFFFF);
             break;
@@ -116,43 +122,37 @@ UInt16 PCIDeviceStub::configRead16(IOPCIAddressSpace space, UInt8 offset)
     DebugLog("configRead16 address space(0x%08x, 0x%02x) result: 0x%04x\n", space.bits, offset, result);
 
     UInt16 newResult = result;
-    
     switch (offset)
     {
         case kIOPCIConfigVendorID:
         {
             int vendor = getIntegerProperty("RM,vendor-id", "vendor-id");
-            
-            if (-1 != vendor && vendor != result)
+            if (-1 != vendor)
                 newResult = vendor;
-            
             break;
         }
+
         case kIOPCIConfigDeviceID:
         {
             int device = getIntegerProperty("RM,device-id", "device-id");
-            
-            if (-1 != device && device != result)
+            if (-1 != device)
                 newResult = device;
-            
             break;
         }
+
         case kIOPCIConfigSubSystemVendorID:
         {
             int vendor = getIntegerProperty("RM,subsystem-vendor-id", "subsystem-vendor-id");
-            
-            if (-1 != vendor && vendor != result)
+            if (-1 != vendor)
                 newResult = vendor;
-            
             break;
         }
+
         case kIOPCIConfigSubSystemID:
         {
             int device = getIntegerProperty("RM,subsystem-id", "subsystem-id");
-            
-            if (-1 != device && device != result)
+            if (-1 != device)
                 newResult = device;
-            
             break;
         }
     }
