@@ -76,7 +76,7 @@ bool FakePCIID::attach(IOService* provider)
         return false;
     }
 
-    //mDeviceVtable = getVTable(device);
+    mDeviceVtable = getVTable(device);
     setVTable(device, mStubVtable);
     
     return super::attach(provider);
@@ -100,7 +100,7 @@ void FakePCIID::stop(IOService *provider)
 {
     DebugLog("FakePCIID::stop()\n");
     
-    //setVTable(OSDynamicCast(IOPCIDevice, provider), mDeviceVtable);
+    setVTable(OSDynamicCast(IOPCIDevice, provider), mDeviceVtable);
     super::stop(provider);
 }
 #endif
