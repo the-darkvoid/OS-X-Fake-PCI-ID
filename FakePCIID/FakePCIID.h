@@ -29,7 +29,7 @@ class FakePCIID: public IOService
     OSDeclareDefaultStructors(FakePCIID);
 
 private:
-    //const void *mDeviceVtable;  //REVIEW: not currently used...
+    const void *mDeviceVtable;
     const void *mStubVtable;
     
 public:
