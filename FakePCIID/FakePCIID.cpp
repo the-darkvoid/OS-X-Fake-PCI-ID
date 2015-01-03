@@ -35,40 +35,12 @@ static inline void setVTable(IOPCIDevice *object, const void *vtable)
 #define super IOService
 OSDefineMetaClassAndStructors(FakePCIID, IOService);
 
-bool FakePCIID::init(OSDictionary *propTable)
+bool FakePCIID::hookProvider(IOService *provider)
 {
-    DebugLog("FakePCIID::init()\n");
-    
-    bool ret = super::init(propTable);
-    if (!ret)
-    {
-        AlwaysLog("super::init returned false\n");
-        return false;
-    }
-    
-    IOLog("FakePCIID v1.0 starting.\n");
-    
-    // capture vtable pointer for PCIDeviceStub
-    PCIDeviceStub *stub = OSTypeAlloc(PCIDeviceStub);
-    mStubVtable = getVTable(stub);
-    stub->release();
+    if (mDeviceVtable)
+        return true;  // already hooked
 
-    return true;
-}
-
-#ifdef DEBUG
-void FakePCIID::free()
-{
-    DebugLog("FakePCIID::free()\n");
-    
-    super::free();
-}
-#endif
-
-bool FakePCIID::attach(IOService* provider)
-{
-    DebugLog("FakePCIID::attach()\n");
-
+    // hook provider IOPCIDevice vtable on attach/start
     IOPCIDevice *device = OSDynamicCast(IOPCIDevice, provider);
     if (!device)
     {
@@ -78,14 +50,58 @@ bool FakePCIID::attach(IOService* provider)
 
     mDeviceVtable = getVTable(device);
     setVTable(device, mStubVtable);
+
+    return true;
+}
+
+void FakePCIID::unhookProvider(IOService* provider)
+{
+    if (!mDeviceVtable)
+        return; // not hooked
+
+    // restore provider IOPCIDevice vtable on stop
+    IOPCIDevice* device = OSDynamicCast(IOPCIDevice, provider);
+    if (device)
+        setVTable(device, mDeviceVtable);
+    mDeviceVtable = NULL;
+}
+
+bool FakePCIID::init(OSDictionary *propTable)
+{
+    DebugLog("FakePCIID::init() %p\n", this);
     
+    bool ret = super::init(propTable);
+    if (!ret)
+    {
+        AlwaysLog("super::init returned false\n");
+        return false;
+    }
+
+    IOLog("FakePCIID v1.0 starting.\n");
+
+    // capture vtable pointer for PCIDeviceStub
+    PCIDeviceStub *stub = OSTypeAlloc(PCIDeviceStub);
+    mStubVtable = getVTable(stub);
+    stub->release();
+
+    mDeviceVtable = NULL;
+    
+    return true;
+}
+
+bool FakePCIID::attach(IOService* provider)
+{
+    DebugLog("FakePCIID::attach() %p\n", this);
+
+    if (!hookProvider(provider))
+        return false;
+
     return super::attach(provider);
 }
 
-#ifdef DEBUG
 bool FakePCIID::start(IOService *provider)
 {
-    DebugLog("FakePCIID::start()\n");
+    DebugLog("FakePCIID::start() %p\n", this);
     
     if (!super::start(provider))
     {
@@ -93,15 +109,34 @@ bool FakePCIID::start(IOService *provider)
         return false;
     }
 
+    if (!hookProvider(provider))
+        return false;
+
     return true;
 }
 
 void FakePCIID::stop(IOService *provider)
 {
-    DebugLog("FakePCIID::stop()\n");
-    
-    setVTable(OSDynamicCast(IOPCIDevice, provider), mDeviceVtable);
+    DebugLog("FakePCIID::stop() %p\n", this);
+
+    unhookProvider(provider);
+
     super::stop(provider);
+}
+
+#ifdef DEBUG
+void FakePCIID::detach(IOService *provider)
+{
+    DebugLog("FakePCIID::detach() %p\n", this);
+
+    return super::detach(provider);
+}
+
+void FakePCIID::free()
+{
+    DebugLog("FakePCIID::free() %p\n", this);
+
+    super::free();
 }
 #endif
 

@@ -31,14 +31,17 @@ class FakePCIID: public IOService
 private:
     const void *mDeviceVtable;
     const void *mStubVtable;
+    bool hookProvider(IOService* provider);
+    void unhookProvider(IOService* provider);
     
 public:
     virtual bool init(OSDictionary *propTable);
-    virtual bool attach(IOService * provider);
-#ifdef DEBUG
+    virtual bool attach(IOService *provider);
     virtual bool start(IOService *provider);
-    virtual void free();
     virtual void stop(IOService *provider);
+#ifdef DEBUG
+    virtual void free();
+    virtual void detach(IOService *provider);
 #endif
 };
 
