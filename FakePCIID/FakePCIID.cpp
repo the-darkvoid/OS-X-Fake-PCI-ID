@@ -48,22 +48,26 @@ bool FakePCIID::hookProvider(IOService *provider)
         return false;
     }
 
+    mProvider = device;
+    device->retain();
+
     mDeviceVtable = getVTable(device);
     setVTable(device, mStubVtable);
 
     return true;
 }
 
-void FakePCIID::unhookProvider(IOService* provider)
+void FakePCIID::unhookProvider()
 {
     if (!mDeviceVtable)
         return; // not hooked
 
     // restore provider IOPCIDevice vtable on stop
-    IOPCIDevice* device = OSDynamicCast(IOPCIDevice, provider);
-    if (device)
-        setVTable(device, mDeviceVtable);
+    setVTable(mProvider, mDeviceVtable);
     mDeviceVtable = NULL;
+
+    mProvider->release();
+    mProvider = NULL;
 }
 
 bool FakePCIID::init(OSDictionary *propTable)
@@ -85,6 +89,7 @@ bool FakePCIID::init(OSDictionary *propTable)
     stub->release();
 
     mDeviceVtable = NULL;
+    mProvider = NULL;
     
     return true;
 }
@@ -119,9 +124,18 @@ void FakePCIID::stop(IOService *provider)
 {
     DebugLog("FakePCIID::stop() %p\n", this);
 
-    unhookProvider(provider);
+    unhookProvider();
 
     super::stop(provider);
+}
+
+void FakePCIID::free()
+{
+    DebugLog("FakePCIID::free() %p\n", this);
+
+    unhookProvider();
+
+    super::free();
 }
 
 #ifdef DEBUG
@@ -130,13 +144,6 @@ void FakePCIID::detach(IOService *provider)
     DebugLog("FakePCIID::detach() %p\n", this);
 
     return super::detach(provider);
-}
-
-void FakePCIID::free()
-{
-    DebugLog("FakePCIID::free() %p\n", this);
-
-    super::free();
 }
 #endif
 
