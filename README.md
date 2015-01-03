@@ -1,5 +1,23 @@
-Intel HD Mobile Graphics
-=====================
+FakePCIID.kext forked from IntelHDMobileGraphics
+================================================
+
+Note: This project, FakePCIID.kext, is forked from IntelHDMobileGraphics.kext
+
+It is a generic mechanism that can hook any PCI device, to provide alternate PCI IDs.
+
+For example, a second entry is found in the current project for Atheros WiFi cards.
+
+More information to be added later.
+
+Future work:
+- separate IOKitPersonalities to injector kexts
+- code cleanup
+- further testing
+- finish README.md
+
+
+Original README
+===============
 
 On OS X Yosemite Intel HD4600 Mobile graphic cards are no longer supported out of the box, even when injecting a different device ID through DSDT.
 
