@@ -35,7 +35,8 @@
 class PCIDeviceStub : public IOPCIDevice
 {
     OSDeclareDefaultStructors(PCIDeviceStub);
-    
+    typedef IOPCIDevice super;
+
 protected:
     int getIntegerProperty(const char* aKey, const char* alternateKey);
     
@@ -114,6 +115,16 @@ public:
     
     virtual UInt8 ioRead8( UInt16 offset, IOMemoryMap * map = 0 );
 #endif
+};
+
+class PCIDeviceStub_HD4600_HD4400 : public PCIDeviceStub
+{
+    OSDeclareDefaultStructors(PCIDeviceStub_HD4600_HD4400);
+    typedef PCIDeviceStub super;
+
+public:
+    virtual UInt32 configRead32(IOPCIAddressSpace space, UInt8 offset);
+    virtual UInt16 configRead16(IOPCIAddressSpace space, UInt8 offset);
 };
 
 #endif
