@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Source Code</key>
+	<string>https://github.com/RehabMan/FakePCIID</string>
+	<key>CFBundleIdentifier</key>
+	<string>org.rehabman.injector.HD4600-HD4400</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>FakePCIID_HD4600_HD4400</string>
+	<key>CFBundlePackageType</key>
+	<string>KEXT</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$MODULE_VERSION</string>
+	<key>CFBundleVersion</key>
+	<string>$MODULE_VERSION</string>
+	<key>IOKitPersonalities</key>
+	<dict>
+		<key>HD4600 and HD4400 mobile</key>
+		<dict>
+			<key>RM,Version</key>
+			<string>${PRODUCT_NAME} ${MODULE_VERSION}</string>
+			<key>RM,Build</key>
+			<string>${CONFIGURATION}-${LOGNAME}</string>
+			<key>CFBundleIdentifier</key>
+			<string>org.rehabman.driver.FakePCIID</string>
+			<key>IOClass</key>
+			<string>FakePCIID</string>
+			<key>IOMatchCategory</key>
+			<string>FakePCIID</string>
+			<key>IOPCIClassMatch</key>
+			<string>0x03000000&amp;0xff000000</string>
+			<key>IOPCIPrimaryMatch</key>
+			<string>0x04128086 0x04168086 0x0a168086</string>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+		</dict>
+	</dict>
+	<key>OSBundleRequired</key>
+	<string>Root</string>
+</dict>
+</plist>
