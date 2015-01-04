@@ -158,10 +158,10 @@ Assuming that the function "compatible" served in the original example is with s
 
 Properties supported by FakePCIID and their corresponding PCI configuration space offsets are listed below:
 
-Offset 0x00: "vendor-id", "RM,vendor-id"
-Offset 0x02: "device-id", "RM,device-id"
-Offset 0x2C: "subsystem-vendor-id", "RM,subsystem-vendor-id"
-Offset 0x2E: "subsystem-id", "RM,subsystem-id"
+- Offset `0x00`: "vendor-id", "RM,vendor-id"
+- Offset `0x02`: "device-id", "RM,device-id"
+- Offset `0x2c`: "subsystem-vendor-id", "RM,subsystem-vendor-id"
+- Offset `0x2e`: "subsystem-id", "RM,subsystem-id"
 
 For more information on the PCI configuration space: http://en.wikipedia.org/wiki/PCI_configuration_space
 
