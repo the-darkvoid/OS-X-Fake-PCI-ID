@@ -47,6 +47,14 @@ bool FakePCIID::hookProvider(IOService *provider)
         return false;
     }
 
+#ifdef DEBUG
+    // merge overriding properties into the provider
+    OSDictionary *providerDict = (OSDictionary*)getProperty("FakeProperties");
+    
+    if (providerDict != NULL)
+        provider->getPropertyTable()->merge(providerDict);
+#endif
+    
     mProvider = device;
     device->retain();
 
