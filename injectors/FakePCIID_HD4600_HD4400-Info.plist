@@ -27,9 +27,9 @@
 			<key>CFBundleIdentifier</key>
 			<string>org.rehabman.driver.FakePCIID</string>
 			<key>IOClass</key>
-			<string>FakePCIID</string>
+			<string>FakePCIID_HD4600_HD4400</string>
 			<key>IOMatchCategory</key>
-			<string>FakePCIID</string>
+			<string>FakePCIID_HD4600_HD4400</string>
 			<key>IOPCIClassMatch</key>
 			<string>0x03000000&amp;0xff000000</string>
 			<key>IOPCIPrimaryMatch</key>

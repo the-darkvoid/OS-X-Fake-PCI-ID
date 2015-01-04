@@ -24,11 +24,12 @@
 #include <IOKit/IOService.h>
 #include <IOKit/pci/IOPCIDevice.h>
 
-class FakePCIID: public IOService
+class FakePCIID : public IOService
 {
     OSDeclareDefaultStructors(FakePCIID);
+    typedef IOService super;
 
-private:
+protected:
     const void *mDeviceVtable;
     const void *mStubVtable;
     IOPCIDevice* mProvider;
@@ -45,6 +46,15 @@ public:
 #ifdef DEBUG
     virtual void detach(IOService *provider);
 #endif
+};
+
+class FakePCIID_HD4600_HD4400 : public FakePCIID
+{
+    OSDeclareDefaultStructors(FakePCIID_HD4600_HD4400);
+    typedef FakePCIID super;
+
+public:
+    virtual bool init(OSDictionary *propTable);
 };
 
 #endif
