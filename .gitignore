@@ -1,4 +1,5 @@
 .DS_Store
+Distribute
 # Ignore build folder
 build
 # Ignore XCode user-data

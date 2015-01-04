@@ -2,22 +2,28 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Source Code</key>
+	<string>https://github.com/RehabMan/FakePCIID</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.rehabman.driver.AtherosAR9280</string>
+	<string>org.rehabman.injector.AR9280-as-AR946x</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>AtherosAR9280</string>
+	<string>FakePCIID_AR9280_as_AR946x</string>
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$MODULE_VERSION</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>$MODULE_VERSION</string>
 	<key>IOKitPersonalities</key>
 	<dict>
-		<key>AtherosAR9280</key>
+		<key>AR9280 as AR946x</key>
 		<dict>
+			<key>RM,Version</key>
+			<string>${PRODUCT_NAME} ${MODULE_VERSION}</string>
+			<key>RM,Build</key>
+			<string>${CONFIGURATION}-${LOGNAME}</string>
 			<key>CFBundleIdentifier</key>
 			<string>org.rehabman.driver.FakePCIID</string>
 			<key>IOClass</key>
@@ -30,20 +36,7 @@
 			<string>IOPCIDevice</string>
 		</dict>
 	</dict>
-	<key>OSBundleLibraries</key>
-	<dict>
-		<key>com.apple.iokit.IOPCIFamily</key>
-		<string>1.0.0</string>
-		<key>com.apple.kpi.bsd</key>
-		<string>8.0.0</string>
-		<key>com.apple.kpi.iokit</key>
-		<string>8.0.0</string>
-		<key>com.apple.kpi.libkern</key>
-		<string>8.0.0</string>
-		<key>com.apple.kpi.mach</key>
-		<string>8.0.0</string>
-		<key>com.apple.kpi.unsupported</key>
-		<string>8.0.0</string>
-	</dict>
+	<key>OSBundleRequired</key>
+	<string>Root</string>
 </dict>
 </plist>
