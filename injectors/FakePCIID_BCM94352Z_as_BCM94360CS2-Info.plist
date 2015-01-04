@@ -25,7 +25,7 @@
 			<key>IOMatchCategory</key>
 			<string>FakePCIID</string>
 			<key>IOPCIPrimaryMatch</key>
-			<string>0x43a014e4</string>
+			<string>0x43b114e4 0x43a014e4</string>
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>
 			<key>RM,Build</key>
