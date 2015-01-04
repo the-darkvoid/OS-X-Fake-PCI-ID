@@ -57,7 +57,6 @@
         : OSMetaClass(#className, className::superClass, sizeof(className))   \
         { init; }
 
-#define super IOPCIDevice
 hack_OSDefineMetaClassAndStructors(PCIDeviceStub, IOPCIDevice);
 
 int PCIDeviceStub::getIntegerProperty(const char *aKey, const char *alternateKey)
@@ -81,7 +80,6 @@ UInt32 PCIDeviceStub::configRead32(IOPCIAddressSpace space, UInt8 offset)
     
     // Replace return value with injected vendor-id/device-id in ioreg
     UInt32 newResult = result;
-   
     switch (offset)
     {
         case kIOPCIConfigVendorID:
@@ -131,7 +129,6 @@ UInt16 PCIDeviceStub::configRead16(IOPCIAddressSpace space, UInt8 offset)
                 newResult = vendor;
             break;
         }
-
         case kIOPCIConfigDeviceID:
         {
             int device = getIntegerProperty("RM,device-id", "device-id");
@@ -139,7 +136,6 @@ UInt16 PCIDeviceStub::configRead16(IOPCIAddressSpace space, UInt8 offset)
                 newResult = device;
             break;
         }
-
         case kIOPCIConfigSubSystemVendorID:
         {
             int vendor = getIntegerProperty("RM,subsystem-vendor-id", "subsystem-vendor-id");
@@ -147,7 +143,6 @@ UInt16 PCIDeviceStub::configRead16(IOPCIAddressSpace space, UInt8 offset)
                 newResult = vendor;
             break;
         }
-
         case kIOPCIConfigSubSystemID:
         {
             int device = getIntegerProperty("RM,subsystem-id", "subsystem-id");
@@ -254,3 +249,54 @@ UInt8 PCIDeviceStub::ioRead8(UInt16 offset, IOMemoryMap* map)
     return result;
 }
 #endif
+
+hack_OSDefineMetaClassAndStructors(PCIDeviceStub_HD4600_HD4400, PCIDeviceStub);
+
+#define kHD4600_Desktop_DeviceID 0x0412
+
+UInt32 PCIDeviceStub_HD4600_HD4400::configRead32(IOPCIAddressSpace space, UInt8 offset)
+{
+    UInt32 result = super::configRead32(space, offset);
+
+    DebugLog("HD4600_HD4400: configRead32 address space(0x%08x, 0x%02x) result: 0x%08x\n", space.bits, offset, result);
+
+    // Replace return value with injected vendor-id/device-id in ioreg
+    UInt32 newResult = result;
+    switch (offset)
+    {
+        case kIOPCIConfigVendorID:
+        case kIOPCIConfigDeviceID: // OS X does a non-aligned read, which still returns full vendor / device ID
+        {
+            newResult = (kHD4600_Desktop_DeviceID << 16) | (newResult & 0xFFFF);
+            break;
+        }
+    }
+
+    if (newResult != result)
+        AlwaysLog("HD4600_HD4400: configRead32(0x%02x), result 0x%08x -> 0x%08x\n", offset, result, newResult);
+
+    return newResult;
+}
+
+UInt16 PCIDeviceStub_HD4600_HD4400::configRead16(IOPCIAddressSpace space, UInt8 offset)
+{
+    UInt16 result = super::configRead16(space, offset);
+
+    DebugLog("HD4600_HD4400: configRead16 address space(0x%08x, 0x%02x) result: 0x%04x\n", space.bits, offset, result);
+
+    UInt16 newResult = result;
+    switch (offset)
+    {
+        case kIOPCIConfigDeviceID:
+        {
+            newResult = kHD4600_Desktop_DeviceID;
+            break;
+        }
+    }
+
+    if (newResult != result)
+        AlwaysLog("HD4600_HD4400: configRead16(0x%02x), result 0x%04x -> 0x%04x\n", offset, result, newResult);
+
+    return newResult;
+}
+
