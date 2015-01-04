@@ -46,6 +46,12 @@ bool FakePCIID::hookProvider(IOService *provider)
         AlwaysLog("provider is not a IOPCIDevice: %s\n", provider->getMetaClass()->getClassName());
         return false;
     }
+    
+    // merge overriding properties into the provider
+    OSDictionary *providerDict = (OSDictionary*)getProperty("FakeProperties");
+    
+    if (providerDict != NULL)
+        provider->getPropertyTable()->merge(providerDict);
 
     mProvider = device;
     device->retain();
