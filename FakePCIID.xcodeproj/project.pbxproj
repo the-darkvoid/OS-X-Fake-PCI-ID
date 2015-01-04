@@ -22,6 +22,8 @@
 		84F11DE81A588B8A003DC874 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D401A4031A530B9800CD5616 /* PCIDeviceStub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PCIDeviceStub.h; sourceTree = "<group>"; };
 		D401A4051A530DC600CD5616 /* PCIDeviceStub.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PCIDeviceStub.cpp; sourceTree = "<group>"; };
+		D405EF6E1A59104300547072 /* FakePCIID_BCM94352Z_as_BCM94360CS2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "FakePCIID_BCM94352Z_as_BCM94360CS2-Info.plist"; path = "injectors/FakePCIID_BCM94352Z_as_BCM94360CS2-Info.plist"; sourceTree = "<group>"; };
+		D405EF741A5910E000547072 /* FakePCIID_BCM94352Z_as_BCM94360CS2.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID_BCM94352Z_as_BCM94360CS2.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4096F801A52FCED005C037A /* FakePCIID.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4096F841A52FCED005C037A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4096F851A52FCED005C037A /* FakePCIID.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FakePCIID.h; sourceTree = "<group>"; };
@@ -37,6 +39,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		843192491A58913C0022C7A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D405EF701A5910E000547072 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -72,10 +81,19 @@
 		84A7B1A61A588D6F00110310 /* Injectors */ = {
 			isa = PBXGroup;
 			children = (
+				D405EF6D1A59102200547072 /* FakePCIID_FakePCIID_BCM94352Z_as_BCM94360CS2 */,
 				8431924E1A58913C0022C7A1 /* FakePCIID_HD4600_HD4400 */,
 				8431923E1A5890E80022C7A1 /* FakePCIID_AR9280_as_AR946x */,
 			);
 			name = Injectors;
+			sourceTree = "<group>";
+		};
+		D405EF6D1A59102200547072 /* FakePCIID_FakePCIID_BCM94352Z_as_BCM94360CS2 */ = {
+			isa = PBXGroup;
+			children = (
+				D405EF6E1A59104300547072 /* FakePCIID_BCM94352Z_as_BCM94360CS2-Info.plist */,
+			);
+			name = FakePCIID_FakePCIID_BCM94352Z_as_BCM94360CS2;
 			sourceTree = "<group>";
 		};
 		D4096F761A52FCEC005C037A = {
@@ -95,6 +113,7 @@
 				D4096F801A52FCED005C037A /* FakePCIID.kext */,
 				8431923D1A5890E80022C7A1 /* FakePCIID_AR9280_as_AR946x.kext */,
 				8431924D1A58913C0022C7A1 /* FakePCIID_HD4600_HD4400.kext */,
+				D405EF741A5910E000547072 /* FakePCIID_BCM94352Z_as_BCM94360CS2.kext */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,6 +149,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8431924A1A58913C0022C7A1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D405EF711A5910E000547072 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -184,6 +210,24 @@
 			productReference = 8431924D1A58913C0022C7A1 /* FakePCIID_HD4600_HD4400.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
+		D405EF731A5910E000547072 /* FakePCIID_BCM94352Z_as_BCM94360CS2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D405EF7A1A5910E000547072 /* Build configuration list for PBXNativeTarget "FakePCIID_BCM94352Z_as_BCM94360CS2" */;
+			buildPhases = (
+				D405EF6F1A5910E000547072 /* Sources */,
+				D405EF701A5910E000547072 /* Frameworks */,
+				D405EF711A5910E000547072 /* Headers */,
+				D405EF721A5910E000547072 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FakePCIID_BCM94352Z_as_BCM94360CS2;
+			productName = FakePCIID_BCM94352Z_as_BCM94360CS2;
+			productReference = D405EF741A5910E000547072 /* FakePCIID_BCM94352Z_as_BCM94360CS2.kext */;
+			productType = "com.apple.product-type.kernel-extension";
+		};
 		D4096F7F1A52FCED005C037A /* FakePCIID */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4096F8B1A52FCED005C037A /* Build configuration list for PBXNativeTarget "FakePCIID" */;
@@ -217,6 +261,9 @@
 					8431924C1A58913C0022C7A1 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
+					D405EF731A5910E000547072 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
 					D4096F7F1A52FCED005C037A = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
@@ -237,6 +284,7 @@
 				D4096F7F1A52FCED005C037A /* FakePCIID */,
 				8431923C1A5890E80022C7A1 /* FakePCIID_AR9280_as_AR946x */,
 				8431924C1A58913C0022C7A1 /* FakePCIID_HD4600_HD4400 */,
+				D405EF731A5910E000547072 /* FakePCIID_BCM94352Z_as_BCM94360CS2 */,
 			);
 		};
 /* End PBXProject section */
@@ -250,6 +298,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8431924B1A58913C0022C7A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D405EF721A5910E000547072 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -274,6 +329,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		843192481A58913C0022C7A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D405EF6F1A5910E000547072 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -331,6 +393,28 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "injectors/FakePCIID_HD4600_HD4400-Info.plist";
 				MODULE_NAME = rehabman.FakePCIID_HD4600_HD4400;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Release;
+		};
+		D405EF7B1A5910E000547072 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "injectors/FakePCIID_BCM94352Z_as_BCM94360CS2-Info.plist";
+				MODULE_NAME = rehabman.FakePCIID_BCM94352Z_as_BCM94360CS2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Debug;
+		};
+		D405EF7C1A5910E000547072 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "injectors/FakePCIID_BCM94352Z_as_BCM94360CS2-Info.plist";
+				MODULE_NAME = rehabman.FakePCIID_BCM94352Z_as_BCM94360CS2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -443,6 +527,15 @@
 			buildConfigurations = (
 				843192561A58913C0022C7A1 /* Debug */,
 				843192571A58913C0022C7A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D405EF7A1A5910E000547072 /* Build configuration list for PBXNativeTarget "FakePCIID_BCM94352Z_as_BCM94360CS2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D405EF7B1A5910E000547072 /* Debug */,
+				D405EF7C1A5910E000547072 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
