@@ -16,6 +16,45 @@
 	<string>$MODULE_VERSION</string>
 	<key>IOKitPersonalities</key>
 	<dict>
+		<key>Airport_Brcm4360</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AirPort.Brcm4360</string>
+			<key>IOClass</key>
+			<string>AirPort_Brcm4360</string>
+			<key>IOMatchCategory</key>
+			<string>IODefaultMatchCategory</string>
+			<key>IOPCIPrimaryMatch</key>
+			<string>0x43b114e4</string>
+			<key>IOProbeScore</key>
+			<integer>901</integer>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>TruePowerOff</key>
+			<true/>
+		</dict>
+		<key>BCM94352Z Properties Inject</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AppleUSBMergeNub</string>
+			<key>IOClass</key>
+			<string>AppleUSBMergeNub</string>
+			<key>IOPCIPrimaryMatch</key>
+			<string>0x43b114e4</string>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>IOProviderMergeProperties</key>
+			<dict>
+				<key>device-id</key>
+				<data>oEMAAA==</data>
+				<key>subsystem-id</key>
+				<data>NAEAAA==</data>
+				<key>subsystem-vendor-id</key>
+				<data>axAAAA==</data>
+				<key>vendor-id</key>
+				<data>5BQAAA==</data>
+			</dict>
+		</dict>
 		<key>BCM94352Z as BCM94360CS2</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
