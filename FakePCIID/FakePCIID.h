@@ -36,6 +36,9 @@ protected:
 
     bool hookProvider(IOService* provider);
     void unhookProvider();
+    
+    bool MergeDictionaryIntoDictionary(OSDictionary * parentSourceDictionary,  OSDictionary * parentTargetDictionary);
+    bool MergeDictionaryIntoProvider(IOService * provider, OSDictionary * dictionaryToMerge);
 
 public:
     virtual bool init(OSDictionary *propTable);
