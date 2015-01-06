@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleIdentifier</key>
-	<string>org.rehabman.injector.BCM94352Z-as-BCM94360CS2</string>
+	<string>org.rehabman.injector.Intel-HDMI-Audio</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>FakePCIID_BCM94352Z_as_BCM94360CS2</string>
+	<string>FakePCIID_Intel_HDMI_Audio</string>
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
@@ -16,7 +16,7 @@
 	<string>$MODULE_VERSION</string>
 	<key>IOKitPersonalities</key>
 	<dict>
-		<key>BCM94352Z as BCM94360CS2</key>
+		<key>Intel HDMI Audio</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>org.rehabman.driver.FakePCIID</string>
@@ -25,13 +25,50 @@
 			<key>IOMatchCategory</key>
 			<string>FakePCIID</string>
 			<key>IOPCIPrimaryMatch</key>
-			<string>0x43b114e4 0x43a014e4</string>
+			<string>0x0c0c8086 0x0d0c8086</string>
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>
 			<key>RM,Build</key>
 			<string>${CONFIGURATION}-${LOGNAME}</string>
 			<key>RM,Version</key>
 			<string>${PRODUCT_NAME} ${MODULE_VERSION}</string>
+		</dict>
+		<key>Intel HDMI Audio Properties Inject</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AppleUSBMergeNub</string>
+			<key>IOClass</key>
+			<string>AppleUSBMergeNub</string>
+			<key>IOPCIPrimaryMatch</key>
+			<string>0x0c0c8086 0x0d0c8086</string>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>IOProviderMergeProperties</key>
+			<dict>
+				<key>DISABLED-PinConfigurations</key>
+				<data>
+				</data>
+				<key>DISABLED-layout-id</key>
+				<data>
+				AQAAAA==
+				</data>
+				<key>device-id</key>
+				<data>
+				DA0AAA==
+				</data>
+				<key>hda-gfx</key>
+				<data>
+				b25ib2FyZC0x
+				</data>
+				<key>subsystem-id</key>
+				<data>
+				LgEAAA==
+				</data>
+				<key>subsystem-vendor-id</key>
+				<data>
+				axAAAA==
+				</data>
+			</dict>
 		</dict>
 	</dict>
 	<key>OSBundleRequired</key>
