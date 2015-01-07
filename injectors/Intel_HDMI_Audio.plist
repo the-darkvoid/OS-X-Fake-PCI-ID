@@ -46,28 +46,17 @@
 			<key>IOProviderMergeProperties</key>
 			<dict>
 				<key>DISABLED-PinConfigurations</key>
-				<data>
-				</data>
+				<data></data>
 				<key>DISABLED-layout-id</key>
-				<data>
-				AQAAAA==
-				</data>
-				<key>device-id</key>
-				<data>
-				DA0AAA==
-				</data>
+				<data>AQAAAA==</data>
+				<key>RM,device-id</key>
+				<data>DA0AAA==</data>
 				<key>hda-gfx</key>
-				<data>
-				b25ib2FyZC0x
-				</data>
-				<key>subsystem-id</key>
-				<data>
-				LgEAAA==
-				</data>
-				<key>subsystem-vendor-id</key>
-				<data>
-				axAAAA==
-				</data>
+				<data>b25ib2FyZC0x</data>
+				<key>RM,subsystem-id</key>
+				<data>LgEAAA==</data>
+				<key>RM,subsystem-vendor-id</key>
+				<data>axAAAA==</data>
 			</dict>
 		</dict>
 	</dict>
