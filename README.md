@@ -48,7 +48,7 @@ In order to create your own injector, you should be familiar with IOKit matching
 FakePCIID.kext will return the vendor-id, device-id, subsystem-vendor-id, and subsystem-id as found in the IO registry under the associated IOPCIDevice.  In order to provide the correct/supported values, _DSM injection is employed (or FakeID with Clover).
 
 For example, this is one such patch that might be used for HD4600:
-```
+```c
 into method label _DSM parent_adr 0x00020000 remove_entry;
 into device name_adr 0x00020000 insert
 begin
@@ -71,7 +71,7 @@ Note that the only property read by FakePCIID in the patch above is "device-id".
 The "device-id" property is used both by FakePCIID and by IOKit matching. Generally this is OK, but for flexibility you can specify a different IDs to be used by FakePCIID by using the "RM," prefixed properties.  
 
 So, a minimalist patch would be as follows:
-```
+```c
 into method label _DSM parent_adr 0x00020000 remove_entry;
 into device name_adr 0x00020000 insert
 begin
@@ -89,7 +89,7 @@ end;
 You would have to inject "device-id" and "ig-platform-id" to have working HD4600 using some other mechanism, of course.  But FakePCIID.kext can do its work with only "RM,device-id".
 
 And this is the patch used in the AR9280 as AR946x scenario:
-```
+```c
 into method label _DSM parent_label PXSX remove_entry;
 into device label PXSX parent_label RP03 insert
 begin
@@ -114,7 +114,7 @@ end;
 ```
 
 For BCM94352Z as BCM94360CS2 the following DSDT patch is used:
-```
+```c
 into device Label PXSX parent_label RP03 replace_content begin
 Method (_DSM, 4, NotSerialized)\n
 {\n
@@ -136,7 +136,7 @@ end;
 Please realize that the nodes PXSX and RP03 are specific to the subject DSDT.  In this case a Lenovo u430 laptop.
 
 Again, a minimalist patch for the WiFi scenario would look like this:
-```
+```c
 into method label _DSM parent_label PXSX remove_entry;
 into device label PXSX parent_label RP03 insert
 begin
