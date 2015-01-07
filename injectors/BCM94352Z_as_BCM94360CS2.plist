@@ -41,6 +41,8 @@
 			<string>AppleUSBMergeNub</string>
 			<key>IOPCIPrimaryMatch</key>
 			<string>0x43b114e4</string>
+			<key>IOProbeScore</key>
+			<integer>9001</integer>
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>
 			<key>IOProviderMergeProperties</key>
