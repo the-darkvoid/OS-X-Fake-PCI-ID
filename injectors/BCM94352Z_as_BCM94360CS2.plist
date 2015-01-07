@@ -47,13 +47,13 @@
 			<string>IOPCIDevice</string>
 			<key>IOProviderMergeProperties</key>
 			<dict>
-				<key>device-id</key>
+				<key>RM,device-id</key>
 				<data>oEMAAA==</data>
-				<key>subsystem-id</key>
+				<key>RM,subsystem-id</key>
 				<data>NAEAAA==</data>
-				<key>subsystem-vendor-id</key>
+				<key>RM,subsystem-vendor-id</key>
 				<data>axAAAA==</data>
-				<key>vendor-id</key>
+				<key>RM,vendor-id</key>
 				<data>5BQAAA==</data>
 			</dict>
 		</dict>
