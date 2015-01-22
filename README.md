@@ -5,6 +5,8 @@ The purpose of this kext is to attach to any IOPCIDevice so it can provide alter
 In order to attach FakePCIID to a given IOPCIDevice, an injector kext must be built that IOKit can use to match against. 
 The FakePCIID.kext Info.plist has no built-in IOKitPersonalities, as it is generic and not built to suit a specific purpose.  The distribution ZIP provide has two such injector kexts, one for Intel HD4400 and HD4600 mobile graphics and one for AR9280 WiFi (for use when a re-branded AR9280 is used to work around a WiFi device whitelist implemented in BIOS).  Custom injector kexts can be created for other devices.
 
+Note: FakePCIID_HD4600_HD4400.kext works for HD4400 mobile, HD4600 mobile, HD4200 mobile, and HD4600 desktop.
+
 In any case, a DSDT patch or FakeID configuration (Clover) will be required to inject the properties that FakePCIID can read on the IOPCIDevice.  Generally this is done with _DSM injection although there are a variety of ways to accomplish such injections.
 
 ### Downloads:
