@@ -187,9 +187,9 @@ https://github.com/RehabMan/OS-X-Fake-PCI-ID
 
 This kext was forked from the project originally named IntelHDMobileGraphics, and was first discussed here: http://www.tonymacx86.com/yosemite-laptop-support/145427-fix-intel-hd4400-hd4600-mobile-yosemite-47.html#post952079
 
-The original repo is now renamed: https://github.com/robvanoostenrijk/OS-X-Fake-PCI-ID
+The original repo is now renamed: https://github.com/the-darkvoid/OS-X-Fake-PCI-ID
 
 So, originally a single purpose kext for Intel HD46000 graphics, it has been modified into a general purpose kext that can be used in many different scenarios.
 
-Note: So far, https://github.com/robvanoostenrijk/OS-X-Fake-PCI-ID, and https://github.com/RehabMan/OS-X-Fake-PCI-ID are being kept in sync.
+Note: So far, https://github.com/the-darkvoid/OS-X-Fake-PCI-ID, and https://github.com/RehabMan/OS-X-Fake-PCI-ID are being kept in sync.
 
