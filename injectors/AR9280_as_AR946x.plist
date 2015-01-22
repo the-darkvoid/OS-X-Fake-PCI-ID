@@ -18,7 +18,24 @@
 	<string>$MODULE_VERSION</string>
 	<key>IOKitPersonalities</key>
 	<dict>
-		<key>AR9280 as AR946x</key>
+		<key>AirPort AR9280 as AR946x</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AirPort.Atheros40</string>
+			<key>IOClass</key>
+			<string>AirPort_AtherosNewma40</string>
+			<key>IOMatchCategory</key>
+			<string>IODefaultMatchCategory</string>
+			<key>IONameMatch</key>
+			<array>
+				<string>pci168c,34</string>
+			</array>
+			<key>IOProbeScore</key>
+			<integer>600</integer>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+		</dict>
+		<key>FakePCIID AR9280 as AR946x</key>
 		<dict>
 			<key>RM,Version</key>
 			<string>${PRODUCT_NAME} ${MODULE_VERSION}</string>
@@ -35,8 +52,32 @@
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>
 		</dict>
+		<key>AR9280 Properties Inject</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AppleUSBMergeNub</string>
+			<key>IOProbeScore</key>
+			<integer>9001</integer>
+			<key>IOClass</key>
+			<string>AppleUSBMergeNub</string>
+			<key>IOPCIPrimaryMatch</key>
+			<string>0x0034168c 0x002a168c</string>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>IOProviderMergeProperties</key>
+			<dict>
+				<key>RM,device-id</key>
+				<data>KgAAAA==</data>
+				<key>RM,vendor-id</key>
+				<data>jBYAAA==</data>
+				<key>RM,subsystem-id</key>
+				<data>jwAAAA==</data>
+				<key>RM,subsystem-vendor-id</key>
+				<data>axAAAA==</data>
+			</dict>
+		</dict>
 	</dict>
 	<key>OSBundleRequired</key>
-	<string>Root</string>
+	<string>Network-Root</string>
 </dict>
 </plist>

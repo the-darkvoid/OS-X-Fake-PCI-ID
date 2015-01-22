@@ -49,12 +49,12 @@
 			<dict>
 				<key>RM,device-id</key>
 				<data>oEMAAA==</data>
+				<key>RM,vendor-id</key>
+				<data>5BQAAA==</data>
 				<key>RM,subsystem-id</key>
 				<data>NAEAAA==</data>
 				<key>RM,subsystem-vendor-id</key>
 				<data>axAAAA==</data>
-				<key>RM,vendor-id</key>
-				<data>5BQAAA==</data>
 			</dict>
 		</dict>
 		<key>BCM94352Z as BCM94360CS2</key>
@@ -76,7 +76,7 @@
 		</dict>
 	</dict>
 	<key>OSBundleRequired</key>
-	<string>Root</string>
+	<string>Network-Root</string>
 	<key>Source Code</key>
 	<string>https://github.com/RehabMan/FakePCIID</string>
 </dict>

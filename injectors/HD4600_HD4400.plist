@@ -26,6 +26,8 @@
 			<string>${CONFIGURATION}-${LOGNAME}</string>
 			<key>CFBundleIdentifier</key>
 			<string>org.rehabman.driver.FakePCIID</string>
+			<key>IOProbeScore</key>
+			<integer>9001</integer>
 			<key>IOClass</key>
 			<string>FakePCIID_HD4600_HD4400</string>
 			<key>IOMatchCategory</key>
