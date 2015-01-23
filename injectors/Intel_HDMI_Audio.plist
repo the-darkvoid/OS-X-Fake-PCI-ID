@@ -49,10 +49,10 @@
 				<data></data>
 				<key>DISABLED-layout-id</key>
 				<data>AQAAAA==</data>
-				<key>RM,device-id</key>
-				<data>DA0AAA==</data>
 				<key>hda-gfx</key>
 				<data>b25ib2FyZC0x</data>
+				<key>RM,device-id</key>
+				<data>DA0AAA==</data>
 				<key>RM,subsystem-id</key>
 				<data>LgEAAA==</data>
 				<key>RM,subsystem-vendor-id</key>
