@@ -20,22 +20,49 @@ https://bitbucket.org/RehabMan/os-x-fake-pci-id/downloads
 
 In all cases, FakePCIID.kext must be installed with a kext installer (such as Kext Wizard).  The Release build should be used for normal installs.  It has a minimum of output to system.log.  For troubleshooting, the Debug build can be used.
 
-In order to cause the kext to be loaded against a particular device, you must also install the appropriate injector kext.  Currently, three injectors are provided:
+In order to cause the kext to be loaded against a particular device, you must also install the appropriate injector kext.  Currently, four injectors are provided:
 
 - FakePCIID_HD4600_HD4400.kext: 
-  This will attach to `8086:0416`, `8086:0412` and `8086:0a16`.
-  - `8086:0a16` is the native device-id for HD4400 mobile. 
-  - `8086:0416` is the native device-id for HD4600 mobile.
+  This will attach to `8086:0412`, `8086:0416`, `8086:0a1e`, `8086:041e`, `8086:0a16`, and `8086:041a`.
+  - `8086:0412` is HD4600 desktop (now the only GT2 device supported in Yosemite as of 10.10.2)
+  - `8086:0a16` is HD4400 mobile.
+  - `8086:0416` is HD4600 mobile.
+  - `8086:0a1e` is HD4200 mobile.
+  - `8086:041e` is HD4400 desktop.
+  - `8086:041a` is P4600 server.
   
   Normally, a fake device-id of `8086:0412` will be injected for Yosemite, as Yosemite does not natively recognize `8086:0416`.  `8086:0412` is the native device-id for HD4600 desktop.
   By injecting `0412`, `AppleIntelFramebufferAzul` and `AppleIntelHD5000Graphics` will load.
   And since, FakePCIID will also be attached to these devices, it will successfully fool both kexts that the device an Intel HD4600 Desktop IGPU (0412).
 
+- FakePCIID_Intel_HDMI_Audio.kext:
+  This will attach to `8086:0c0c`, `8086:0d0c`, and `8086:0a0c`
+
+  The purpose is to provide support for unsupported HDAU (usually called B0D3) devices which provide HDMI-audio on Haswell(+) systems.  `8086:0c0c` is the unsupported ID.  The other two `8086:0d0c`, and `8086:0a0c` are supported.  This kext, AppleHDAController, loads by PCI class, so you normally would not inject device-id for it, but to allow FakePCIID to work, you will need to inject RM,device-id (one of the supported IDs)
+
+  For example (typical _DSM patch for HDAU device for FakePCIID and HDMI audio):
+
+```c
+into method label _DSM parent_adr 0x00030000 remove_entry;
+into device name_adr 0x00030000 insert
+begin
+Method (_DSM, 4, NotSerialized)\n
+{\n
+    If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }\n
+    Return (Package()\n
+    {\n
+        "RM,device-id", Buffer() { 0x0c, 0x0a, 0x00, 0x00 },\n
+        "hda-gfx", Buffer() { "onboard-1" },\n
+    })\n
+}\n
+end;
+```
+
 - FakePCIID_AR9280_as_AR946x:
-This kext will attach to `168c:0034` or `168c:002a`.
+  This kext will attach to `168c:0034` or `168c:002a`.
 
   This particular application of FakePCIID.kext is used in a situation where you have an AR9280 re-branded as some other device.  For example, with the Lenovo u430, it is useful to rebrand an AR9280 ias an AR946x as that device is allowed by the BIOS whitelist where AR9280 is not.
-By using FakePCIID, we can remap the PCI IDs back to AR9280 (`168c:002a`) even though the device itself is reporting `168c:0034`.
+  By using FakePCIID, we can remap the PCI IDs back to AR9280 (`168c:002a`) even though the device itself is reporting `168c:0034`.
 
 - FakePCIID_BCM94352Z_as_BCM94360CS2:
 	  This kext will attach to `14e4:43b1` or `14e4:43a0`.
