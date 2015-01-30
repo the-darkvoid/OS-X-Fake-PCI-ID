@@ -447,7 +447,7 @@
 		D4096F891A52FCED005C037A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = injectors/Intel_HDMI_Audio.plist;
+				INFOPLIST_FILE = FakePCIID/Info.plist;
 				MODULE_NAME = rehabman.FakePCIID_Intel_HDMI_Audio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.6;
@@ -459,7 +459,7 @@
 		D4096F8A1A52FCED005C037A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = injectors/Intel_HDMI_Audio.plist;
+				INFOPLIST_FILE = FakePCIID/Info.plist;
 				MODULE_NAME = rehabman.FakePCIID_Intel_HDMI_Audio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.6;
@@ -496,6 +496,7 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = injectors/Intel_HDMI_Audio.plist;
 				PRODUCT_NAME = FakePCIID_Intel_HDMI_Audio;
 			};
 			name = Debug;
@@ -505,6 +506,7 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				INFOPLIST_FILE = injectors/Intel_HDMI_Audio.plist;
 				PRODUCT_NAME = FakePCIID_Intel_HDMI_Audio;
 			};
 			name = Release;
