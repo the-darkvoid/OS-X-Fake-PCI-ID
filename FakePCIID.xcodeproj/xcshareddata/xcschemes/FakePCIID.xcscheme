@@ -76,6 +76,20 @@
                ReferencedContainer = "container:FakePCIID.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D43DC8691A7FA6E5004B2D06"
+               BuildableName = "FakePCIID_BCM57XX_as_BCM57765.kext"
+               BlueprintName = "FakePCIID_BCM57XX_as_BCM57765"
+               ReferencedContainer = "container:FakePCIID.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
