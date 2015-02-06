@@ -522,6 +522,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				INFOPLIST_FILE = FakePCIID/Info.plist;
 				MODULE_NAME = org.rehabman.driver.FakePCIID;
 				PRODUCT_NAME = FakePCIID;

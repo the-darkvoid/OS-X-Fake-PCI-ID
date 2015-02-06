@@ -94,7 +94,6 @@ public:
      @param offset An offset into a bus or device's I/O space aperture.
      @param map If the offset is relative to the beginning of a device's aperture, an IOMemoryMap object for that object should be passed in. Otherwise, passing zero will write the value relative to the beginning of the bus' I/O space.
      @result The value read in host byte order (big endian on PPC). */
-    
     virtual UInt32 ioRead32( UInt16 offset, IOMemoryMap * map = 0 );
     
     /*! @function ioRead16
@@ -103,7 +102,6 @@ public:
      @param offset An offset into a bus or device's I/O space aperture.
      @param map If the offset is relative to the beginning of a device's aperture, an IOMemoryMap object for that object should be passed in. Otherwise, passing zero will write the value relative to the beginning of the bus' I/O space.
      @result The value read in host byte order (big endian on PPC). */
-    
     virtual UInt16 ioRead16( UInt16 offset, IOMemoryMap * map = 0 );
     
     /*! @function ioRead8
@@ -112,7 +110,6 @@ public:
      @param offset An offset into a bus or device's I/O space aperture.
      @param map If the offset is relative to the beginning of a device's aperture, an IOMemoryMap object for that object should be passed in. Otherwise, passing zero will write the value relative to the beginning of the bus' I/O space.
      @result The value read. */
-    
     virtual UInt8 ioRead8( UInt16 offset, IOMemoryMap * map = 0 );
 #endif
 };
