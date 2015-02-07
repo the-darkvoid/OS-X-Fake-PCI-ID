@@ -43,9 +43,9 @@ protected:
 public:
     virtual UInt32 configRead32(IOPCIAddressSpace space, UInt8 offset);
     virtual UInt16 configRead16(IOPCIAddressSpace space, UInt8 offset);
-#ifdef HOOK_ALL
     virtual UInt8 configRead8(IOPCIAddressSpace space, UInt8 offset);
 
+#ifdef HOOK_ALL
     /*! @function configRead32
      @abstract Reads a 32-bit value from the PCI device's configuration space.
      @discussion This method reads a 32-bit configuration space register on the device and returns its value.
