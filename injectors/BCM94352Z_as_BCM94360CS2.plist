@@ -33,6 +33,55 @@
 			<key>TruePowerOff</key>
 			<true/>
 		</dict>
+		<key>BCM943224HMS Properties Inject</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AppleUSBMergeNub</string>
+			<key>IOClass</key>
+			<string>AppleUSBMergeNub</string>
+			<key>IOPCIPrimaryMatch</key>
+			<string>0x435314e4</string>
+			<key>IOProbeScore</key>
+			<integer>9001</integer>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>IOProviderMergeProperties</key>
+			<dict>
+				<key>RM,device-id</key>
+				<data>
+				oEMAAA==
+				</data>
+				<key>RM,subsystem-id</key>
+				<data>
+				NAEAAA==
+				</data>
+				<key>RM,subsystem-vendor-id</key>
+				<data>
+				axAAAA==
+				</data>
+				<key>RM,vendor-id</key>
+				<data>
+				5BQAAA==
+				</data>
+			</dict>
+		</dict>
+		<key>BCM943224HMS as BCM94360CS2</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>org.rehabman.driver.FakePCIID</string>
+			<key>IOClass</key>
+			<string>FakePCIID</string>
+			<key>IOMatchCategory</key>
+			<string>FakePCIID</string>
+			<key>IOPCIPrimaryMatch</key>
+			<string>0x435314e4</string>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>RM,Build</key>
+			<string>${CONFIGURATION}-${LOGNAME}</string>
+			<key>RM,Version</key>
+			<string>${PRODUCT_NAME} ${MODULE_VERSION}</string>
+		</dict>
 		<key>BCM94352Z Properties Inject</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
@@ -48,13 +97,21 @@
 			<key>IOProviderMergeProperties</key>
 			<dict>
 				<key>RM,device-id</key>
-				<data>oEMAAA==</data>
-				<key>RM,vendor-id</key>
-				<data>5BQAAA==</data>
+				<data>
+				oEMAAA==
+				</data>
 				<key>RM,subsystem-id</key>
-				<data>NAEAAA==</data>
+				<data>
+				NAEAAA==
+				</data>
 				<key>RM,subsystem-vendor-id</key>
-				<data>axAAAA==</data>
+				<data>
+				axAAAA==
+				</data>
+				<key>RM,vendor-id</key>
+				<data>
+				5BQAAA==
+				</data>
 			</dict>
 		</dict>
 		<key>BCM94352Z as BCM94360CS2</key>
