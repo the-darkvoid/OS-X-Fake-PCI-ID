@@ -108,6 +108,14 @@ UInt32 PCIDeviceStub::configRead32(IOPCIAddressSpace space, UInt8 offset)
                 newResult = (device << 16) | (newResult & 0xFFFF);
             break;
         }
+        case kIOPCIConfigRevisionID:
+        {
+            int revision = getIntegerProperty("RM,revision-id", "revision-id");
+            
+            if (-1 != revision)
+                newResult = (newResult & 0xFFFFFF00) | revision;
+            break;
+        }
     }
     
     if (newResult != result)
@@ -157,6 +165,14 @@ UInt16 PCIDeviceStub::configRead16(IOPCIAddressSpace space, UInt8 offset)
                 newResult = device;
             break;
         }
+        case kIOPCIConfigRevisionID:
+        {
+            int revision = getIntegerProperty("RM,revision-id", "revision-id");
+            
+            if (-1 != revision)
+                newResult = (newResult & 0xFF00) | revision;
+            break;
+        }
     }
 
     if (newResult != result)
@@ -166,19 +182,36 @@ UInt16 PCIDeviceStub::configRead16(IOPCIAddressSpace space, UInt8 offset)
     return newResult;
 }
 
-#ifdef HOOK_ALL
 UInt8 PCIDeviceStub::configRead8(IOPCIAddressSpace space, UInt8 offset)
 {
     UInt8 result = super::configRead8(space, offset);
-    
+ 
     UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
     
     DebugLog("[%04x:%04x] configRead8 address space(0x%08x, 0x%02x) result: 0x%02x\n",
              deviceInfo & 0xFFFF, deviceInfo >> 16, space.bits, offset, result);
     
-    return result;
+    UInt8 newResult = result;
+    switch (offset)
+    {
+        case kIOPCIConfigRevisionID:
+        {
+            int revision = getIntegerProperty("RM,revision-id", "revision-id");
+            
+            if (-1 != revision)
+                newResult = revision;
+            break;
+        }
+    }
+    
+    if (newResult != result)
+        AlwaysLog("[%04x:%04x] configRead8(0x%02x), result 0x%02x -> 0x%02x\n",
+                  deviceInfo & 0xFFFF, deviceInfo >> 16, offset, result, newResult);
+    
+    return newResult;
 }
 
+#ifdef HOOK_ALL
 UInt32 PCIDeviceStub::configRead32(UInt8 offset)
 {
     UInt32 result = super::configRead32(offset);
