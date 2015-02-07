@@ -298,6 +298,62 @@ UInt8 PCIDeviceStub::ioRead8(UInt16 offset, IOMemoryMap* map)
     
     return result;
 }
+
+IODeviceMemory* PCIDeviceStub::getDeviceMemoryWithRegister( UInt8 reg )
+{
+    IODeviceMemory* result = super::getDeviceMemoryWithRegister(reg);
+    
+    UInt16 vendorId = super::configRead16(super::space, kIOPCIConfigVendorID);
+    UInt16 deviceId = super::configRead16(super::space, kIOPCIConfigDeviceID);
+    
+    if (result)
+        DebugLog("[%04x:%04x] getDeviceMemoryWithRegister address (0x%08llx) size (0x%08llx)\n",
+                 vendorId, deviceId, result->getPhysicalAddress(), result->getLength());
+    
+    return result;
+}
+
+IOMemoryMap* PCIDeviceStub::mapDeviceMemoryWithRegister(UInt8 reg, IOOptionBits options)
+{
+    IOMemoryMap* result = super::mapDeviceMemoryWithRegister(reg, options);
+    
+    UInt16 vendorId = super::configRead16(super::space, kIOPCIConfigVendorID);
+    UInt16 deviceId = super::configRead16(super::space, kIOPCIConfigDeviceID);
+    
+    if (result)
+        DebugLog("[%04x:%04x] mapDeviceMemoryWithRegister address (0x%08llx) size (0x%08llx)\n",
+                 vendorId, deviceId, result->getPhysicalAddress(), result->getLength());
+    
+    return result;
+}
+
+IODeviceMemory* PCIDeviceStub::ioDeviceMemory(void)
+{
+    IODeviceMemory* result = super::ioDeviceMemory();
+    
+    UInt16 vendorId = super::configRead16(super::space, kIOPCIConfigVendorID);
+    UInt16 deviceId = super::configRead16(super::space, kIOPCIConfigDeviceID);
+    
+    if (result)
+        DebugLog("[%04x:%04x] ioDeviceMemory address (0x%08llx) size (0x%08llx)\n",
+                 vendorId, deviceId, result->getPhysicalAddress(), result->getLength());
+    
+    return result;
+}
+
+UInt32 PCIDeviceStub::extendedFindPCICapability( UInt32 capabilityID, IOByteCount* offset)
+{
+    UInt32 result = super::extendedFindPCICapability(capabilityID, offset);
+    
+    UInt16 vendorId = super::configRead16(super::space, kIOPCIConfigVendorID);
+    UInt16 deviceId = super::configRead16(super::space, kIOPCIConfigDeviceID);
+    
+    DebugLog("[%04x:%04x] extendedFindPCICapability (0x%08x) offset (0x%08llx) result: 0x%08x\n",
+             vendorId, deviceId, capabilityID, *offset, result);
+    
+    return result;
+}
+
 #endif
 
 hack_OSDefineMetaClassAndStructors(PCIDeviceStub_HD4600_HD4400, PCIDeviceStub);
