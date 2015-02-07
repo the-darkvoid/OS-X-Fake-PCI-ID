@@ -30,7 +30,7 @@
 
 #include <IOKit/pci/IOPCIDevice.h>
 
-//#define HOOK_ALL
+#define HOOK_ALL
 
 class PCIDeviceStub : public IOPCIDevice
 {
