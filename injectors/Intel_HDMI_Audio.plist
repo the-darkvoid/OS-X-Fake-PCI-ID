@@ -34,6 +34,11 @@
 			<string>${CONFIGURATION}-${LOGNAME}</string>
 			<key>RM,Version</key>
 			<string>${PRODUCT_NAME} ${MODULE_VERSION}</string>
+			<key>FakeProperties</key>
+			<dict>
+				<key>RM,device-id</key>
+				<data>DAoAAA==</data>
+			</dict>
 		</dict>
 	</dict>
 	<key>OSBundleRequired</key>

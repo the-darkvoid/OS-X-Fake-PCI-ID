@@ -163,33 +163,3 @@ void FakePCIID::detach(IOService *provider)
     return super::detach(provider);
 }
 #endif
-
-OSDefineMetaClassAndStructors(FakePCIID_HD4600_HD4400, FakePCIID);
-
-bool FakePCIID_HD4600_HD4400::init(OSDictionary *propTable)
-{
-    if (!super::init(propTable))
-        return false;
-
-    // capture vtable pointer for PCIDeviceStub_HD4600_HD4400
-    PCIDeviceStub *stub = OSTypeAlloc(PCIDeviceStub_HD4600_HD4400);
-    mStubVtable = getVTable(stub);
-    stub->release();
-
-    return true;
-}
-
-OSDefineMetaClassAndStructors(FakePCIID_CheckChildren, FakePCIID);
-
-bool FakePCIID_CheckChildren::init(OSDictionary *propTable)
-{
-    if (!super::init(propTable))
-        return false;
-
-    // capture vtable pointer for PCIDeviceStub_CheckChildren
-    PCIDeviceStub *stub = OSTypeAlloc(PCIDeviceStub_CheckChildren);
-    mStubVtable = getVTable(stub);
-    stub->release();
-
-    return true;
-}

@@ -48,22 +48,4 @@ public:
 #endif
 };
 
-class FakePCIID_HD4600_HD4400 : public FakePCIID
-{
-    OSDeclareDefaultStructors(FakePCIID_HD4600_HD4400);
-    typedef FakePCIID super;
-
-public:
-    virtual bool init(OSDictionary *propTable);
-};
-
-class FakePCIID_CheckChildren : public FakePCIID
-{
-    OSDeclareDefaultStructors(FakePCIID_CheckChildren);
-    typedef FakePCIID super;
-
-public:
-    virtual bool init(OSDictionary *propTable);
-};
-
 #endif

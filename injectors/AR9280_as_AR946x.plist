@@ -37,6 +37,20 @@
 		</dict>
 		<key>FakePCIID AR9280 as AR946x</key>
 		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>org.rehabman.driver.FakePCIID</string>
+			<key>IOClass</key>
+			<string>FakePCIID</string>
+			<key>IOMatchCategory</key>
+			<string>FakePCIID</string>
+			<key>IOPCIPrimaryMatch</key>
+			<string>0x0034168c 0x002a168c</string>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>RM,Build</key>
+			<string>${CONFIGURATION}-${LOGNAME}</string>
+			<key>RM,Version</key>
+			<string>${PRODUCT_NAME} ${MODULE_VERSION}</string>
 			<key>FakeProperties</key>
 			<dict>
 				<key>RM,device-id</key>
@@ -48,28 +62,6 @@
 				<key>RM,subsystem-vendor-id</key>
 				<data>axAAAA==</data>
 			</dict>
-			<key>RM,device-id</key>
-			<data>KgAAAA==</data>
-			<key>RM,vendor-id</key>
-			<data>jBYAAA==</data>
-			<key>RM,subsystem-id</key>
-			<data>jwAAAA==</data>
-			<key>RM,subsystem-vendor-id</key>
-			<data>axAAAA==</data>
-			<key>RM,Version</key>
-			<string>${PRODUCT_NAME} ${MODULE_VERSION}</string>
-			<key>RM,Build</key>
-			<string>${CONFIGURATION}-${LOGNAME}</string>
-			<key>CFBundleIdentifier</key>
-			<string>org.rehabman.driver.FakePCIID</string>
-			<key>IOClass</key>
-			<string>FakePCIID</string>
-			<key>IOMatchCategory</key>
-			<string>FakePCIID</string>
-			<key>IOPCIPrimaryMatch</key>
-			<string>0x0034168c 0x002a168c</string>
-			<key>IOProviderClass</key>
-			<string>IOPCIDevice</string>
 		</dict>
 	</dict>
 	<key>OSBundleRequired</key>

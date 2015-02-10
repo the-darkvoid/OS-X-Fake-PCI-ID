@@ -119,27 +119,4 @@ public:
 #endif
 };
 
-class PCIDeviceStub_HD4600_HD4400 : public PCIDeviceStub
-{
-    OSDeclareDefaultStructors(PCIDeviceStub_HD4600_HD4400);
-    typedef PCIDeviceStub super;
-
-public:
-    virtual UInt32 configRead32(IOPCIAddressSpace space, UInt8 offset);
-    virtual UInt16 configRead16(IOPCIAddressSpace space, UInt8 offset);
-};
-
-class PCIDeviceStub_CheckChildren : public PCIDeviceStub
-{
-    OSDeclareDefaultStructors(PCIDeviceStub_CheckChildren);
-    typedef PCIDeviceStub super;
-
-private:
-    FakePCIID* findFakeChild();
-
-public:
-    virtual UInt32 configRead32(IOPCIAddressSpace space, UInt8 offset);
-    virtual UInt16 configRead16(IOPCIAddressSpace space, UInt8 offset);
-};
-
 #endif
