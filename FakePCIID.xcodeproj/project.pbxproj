@@ -388,7 +388,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = injectors/AR9280_as_AR946x.plist;
-				MODULE_NAME = rehabman.FakePCIID_AR9280_as_AR946x;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-AR9280-as-AR946x";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -398,7 +398,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = injectors/AR9280_as_AR946x.plist;
-				MODULE_NAME = rehabman.FakePCIID_AR9280_as_AR946x;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-AR9280-as-AR946x";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -408,7 +408,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = injectors/HD4600_HD4400.plist;
-				MODULE_NAME = rehabman.FakePCIID_HD4600_HD4400;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-HD4600-HD4400";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -418,7 +418,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = injectors/HD4600_HD4400.plist;
-				MODULE_NAME = rehabman.FakePCIID_HD4600_HD4400;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-HD4600-HD4400";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -428,7 +428,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = injectors/BCM94352Z_as_BCM94360CS2.plist;
-				MODULE_NAME = rehabman.FakePCIID_BCM94352Z_as_BCM94360CS2;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-BCM94352Z-as-BCM94360CS2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -438,7 +438,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = injectors/BCM94352Z_as_BCM94360CS2.plist;
-				MODULE_NAME = rehabman.FakePCIID_BCM94352Z_as_BCM94360CS2;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-BCM94352Z-as-BCM94360CS2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -447,8 +447,8 @@
 		D4096F891A52FCED005C037A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				INFOPLIST_FILE = FakePCIID/Info.plist;
-				MODULE_NAME = rehabman.FakePCIID_Intel_HDMI_Audio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.6;
 				SYMROOT = build/Products;
@@ -460,7 +460,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = FakePCIID/Info.plist;
-				MODULE_NAME = rehabman.FakePCIID_Intel_HDMI_Audio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.6;
 				SYMROOT = build/Products;
@@ -497,6 +496,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = injectors/Intel_HDMI_Audio.plist;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-Intel-HDMI-Audio";
 				PRODUCT_NAME = FakePCIID_Intel_HDMI_Audio;
 			};
 			name = Debug;
@@ -507,6 +507,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				INFOPLIST_FILE = injectors/Intel_HDMI_Audio.plist;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-Intel-HDMI-Audio";
 				PRODUCT_NAME = FakePCIID_Intel_HDMI_Audio;
 			};
 			name = Release;

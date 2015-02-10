@@ -57,4 +57,13 @@ public:
     virtual bool init(OSDictionary *propTable);
 };
 
+class FakePCIID_CheckChildren : public FakePCIID
+{
+    OSDeclareDefaultStructors(FakePCIID_CheckChildren);
+    typedef FakePCIID super;
+
+public:
+    virtual bool init(OSDictionary *propTable);
+};
+
 #endif

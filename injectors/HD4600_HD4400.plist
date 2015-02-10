@@ -5,7 +5,7 @@
 	<key>Source Code</key>
 	<string>https://github.com/RehabMan/FakePCIID</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.rehabman.injector.HD4600-HD4400</string>
+	<string>org.rehabman.injector.FakePCIID-HD4600-HD4400</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

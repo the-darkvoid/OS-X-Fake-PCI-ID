@@ -20,6 +20,7 @@
 
 #include <IOKit/IOLib.h>
 #include "PCIDeviceStub.h"
+#include "FakePCIID.h"
 
 // We want ioreg to still see the normal class hierarchy for hooked
 // provider IOPCIDevice
@@ -59,12 +60,13 @@
 
 hack_OSDefineMetaClassAndStructors(PCIDeviceStub, IOPCIDevice);
 
-int PCIDeviceStub::getIntegerProperty(const char *aKey, const char *alternateKey)
+int PCIDeviceStub::getIntegerProperty(IORegistryEntry* entry, const char *aKey, const char *alternateKey)
 {
-    OSData* data = OSDynamicCast(OSData, getProperty(aKey));
+    OSData* data = OSDynamicCast(OSData, entry->getProperty(aKey));
     if (!data || sizeof(UInt32) != data->getLength())
     {
-        data = OSDynamicCast(OSData, getProperty(alternateKey));
+        if (alternateKey)
+            data = OSDynamicCast(OSData, entry->getProperty(alternateKey));
         if (!data || sizeof(UInt32) != data->getLength())
             return -1;
     }
@@ -85,22 +87,22 @@ UInt32 PCIDeviceStub::configRead32(IOPCIAddressSpace space, UInt8 offset)
         case kIOPCIConfigVendorID:
         case kIOPCIConfigDeviceID: // OS X does a non-aligned read, which still returns full vendor / device ID
         {
-            int vendor = getIntegerProperty("RM,vendor-id", "vendor-id");
+            int vendor = getIntegerProperty(this, "RM,vendor-id", "vendor-id");
             if (-1 != vendor)
                 newResult = (newResult & 0xFFFF0000) | vendor;
             
-            int device = getIntegerProperty("RM,device-id", "device-id");
+            int device = getIntegerProperty(this, "RM,device-id", "device-id");
             if (-1 != device)
                 newResult = (device << 16) | (newResult & 0xFFFF);
             break;
         }
         case kIOPCIConfigSubSystemVendorID:
         {
-            int vendor = getIntegerProperty("RM,subsystem-vendor-id", "subsystem-vendor-id");
+            int vendor = getIntegerProperty(this, "RM,subsystem-vendor-id", "subsystem-vendor-id");
             if (-1 != vendor)
                 newResult = (newResult & 0xFFFF0000) | vendor;
             
-            int device = getIntegerProperty("RM,subsystem-id", "subsystem-id");
+            int device = getIntegerProperty(this, "RM,subsystem-id", "subsystem-id");
             if (-1 != device)
                 newResult = (device << 16) | (newResult & 0xFFFF);
             break;
@@ -124,28 +126,28 @@ UInt16 PCIDeviceStub::configRead16(IOPCIAddressSpace space, UInt8 offset)
     {
         case kIOPCIConfigVendorID:
         {
-            int vendor = getIntegerProperty("RM,vendor-id", "vendor-id");
+            int vendor = getIntegerProperty(this, "RM,vendor-id", "vendor-id");
             if (-1 != vendor)
                 newResult = vendor;
             break;
         }
         case kIOPCIConfigDeviceID:
         {
-            int device = getIntegerProperty("RM,device-id", "device-id");
+            int device = getIntegerProperty(this, "RM,device-id", "device-id");
             if (-1 != device)
                 newResult = device;
             break;
         }
         case kIOPCIConfigSubSystemVendorID:
         {
-            int vendor = getIntegerProperty("RM,subsystem-vendor-id", "subsystem-vendor-id");
+            int vendor = getIntegerProperty(this, "RM,subsystem-vendor-id", "subsystem-vendor-id");
             if (-1 != vendor)
                 newResult = vendor;
             break;
         }
         case kIOPCIConfigSubSystemID:
         {
-            int device = getIntegerProperty("RM,subsystem-id", "subsystem-id");
+            int device = getIntegerProperty(this, "RM,subsystem-id", "subsystem-id");
             if (-1 != device)
                 newResult = device;
             break;
@@ -296,6 +298,139 @@ UInt16 PCIDeviceStub_HD4600_HD4400::configRead16(IOPCIAddressSpace space, UInt8 
 
     if (newResult != result)
         AlwaysLog("HD4600_HD4400: configRead16(0x%02x), result 0x%04x -> 0x%04x\n", offset, result, newResult);
+
+    return newResult;
+}
+
+
+hack_OSDefineMetaClassAndStructors(PCIDeviceStub_CheckChildren, PCIDeviceStub);
+
+FakePCIID* PCIDeviceStub_CheckChildren::findFakeChild()
+{
+    FakePCIID* result = NULL;
+    if (OSIterator* i = getChildIterator(gIOServicePlane))
+    {
+        while (OSObject* entry = i->getNextObject())
+        {
+            if ((result = OSDynamicCast(FakePCIID, entry)))
+                break;
+        }
+        i->release();
+    }
+
+    if (!result)
+        DebugLog("CheckChildren::findFakeChild: FakePCIID entry not found\n");
+
+    return result;
+}
+
+UInt32 PCIDeviceStub_CheckChildren::configRead32(IOPCIAddressSpace space, UInt8 offset)
+{
+    UInt32 result = IOPCIDevice::configRead32(space, offset);
+
+    DebugLog("CheckChildren: configRead32 address space(0x%08x, 0x%02x) result: 0x%08x\n", space.bits, offset, result);
+
+    // Replace return value with injected vendor-id/device-id in ioreg
+    UInt32 newResult = result;
+    switch (offset)
+    {
+        case kIOPCIConfigVendorID:
+        case kIOPCIConfigDeviceID: // OS X does a non-aligned read, which still returns full vendor / device ID
+        {
+            FakePCIID* entry = findFakeChild();
+            if (!entry)
+                break;
+
+            int vendor = getIntegerProperty(entry, "RM,vendor-id", NULL);
+            if (-1 != vendor)
+                newResult = (newResult & 0xFFFF0000) | vendor;
+
+            int device = getIntegerProperty(entry, "RM,device-id", NULL);
+            if (-1 != device)
+                newResult = (device << 16) | (newResult & 0xFFFF);
+            break;
+        }
+        case kIOPCIConfigSubSystemVendorID:
+        {
+            FakePCIID* entry = findFakeChild();
+            if (!entry)
+                break;
+
+            int vendor = getIntegerProperty(entry, "RM,subsystem-vendor-id", NULL);
+            if (-1 != vendor)
+                newResult = (newResult & 0xFFFF0000) | vendor;
+
+            int device = getIntegerProperty(entry, "RM,subsystem-id", NULL);
+            if (-1 != device)
+                newResult = (device << 16) | (newResult & 0xFFFF);
+            break;
+        }
+    }
+
+    if (newResult != result)
+        AlwaysLog("CheckChildren: configRead32(0x%02x), result 0x%08x -> 0x%08x\n", offset, result, newResult);
+
+    return newResult;
+
+}
+
+UInt16 PCIDeviceStub_CheckChildren::configRead16(IOPCIAddressSpace space, UInt8 offset)
+{
+    UInt16 result = IOPCIDevice::configRead16(space, offset);
+
+    DebugLog("CheckChildren: configRead16 address space(0x%08x, 0x%02x) result: 0x%04x\n", space.bits, offset, result);
+
+    UInt16 newResult = result;
+    switch (offset)
+    {
+        case kIOPCIConfigVendorID:
+        {
+            FakePCIID* entry = findFakeChild();
+            if (!entry)
+                break;
+
+            int vendor = getIntegerProperty(entry, "RM,vendor-id", NULL);
+            if (-1 != vendor)
+                newResult = vendor;
+            break;
+        }
+        case kIOPCIConfigDeviceID:
+        {
+            FakePCIID* entry = findFakeChild();
+            if (!entry)
+                break;
+
+            int device = getIntegerProperty(entry, "RM,device-id", NULL);
+            if (-1 != device)
+                newResult = device;
+            break;
+        }
+        case kIOPCIConfigSubSystemVendorID:
+        {
+            FakePCIID* entry = findFakeChild();
+            if (!entry)
+                break;
+
+            int vendor = getIntegerProperty(entry, "RM,subsystem-vendor-id", NULL);
+            if (-1 != vendor)
+                newResult = vendor;
+            break;
+        }
+        case kIOPCIConfigSubSystemID:
+        {
+            FakePCIID* entry = findFakeChild();
+            if (!entry)
+                break;
+
+            int device = getIntegerProperty(entry, "RM,subsystem-id", NULL);
+            if (-1 != device)
+                newResult = device;
+            break;
+        }
+    }
+
+    if (newResult != result)
+        AlwaysLog("CheckChildren: configRead16(0x%02x), result 0x%04x -> 0x%04x\n", offset, result, newResult);
 
     return newResult;
 }

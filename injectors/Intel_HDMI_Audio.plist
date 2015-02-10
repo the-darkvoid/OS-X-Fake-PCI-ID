@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Source Code</key>
+	<string>https://github.com/RehabMan/FakePCIID</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.rehabman.injector.Intel-HDMI-Audio</string>
+	<string>org.rehabman.injector.FakePCIID-Intel-HDMI-Audio</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -36,7 +38,5 @@
 	</dict>
 	<key>OSBundleRequired</key>
 	<string>Root</string>
-	<key>Source Code</key>
-	<string>https://github.com/RehabMan/FakePCIID</string>
 </dict>
 </plist>
