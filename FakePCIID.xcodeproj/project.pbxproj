@@ -28,6 +28,8 @@
 		D4096F841A52FCED005C037A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4096F851A52FCED005C037A /* FakePCIID.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FakePCIID.h; sourceTree = "<group>"; };
 		D4096F871A52FCED005C037A /* FakePCIID.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FakePCIID.cpp; sourceTree = "<group>"; };
+		D410AA971A8A2BC6007FD343 /* FakePCIID_Intel_GbX.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID_Intel_GbX.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		D410AAA01A8A2C00007FD343 /* Intel_GbX.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Intel_GbX.plist; path = injectors/Intel_GbX.plist; sourceTree = "<group>"; };
 		D423B7971A5C0FD8007F2350 /* FakePCIID_Intel_HDMI_Audio.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID_Intel_HDMI_Audio.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		D423B7A01A5C0FF6007F2350 /* Intel_HDMI_Audio.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Intel_HDMI_Audio.plist; path = injectors/Intel_HDMI_Audio.plist; sourceTree = "<group>"; };
 		D43DC8631A7FA447004B2D06 /* BCM57XX_as_BCM57765.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = BCM57XX_as_BCM57765.plist; path = injectors/BCM57XX_as_BCM57765.plist; sourceTree = "<group>"; };
@@ -63,6 +65,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D410AA931A8A2BC6007FD343 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D423B7931A5C0FD8007F2350 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -83,6 +92,7 @@
 		84A7B1A61A588D6F00110310 /* Injectors */ = {
 			isa = PBXGroup;
 			children = (
+				D410AAA01A8A2C00007FD343 /* Intel_GbX.plist */,
 				D43DC8631A7FA447004B2D06 /* BCM57XX_as_BCM57765.plist */,
 				D423B7A01A5C0FF6007F2350 /* Intel_HDMI_Audio.plist */,
 				D405EF6E1A59104300547072 /* BCM94352Z_as_BCM94360CS2.plist */,
@@ -112,6 +122,7 @@
 				D405EF741A5910E000547072 /* FakePCIID_BCM94352Z_as_BCM94360CS2.kext */,
 				D423B7971A5C0FD8007F2350 /* FakePCIID_Intel_HDMI_Audio.kext */,
 				D43DC86A1A7FA6E5004B2D06 /* FakePCIID_BCM57XX_as_BCM57765.kext */,
+				D410AA971A8A2BC6007FD343 /* FakePCIID_Intel_GbX.kext */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -166,6 +177,13 @@
 			files = (
 				D4096F861A52FCED005C037A /* FakePCIID.h in Headers */,
 				843192371A588EF50022C7A1 /* PCIDeviceStub.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D410AA941A8A2BC6007FD343 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +276,24 @@
 			productReference = D4096F801A52FCED005C037A /* FakePCIID.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
+		D410AA961A8A2BC6007FD343 /* FakePCIID_Intel_GbX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D410AA9F1A8A2BC6007FD343 /* Build configuration list for PBXNativeTarget "FakePCIID_Intel_GbX" */;
+			buildPhases = (
+				D410AA921A8A2BC6007FD343 /* Sources */,
+				D410AA931A8A2BC6007FD343 /* Frameworks */,
+				D410AA941A8A2BC6007FD343 /* Headers */,
+				D410AA951A8A2BC6007FD343 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FakePCIID_Intel_GbX;
+			productName = FakePCIID_Intel_GbX;
+			productReference = D410AA971A8A2BC6007FD343 /* FakePCIID_Intel_GbX.kext */;
+			productType = "com.apple.product-type.kernel-extension";
+		};
 		D423B7961A5C0FD8007F2350 /* FakePCIID_Intel_HDMI_Audio */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D423B79D1A5C0FD8007F2350 /* Build configuration list for PBXNativeTarget "FakePCIID_Intel_HDMI_Audio" */;
@@ -315,6 +351,9 @@
 					D4096F7F1A52FCED005C037A = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
+					D410AA961A8A2BC6007FD343 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
 					D423B7961A5C0FD8007F2350 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
@@ -341,6 +380,7 @@
 				D405EF731A5910E000547072 /* FakePCIID_BCM94352Z_as_BCM94360CS2 */,
 				D423B7961A5C0FD8007F2350 /* FakePCIID_Intel_HDMI_Audio */,
 				D43DC8691A7FA6E5004B2D06 /* FakePCIID_BCM57XX_as_BCM57765 */,
+				D410AA961A8A2BC6007FD343 /* FakePCIID_Intel_GbX */,
 			);
 		};
 /* End PBXProject section */
@@ -368,6 +408,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D4096F7E1A52FCED005C037A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D410AA951A8A2BC6007FD343 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -418,6 +465,13 @@
 			files = (
 				D401A4061A530DC600CD5616 /* PCIDeviceStub.cpp in Sources */,
 				D4096F881A52FCED005C037A /* FakePCIID.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D410AA921A8A2BC6007FD343 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,6 +595,26 @@
 			};
 			name = Release;
 		};
+		D410AA9D1A8A2BC6007FD343 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = injectors/Intel_GbX.plist;
+				MODULE_NAME = rehabman.FakePCIID_Intel_GbX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Debug;
+		};
+		D410AA9E1A8A2BC6007FD343 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = injectors/Intel_GbX.plist;
+				MODULE_NAME = rehabman.FakePCIID_Intel_GbX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Release;
+		};
 		D43DC8701A7FA6E5004B2D06 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -627,6 +701,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		D410AA9F1A8A2BC6007FD343 /* Build configuration list for PBXNativeTarget "FakePCIID_Intel_GbX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D410AA9D1A8A2BC6007FD343 /* Debug */,
+				D410AA9E1A8A2BC6007FD343 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		D423B79D1A5C0FD8007F2350 /* Build configuration list for PBXNativeTarget "FakePCIID_Intel_HDMI_Audio" */ = {
 			isa = XCConfigurationList;
