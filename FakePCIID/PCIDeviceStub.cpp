@@ -212,6 +212,36 @@ UInt8 PCIDeviceStub::configRead8(IOPCIAddressSpace space, UInt8 offset)
 }
 
 #ifdef HOOK_ALL
+void PCIDeviceStub::configWrite32(IOPCIAddressSpace space, UInt8 offset, UInt32 data)
+{
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
+    
+    DebugLog("[%04x:%04x] configWrite32 address space(0x%08x, 0x%02x) data: 0x%08x\n",
+             deviceInfo & 0xFFFF, deviceInfo >> 16, space.bits, offset, data);
+    
+    super::configWrite32(space, offset, data);
+}
+
+void PCIDeviceStub::configWrite16(IOPCIAddressSpace space, UInt8 offset, UInt16 data)
+{
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
+    
+    DebugLog("[%04x:%04x] configWrite16 address space(0x%08x, 0x%02x) data: 0x%04x\n",
+             deviceInfo & 0xFFFF, deviceInfo >> 16, space.bits, offset, data);
+    
+    super::configWrite16(space, offset, data);
+}
+
+void PCIDeviceStub::configWrite8(IOPCIAddressSpace space, UInt8 offset, UInt8 data)
+{
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
+    
+    DebugLog("[%04x:%04x] configWrite8 address space(0x%08x, 0x%02x) data: 0x%02x\n",
+             deviceInfo & 0xFFFF, deviceInfo >> 16, space.bits, offset, data);
+    
+    super::configWrite8(space, offset, data);
+}
+
 UInt32 PCIDeviceStub::configRead32(UInt8 offset)
 {
     UInt32 result = super::configRead32(offset);
