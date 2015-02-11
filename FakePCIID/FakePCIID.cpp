@@ -51,16 +51,16 @@ bool FakePCIID::hookProvider(IOService *provider)
     {
         if (OSCollectionIterator* iter = OSCollectionIterator::withCollection(providerDict))
         {
-            while (OSObject* key = iter->getNextObject())
+            while (OSSymbol* key = OSDynamicCast(OSSymbol, iter->getNextObject()))
             {
-                OSString* key1 = OSDynamicCast(OSString, key);
-                if (NULL != key1 && NULL == provider->getProperty(key1))
+                if (!provider->getProperty(key))
                 {
-                    if (OSObject* value = providerDict->getObject(key1))
-                        provider->setProperty(key1, value);
+                    if (OSObject* value = providerDict->getObject(key))
+                        provider->setProperty(key, value);
                 }
             }
-            iter->release();
+            
+            OSSafeRelease(iter);
         }
     }
 
