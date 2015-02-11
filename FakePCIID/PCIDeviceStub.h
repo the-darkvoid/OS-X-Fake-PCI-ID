@@ -30,6 +30,8 @@
 
 #include <IOKit/pci/IOPCIDevice.h>
 
+class FakePCIID;
+
 //#define HOOK_ALL
 
 class PCIDeviceStub : public IOPCIDevice
@@ -38,7 +40,7 @@ class PCIDeviceStub : public IOPCIDevice
     typedef IOPCIDevice super;
 
 protected:
-    int getIntegerProperty(const char* aKey, const char* alternateKey);
+    static int getIntegerProperty(IORegistryEntry* entry, const char* aKey, const char* alternateKey);
     
 public:
     virtual UInt32 configRead32(IOPCIAddressSpace space, UInt8 offset);
@@ -67,16 +69,6 @@ public:
     virtual IODeviceMemory* ioDeviceMemory(void);
     virtual UInt32 extendedFindPCICapability(UInt32 capabilityID, IOByteCount * offset = 0);
 #endif
-};
-
-class PCIDeviceStub_HD4600_HD4400 : public PCIDeviceStub
-{
-    OSDeclareDefaultStructors(PCIDeviceStub_HD4600_HD4400);
-    typedef PCIDeviceStub super;
-
-public:
-    virtual UInt32 configRead32(IOPCIAddressSpace space, UInt8 offset);
-    virtual UInt16 configRead16(IOPCIAddressSpace space, UInt8 offset);
 };
 
 #endif

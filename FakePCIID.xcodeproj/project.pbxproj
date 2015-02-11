@@ -95,9 +95,9 @@
 				D410AAA01A8A2C00007FD343 /* Intel_GbX.plist */,
 				D43DC8631A7FA447004B2D06 /* BCM57XX_as_BCM57765.plist */,
 				D423B7A01A5C0FF6007F2350 /* Intel_HDMI_Audio.plist */,
-				D405EF6E1A59104300547072 /* BCM94352Z_as_BCM94360CS2.plist */,
 				843192601A5892A40022C7A1 /* HD4600_HD4400.plist */,
 				843192621A5892AD0022C7A1 /* AR9280_as_AR946x.plist */,
+				D405EF6E1A59104300547072 /* BCM94352Z_as_BCM94360CS2.plist */,
 			);
 			name = Injectors;
 			sourceTree = "<group>";
@@ -496,7 +496,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = injectors/AR9280_as_AR946x.plist;
-				MODULE_NAME = rehabman.FakePCIID_AR9280_as_AR946x;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-AR9280-as-AR946x";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -506,7 +506,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = injectors/AR9280_as_AR946x.plist;
-				MODULE_NAME = rehabman.FakePCIID_AR9280_as_AR946x;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-AR9280-as-AR946x";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -516,7 +516,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = injectors/HD4600_HD4400.plist;
-				MODULE_NAME = rehabman.FakePCIID_HD4600_HD4400;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-HD4600-HD4400";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -526,7 +526,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = injectors/HD4600_HD4400.plist;
-				MODULE_NAME = rehabman.FakePCIID_HD4600_HD4400;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-HD4600-HD4400";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -536,7 +536,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = injectors/BCM94352Z_as_BCM94360CS2.plist;
-				MODULE_NAME = rehabman.FakePCIID_BCM94352Z_as_BCM94360CS2;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-BCM94352Z-as-BCM94360CS2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -546,7 +546,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = injectors/BCM94352Z_as_BCM94360CS2.plist;
-				MODULE_NAME = rehabman.FakePCIID_BCM94352Z_as_BCM94360CS2;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-BCM94352Z-as-BCM94360CS2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -555,8 +555,9 @@
 		D4096F891A52FCED005C037A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = injectors/Intel_HDMI_Audio.plist;
-				MODULE_NAME = rehabman.FakePCIID_Intel_HDMI_Audio;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				INFOPLIST_FILE = FakePCIID/Info.plist;
+				MODULE_VERSION = 1.0.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -565,8 +566,8 @@
 		D4096F8A1A52FCED005C037A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = injectors/Intel_HDMI_Audio.plist;
-				MODULE_NAME = rehabman.FakePCIID_Intel_HDMI_Audio;
+				INFOPLIST_FILE = FakePCIID/Info.plist;
+				MODULE_VERSION = 1.0.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -641,6 +642,8 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = injectors/Intel_HDMI_Audio.plist;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-Intel-HDMI-Audio";
 				PRODUCT_NAME = FakePCIID_Intel_HDMI_Audio;
 			};
 			name = Debug;
@@ -650,6 +653,8 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				INFOPLIST_FILE = injectors/Intel_HDMI_Audio.plist;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-Intel-HDMI-Audio";
 				PRODUCT_NAME = FakePCIID_Intel_HDMI_Audio;
 			};
 			name = Release;
@@ -709,6 +714,7 @@
 				D410AA9E1A8A2BC6007FD343 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D423B79D1A5C0FD8007F2350 /* Build configuration list for PBXNativeTarget "FakePCIID_Intel_HDMI_Audio" */ = {
 			isa = XCConfigurationList;

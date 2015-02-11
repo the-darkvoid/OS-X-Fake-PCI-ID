@@ -20,6 +20,7 @@
 
 #include <IOKit/IOLib.h>
 #include "PCIDeviceStub.h"
+#include "FakePCIID.h"
 
 // We want ioreg to still see the normal class hierarchy for hooked
 // provider IOPCIDevice
@@ -59,12 +60,13 @@
 
 hack_OSDefineMetaClassAndStructors(PCIDeviceStub, IOPCIDevice);
 
-int PCIDeviceStub::getIntegerProperty(const char *aKey, const char *alternateKey)
+int PCIDeviceStub::getIntegerProperty(IORegistryEntry* entry, const char *aKey, const char *alternateKey)
 {
-    OSData* data = OSDynamicCast(OSData, getProperty(aKey));
+    OSData* data = OSDynamicCast(OSData, entry->getProperty(aKey));
     if (!data || sizeof(UInt32) != data->getLength())
     {
-        data = OSDynamicCast(OSData, getProperty(alternateKey));
+        if (alternateKey)
+            data = OSDynamicCast(OSData, entry->getProperty(alternateKey));
         if (!data || sizeof(UInt32) != data->getLength())
             return -1;
     }
@@ -88,29 +90,29 @@ UInt32 PCIDeviceStub::configRead32(IOPCIAddressSpace space, UInt8 offset)
         case kIOPCIConfigVendorID:
         case kIOPCIConfigDeviceID: // OS X does a non-aligned read, which still returns full vendor / device ID
         {
-            int vendor = getIntegerProperty("RM,vendor-id", "vendor-id");
+            int vendor = getIntegerProperty(this, "RM,vendor-id", "vendor-id");
             if (-1 != vendor)
                 newResult = (newResult & 0xFFFF0000) | vendor;
             
-            int device = getIntegerProperty("RM,device-id", "device-id");
+            int device = getIntegerProperty(this, "RM,device-id", "device-id");
             if (-1 != device)
                 newResult = (device << 16) | (newResult & 0xFFFF);
             break;
         }
         case kIOPCIConfigSubSystemVendorID:
         {
-            int vendor = getIntegerProperty("RM,subsystem-vendor-id", "subsystem-vendor-id");
+            int vendor = getIntegerProperty(this, "RM,subsystem-vendor-id", "subsystem-vendor-id");
             if (-1 != vendor)
                 newResult = (newResult & 0xFFFF0000) | vendor;
             
-            int device = getIntegerProperty("RM,subsystem-id", "subsystem-id");
+            int device = getIntegerProperty(this, "RM,subsystem-id", "subsystem-id");
             if (-1 != device)
                 newResult = (device << 16) | (newResult & 0xFFFF);
             break;
         }
         case kIOPCIConfigRevisionID:
         {
-            int revision = getIntegerProperty("RM,revision-id", "revision-id");
+            int revision = getIntegerProperty(this, "RM,revision-id", "revision-id");
             
             if (-1 != revision)
                 newResult = (newResult & 0xFFFFFF00) | revision;
@@ -139,35 +141,35 @@ UInt16 PCIDeviceStub::configRead16(IOPCIAddressSpace space, UInt8 offset)
     {
         case kIOPCIConfigVendorID:
         {
-            int vendor = getIntegerProperty("RM,vendor-id", "vendor-id");
+            int vendor = getIntegerProperty(this, "RM,vendor-id", "vendor-id");
             if (-1 != vendor)
                 newResult = vendor;
             break;
         }
         case kIOPCIConfigDeviceID:
         {
-            int device = getIntegerProperty("RM,device-id", "device-id");
+            int device = getIntegerProperty(this, "RM,device-id", "device-id");
             if (-1 != device)
                 newResult = device;
             break;
         }
         case kIOPCIConfigSubSystemVendorID:
         {
-            int vendor = getIntegerProperty("RM,subsystem-vendor-id", "subsystem-vendor-id");
+            int vendor = getIntegerProperty(this, "RM,subsystem-vendor-id", "subsystem-vendor-id");
             if (-1 != vendor)
                 newResult = vendor;
             break;
         }
         case kIOPCIConfigSubSystemID:
         {
-            int device = getIntegerProperty("RM,subsystem-id", "subsystem-id");
+            int device = getIntegerProperty(this, "RM,subsystem-id", "subsystem-id");
             if (-1 != device)
                 newResult = device;
             break;
         }
         case kIOPCIConfigRevisionID:
         {
-            int revision = getIntegerProperty("RM,revision-id", "revision-id");
+            int revision = getIntegerProperty(this, "RM,revision-id", "revision-id");
             
             if (-1 != revision)
                 newResult = (newResult & 0xFF00) | revision;
@@ -196,7 +198,7 @@ UInt8 PCIDeviceStub::configRead8(IOPCIAddressSpace space, UInt8 offset)
     {
         case kIOPCIConfigRevisionID:
         {
-            int revision = getIntegerProperty("RM,revision-id", "revision-id");
+            int revision = getIntegerProperty(this, "RM,revision-id", "revision-id");
             
             if (-1 != revision)
                 newResult = revision;
@@ -403,53 +405,4 @@ UInt32 PCIDeviceStub::extendedFindPCICapability( UInt32 capabilityID, IOByteCoun
 
 #endif
 
-hack_OSDefineMetaClassAndStructors(PCIDeviceStub_HD4600_HD4400, PCIDeviceStub);
-
-#define kHD4600_Desktop_DeviceID 0x0412
-
-UInt32 PCIDeviceStub_HD4600_HD4400::configRead32(IOPCIAddressSpace space, UInt8 offset)
-{
-    UInt32 result = super::configRead32(space, offset);
-
-    DebugLog("HD4600_HD4400: configRead32 address space(0x%08x, 0x%02x) result: 0x%08x\n", space.bits, offset, result);
-
-    // Replace return value with injected vendor-id/device-id in ioreg
-    UInt32 newResult = result;
-    switch (offset)
-    {
-        case kIOPCIConfigVendorID:
-        case kIOPCIConfigDeviceID: // OS X does a non-aligned read, which still returns full vendor / device ID
-        {
-            newResult = (kHD4600_Desktop_DeviceID << 16) | (newResult & 0xFFFF);
-            break;
-        }
-    }
-
-    if (newResult != result)
-        AlwaysLog("HD4600_HD4400: configRead32(0x%02x), result 0x%08x -> 0x%08x\n", offset, result, newResult);
-
-    return newResult;
-}
-
-UInt16 PCIDeviceStub_HD4600_HD4400::configRead16(IOPCIAddressSpace space, UInt8 offset)
-{
-    UInt16 result = super::configRead16(space, offset);
-
-    DebugLog("HD4600_HD4400: configRead16 address space(0x%08x, 0x%02x) result: 0x%04x\n", space.bits, offset, result);
-
-    UInt16 newResult = result;
-    switch (offset)
-    {
-        case kIOPCIConfigDeviceID:
-        {
-            newResult = kHD4600_Desktop_DeviceID;
-            break;
-        }
-    }
-
-    if (newResult != result)
-        AlwaysLog("HD4600_HD4400: configRead16(0x%02x), result 0x%04x -> 0x%04x\n", offset, result, newResult);
-
-    return newResult;
-}
 

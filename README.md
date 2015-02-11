@@ -3,11 +3,12 @@
 The purpose of this kext is to attach to any IOPCIDevice so it can provide alternate PCI ID when another driver attached to the same device requests them.  This technique can be used instead of patching binaries that may check for supported device-ids (or other PCI IDs) in their IOService::probe or IOService::start method.
 
 In order to attach FakePCIID to a given IOPCIDevice, an injector kext must be built that IOKit can use to match against. 
-The FakePCIID.kext Info.plist has no built-in IOKitPersonalities, as it is generic and not built to suit a specific purpose.  The distribution ZIP provide has two such injector kexts, one for Intel HD4400 and HD4600 mobile graphics and one for AR9280 WiFi (for use when a re-branded AR9280 is used to work around a WiFi device whitelist implemented in BIOS).  Custom injector kexts can be created for other devices.
+The FakePCIID.kext Info.plist has no built-in IOKitPersonalities, as it is generic and not built to suit a specific purpose.  The distribution ZIP provide has four such injector kexts, which are described below.  Custom injector kexts can be created for other devices.
 
 Note: FakePCIID_HD4600_HD4400.kext works for HD4400 mobile, HD4600 mobile, HD4200 mobile, and HD4600 desktop.
 
-In any case, a DSDT patch or FakeID configuration (Clover) will be required to inject the properties that FakePCIID can read on the IOPCIDevice.  Generally this is done with _DSM injection although there are a variety of ways to accomplish such injections.
+In any case, a DSDT patch, FakeID configuration (Clover), or FakeProperties dictionary in the injector's Info.plist will be required to inject the properties that FakePCIID can read on the IOPCIDevice.  The properties used by FakePCIID are described later in this post.  The properties must be present on the PCIDevice that is being hooked (the direct parent of FakePCIID).
+
 
 ### Downloads:
 
@@ -23,7 +24,8 @@ In all cases, FakePCIID.kext must be installed with a kext installer (such as Ke
 In order to cause the kext to be loaded against a particular device, you must also install the appropriate injector kext.  Currently, four injectors are provided:
 
 - FakePCIID_HD4600_HD4400.kext: 
-  This will attach to `8086:0412`, `8086:0416`, `8086:0a1e`, `8086:041e`, `8086:0a16`, and `8086:041a`.
+  This kext will attach to `8086:0412`, `8086:0416`, `8086:0a1e`, `8086:041e`, `8086:0a16`, and `8086:041a`.
+
   - `8086:0412` is HD4600 desktop (now the only GT2 device supported in Yosemite as of 10.10.2)
   - `8086:0a16` is HD4400 mobile.
   - `8086:0416` is HD4600 mobile.
@@ -36,11 +38,11 @@ In order to cause the kext to be loaded against a particular device, you must al
   And since, FakePCIID will also be attached to these devices, it will successfully fool both kexts that the device an Intel HD4600 Desktop IGPU (0412).
 
 - FakePCIID_Intel_HDMI_Audio.kext:
-  This will attach to `8086:0c0c`, `8086:0d0c`, and `8086:0a0c`
+  This kext will attach to `8086:0c0c`, `8086:0d0c`, and `8086:0a0c`
 
-  The purpose is to provide support for unsupported HDAU (usually called B0D3) devices which provide HDMI-audio on Haswell(+) systems.  `8086:0c0c` is the unsupported ID.  The other two `8086:0d0c`, and `8086:0a0c` are supported.  This kext, AppleHDAController, loads by PCI class, so you normally would not inject device-id for it, but to allow FakePCIID to work, you will need to inject RM,device-id (one of the supported IDs)
+  The purpose is to provide support for unsupported HDAU (usually called B0D3) devices which provide HDMI-audio on Haswell(+) systems.  `8086:0c0c` is the unsupported ID.  The other two `8086:0d0c`, and `8086:0a0c` are supported.  This kext, AppleHDAController, loads by PCI class, so you normally would not inject device-id for it, but to allow FakePCIID to work, you may need to inject RM,device-id (one of the supported IDs).  By default, the kext injects RM,device-id=<0c 0a 00 00> (0x0a0c).  You can override it with a DSDT edit.
 
-  For example (typical _DSM patch for HDAU device for FakePCIID and HDMI audio):
+  For example (_DSM patch for HDAU device for FakePCIID and HDMI audio, if you wanted 0x0d0c instead of 0x0a0c):
 
 ```c
 into method label _DSM parent_adr 0x00030000 remove_entry;
@@ -51,7 +53,7 @@ Method (_DSM, 4, NotSerialized)\n
     If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }\n
     Return (Package()\n
     {\n
-        "RM,device-id", Buffer() { 0x0c, 0x0a, 0x00, 0x00 },\n
+        "RM,device-id", Buffer() { 0x0c, 0x0d, 0x00, 0x00 },\n
         "hda-gfx", Buffer() { "onboard-1" },\n
     })\n
 }\n
@@ -65,7 +67,7 @@ end;
   By using FakePCIID, we can remap the PCI IDs back to AR9280 (`168c:002a`) even though the device itself is reporting `168c:0034`.
 
 - FakePCIID_BCM94352Z_as_BCM94360CS2:
-	  This kext will attach to `14e4:43b1` or `14e4:43a0`.
+  This kext will attach to `14e4:43b1` or `14e4:43a0`.
 
   This particular application of FakePCIID.kext is used to emulate an authentic Apple Airport Extreme (BCM94360CS2), when using a BCM94352Z NGFF M.2 WiFi module.
 

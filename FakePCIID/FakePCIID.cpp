@@ -39,7 +39,6 @@ bool FakePCIID::hookProvider(IOService *provider)
     if (mDeviceVtable)
         return true;  // already hooked
 
-    // hook provider IOPCIDevice vtable on attach/start
     IOPCIDevice *device = OSDynamicCast(IOPCIDevice, provider);
     if (!device)
     {
@@ -47,14 +46,25 @@ bool FakePCIID::hookProvider(IOService *provider)
         return false;
     }
 
-#ifdef DEBUG
-    // merge overriding properties into the provider
-    OSDictionary *providerDict = (OSDictionary*)getProperty("FakeProperties");
-    
-    if (providerDict != NULL)
-        provider->getPropertyTable()->merge(providerDict);
-#endif
-    
+    // merge FakeProperties into the provider (only properties that do not exist)
+    if (OSDictionary *providerDict = (OSDictionary*)getProperty("FakeProperties"))
+    {
+        if (OSCollectionIterator* iter = OSCollectionIterator::withCollection(providerDict))
+        {
+            while (OSObject* key = iter->getNextObject())
+            {
+                OSString* key1 = OSDynamicCast(OSString, key);
+                if (NULL != key1 && NULL == provider->getProperty(key1))
+                {
+                    if (OSObject* value = providerDict->getObject(key1))
+                        provider->setProperty(key1, value);
+                }
+            }
+            iter->release();
+        }
+    }
+
+    // hook provider IOPCIDevice vtable on attach/start
     mProvider = device;
     device->retain();
 
@@ -153,18 +163,3 @@ void FakePCIID::detach(IOService *provider)
     return super::detach(provider);
 }
 #endif
-
-OSDefineMetaClassAndStructors(FakePCIID_HD4600_HD4400, FakePCIID);
-
-bool FakePCIID_HD4600_HD4400::init(OSDictionary *propTable)
-{
-    if (!super::init(propTable))
-        return false;
-
-    // capture vtable pointer for PCIDeviceStub_HD4600_HD4400
-    PCIDeviceStub *stub = OSTypeAlloc(PCIDeviceStub_HD4600_HD4400);
-    mStubVtable = getVTable(stub);
-    stub->release();
-
-    return true;
-}
