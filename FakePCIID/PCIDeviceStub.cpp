@@ -78,7 +78,10 @@ UInt32 PCIDeviceStub::configRead32(IOPCIAddressSpace space, UInt8 offset)
 {
     UInt32 result = super::configRead32(space, offset);
     
-    DebugLog("configRead32 address space(0x%08x, 0x%02x) result: 0x%08x\n", space.bits, offset, result);
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
+   
+    DebugLog("[%04x:%04x] configRead32 address space(0x%08x, 0x%02x) result: 0x%08x\n",
+             deviceInfo & 0xFFFF, deviceInfo >> 16, space.bits, offset, result);
     
     // Replace return value with injected vendor-id/device-id in ioreg
     UInt32 newResult = result;
@@ -107,10 +110,19 @@ UInt32 PCIDeviceStub::configRead32(IOPCIAddressSpace space, UInt8 offset)
                 newResult = (device << 16) | (newResult & 0xFFFF);
             break;
         }
+        case kIOPCIConfigRevisionID:
+        {
+            int revision = getIntegerProperty(this, "RM,revision-id", "revision-id");
+            
+            if (-1 != revision)
+                newResult = (newResult & 0xFFFFFF00) | revision;
+            break;
+        }
     }
     
     if (newResult != result)
-        AlwaysLog("configRead32(0x%02x), result 0x%08x -> 0x%08x\n", offset, result, newResult);
+        AlwaysLog("[%04x:%04x] configRead32(0x%02x), result 0x%08x -> 0x%08x\n",
+                  deviceInfo & 0xFFFF, deviceInfo >> 16, offset, result, newResult);
 
     return newResult;
 }
@@ -119,7 +131,10 @@ UInt16 PCIDeviceStub::configRead16(IOPCIAddressSpace space, UInt8 offset)
 {
     UInt16 result = super::configRead16(space, offset);
     
-    DebugLog("configRead16 address space(0x%08x, 0x%02x) result: 0x%04x\n", space.bits, offset, result);
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
+    
+    DebugLog("[%04x:%04x] configRead16 address space(0x%08x, 0x%02x) result: 0x%04x\n",
+             deviceInfo & 0xFFFF, deviceInfo >> 16, space.bits, offset, result);
 
     UInt16 newResult = result;
     switch (offset)
@@ -152,29 +167,91 @@ UInt16 PCIDeviceStub::configRead16(IOPCIAddressSpace space, UInt8 offset)
                 newResult = device;
             break;
         }
+        case kIOPCIConfigRevisionID:
+        {
+            int revision = getIntegerProperty(this, "RM,revision-id", "revision-id");
+            
+            if (-1 != revision)
+                newResult = (newResult & 0xFF00) | revision;
+            break;
+        }
     }
 
     if (newResult != result)
-        AlwaysLog("configRead16(0x%02x), result 0x%04x -> 0x%04x\n", offset, result, newResult);
+        AlwaysLog("[%04x:%04x] configRead16(0x%02x), result 0x%04x -> 0x%04x\n",
+                  deviceInfo & 0xFFFF, deviceInfo >> 16, offset, result, newResult);
 
     return newResult;
 }
 
-#ifdef HOOK_ALL
 UInt8 PCIDeviceStub::configRead8(IOPCIAddressSpace space, UInt8 offset)
 {
     UInt8 result = super::configRead8(space, offset);
+ 
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
     
-    AlwaysLog("configRead8 address space offset 0x%02x --> 0x%02x\n", result);
+    DebugLog("[%04x:%04x] configRead8 address space(0x%08x, 0x%02x) result: 0x%02x\n",
+             deviceInfo & 0xFFFF, deviceInfo >> 16, space.bits, offset, result);
     
-    return result;
+    UInt8 newResult = result;
+    switch (offset)
+    {
+        case kIOPCIConfigRevisionID:
+        {
+            int revision = getIntegerProperty(this, "RM,revision-id", "revision-id");
+            
+            if (-1 != revision)
+                newResult = revision;
+            break;
+        }
+    }
+    
+    if (newResult != result)
+        AlwaysLog("[%04x:%04x] configRead8(0x%02x), result 0x%02x -> 0x%02x\n",
+                  deviceInfo & 0xFFFF, deviceInfo >> 16, offset, result, newResult);
+    
+    return newResult;
+}
+
+#ifdef HOOK_ALL
+void PCIDeviceStub::configWrite32(IOPCIAddressSpace space, UInt8 offset, UInt32 data)
+{
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
+    
+    DebugLog("[%04x:%04x] configWrite32 address space(0x%08x, 0x%02x) data: 0x%08x\n",
+             deviceInfo & 0xFFFF, deviceInfo >> 16, space.bits, offset, data);
+    
+    super::configWrite32(space, offset, data);
+}
+
+void PCIDeviceStub::configWrite16(IOPCIAddressSpace space, UInt8 offset, UInt16 data)
+{
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
+    
+    DebugLog("[%04x:%04x] configWrite16 address space(0x%08x, 0x%02x) data: 0x%04x\n",
+             deviceInfo & 0xFFFF, deviceInfo >> 16, space.bits, offset, data);
+    
+    super::configWrite16(space, offset, data);
+}
+
+void PCIDeviceStub::configWrite8(IOPCIAddressSpace space, UInt8 offset, UInt8 data)
+{
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
+    
+    DebugLog("[%04x:%04x] configWrite8 address space(0x%08x, 0x%02x) data: 0x%02x\n",
+             deviceInfo & 0xFFFF, deviceInfo >> 16, space.bits, offset, data);
+    
+    super::configWrite8(space, offset, data);
 }
 
 UInt32 PCIDeviceStub::configRead32(UInt8 offset)
 {
     UInt32 result = super::configRead32(offset);
     
-    AlwaysLog("configRead32 offset 0x%02x --> 0x%08x\n", offset, result);
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
+    
+    DebugLog("[%04x:%04x] configRead32 address (0x%02x) result: 0x%08x\n",
+             deviceInfo & 0xFFFF, deviceInfo >> 16, offset, result);
     
     return result;
 }
@@ -183,7 +260,10 @@ UInt16 PCIDeviceStub::configRead16(UInt8 offset)
 {
     UInt16 result = super::configRead16(offset);
     
-    AlwaysLog("configRead16 offset 0x%02x --> 0x%04x\n", offset, result);
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
+    
+    DebugLog("[%04x:%04x] configRead16 address (0x%02x) result: 0x%04x\n",
+             deviceInfo & 0xFFFF, deviceInfo >> 16, offset, result);
     
     return result;
 }
@@ -192,7 +272,10 @@ UInt8 PCIDeviceStub::configRead8(UInt8 offset)
 {
     UInt8 result = super::configRead8(offset);
     
-    AlwaysLog("configRead8 offset 0x%02x --> 0x%02x\n", offset, result);
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
+    
+    DebugLog("[%04x:%04x] configRead8 address (0x%02x) result: 0x%02x\n",
+             deviceInfo & 0xFFFF, deviceInfo >> 16, offset, result);
     
     return result;
 }
@@ -201,7 +284,10 @@ UInt32 PCIDeviceStub::extendedConfigRead32(IOByteCount offset)
 {
     UInt32 result = super::extendedConfigRead32(offset);
     
-    AlwaysLog("extendedConfigRead32 offset 0x%08llx --> 0x%08x\n", offset, result);
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
+    
+    DebugLog("[%04x:%04x] extendedConfigRead32 address (0x%02llx) result: 0x%08x\n",
+             deviceInfo & 0xFFFF, deviceInfo >> 16, offset, result);
     
     return result;
 }
@@ -210,7 +296,10 @@ UInt16 PCIDeviceStub::extendedConfigRead16(IOByteCount offset)
 {
     UInt16 result = super::extendedConfigRead16(offset);
     
-    AlwaysLog("extendedConfigRead16 offset 0x%08llx --> 0x%04x\n", offset, result);
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
+    
+    DebugLog("[%04x:%04x] extendedConfigRead16 address (0x%02llx) result: 0x%04x\n",
+             deviceInfo & 0xFFFF, deviceInfo >> 16, offset, result);
     
     return result;
 }
@@ -219,7 +308,10 @@ UInt8 PCIDeviceStub::extendedConfigRead8(IOByteCount offset)
 {
     UInt8 result = super::extendedConfigRead8(offset);
     
-    AlwaysLog("extendedConfigRead8 offset 0x%08llx --> 0x%02x\n", offset, result);
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
+    
+    DebugLog("[%04x:%04x] extendedConfigRead8 address (0x%02llx) result: 0x%02x\n",
+             deviceInfo & 0xFFFF, deviceInfo >> 16, offset, result);
     
     return result;
 }
@@ -228,7 +320,10 @@ UInt32 PCIDeviceStub::ioRead32(UInt16 offset, IOMemoryMap* map)
 {
     UInt32 result = super::ioRead32(offset);
     
-    AlwaysLog("ioRead32 offset 0x%04x --> 0x%08x\n", offset, result);
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
+    
+    DebugLog("[%04x:%04x] ioRead32 address (0x%04x) result: 0x%08x\n",
+             deviceInfo & 0xFFFF, deviceInfo >> 16, offset, result);
     
     return result;
 }
@@ -237,7 +332,10 @@ UInt16 PCIDeviceStub::ioRead16(UInt16 offset, IOMemoryMap* map)
 {
     UInt16 result = super::ioRead16(offset);
     
-    AlwaysLog("ioRead16 offset 0x%04x --> 0x%04x\n", offset, result);
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
+    
+    DebugLog("[%04x:%04x] ioRead16 address (0x%04x) result: 0x%04x\n",
+             deviceInfo & 0xFFFF, deviceInfo >> 16, offset, result);
     
     return result;
 }
@@ -246,10 +344,65 @@ UInt8 PCIDeviceStub::ioRead8(UInt16 offset, IOMemoryMap* map)
 {
     UInt8 result = super::ioRead8(offset);
     
-    AlwaysLog("ioRead8 offset 0x%04x --> 0x%02x\n", offset, result);
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
+    
+    DebugLog("[%04x:%04x] ioRead8 address (0x%04x) result: 0x%02x\n",
+             deviceInfo & 0xFFFF, deviceInfo >> 16, offset, result);
     
     return result;
 }
+
+IODeviceMemory* PCIDeviceStub::getDeviceMemoryWithRegister( UInt8 reg )
+{
+    IODeviceMemory* result = super::getDeviceMemoryWithRegister(reg);
+    
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
+    
+    if (result)
+        DebugLog("[%04x:%04x] getDeviceMemoryWithRegister address (0x%08llx) size (0x%08llx)\n",
+                 deviceInfo & 0xFFFF, deviceInfo >> 16, result->getPhysicalAddress(), result->getLength());
+    
+    return result;
+}
+
+IOMemoryMap* PCIDeviceStub::mapDeviceMemoryWithRegister(UInt8 reg, IOOptionBits options)
+{
+    IOMemoryMap* result = super::mapDeviceMemoryWithRegister(reg, options);
+    
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
+    
+    if (result)
+        DebugLog("[%04x:%04x] mapDeviceMemoryWithRegister address (0x%08llx) size (0x%08llx)\n",
+                 deviceInfo & 0xFFFF, deviceInfo >> 16, result->getPhysicalAddress(), result->getLength());
+    
+    return result;
+}
+
+IODeviceMemory* PCIDeviceStub::ioDeviceMemory(void)
+{
+    IODeviceMemory* result = super::ioDeviceMemory();
+    
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
+    
+    if (result)
+        DebugLog("[%04x:%04x] ioDeviceMemory address (0x%08llx) size (0x%08llx)\n",
+                 deviceInfo & 0xFFFF, deviceInfo >> 16, result->getPhysicalAddress(), result->getLength());
+    
+    return result;
+}
+
+UInt32 PCIDeviceStub::extendedFindPCICapability( UInt32 capabilityID, IOByteCount* offset)
+{
+    UInt32 result = super::extendedFindPCICapability(capabilityID, offset);
+    
+    UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
+    
+    DebugLog("[%04x:%04x] extendedFindPCICapability (0x%08x) offset (0x%08llx) result: 0x%08x\n",
+             deviceInfo & 0xFFFF, deviceInfo >> 16, capabilityID, *offset, result);
+    
+    return result;
+}
+
 #endif
 
 

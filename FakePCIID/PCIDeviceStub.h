@@ -45,77 +45,29 @@ protected:
 public:
     virtual UInt32 configRead32(IOPCIAddressSpace space, UInt8 offset);
     virtual UInt16 configRead16(IOPCIAddressSpace space, UInt8 offset);
-#ifdef HOOK_ALL
     virtual UInt8 configRead8(IOPCIAddressSpace space, UInt8 offset);
 
-    /*! @function configRead32
-     @abstract Reads a 32-bit value from the PCI device's configuration space.
-     @discussion This method reads a 32-bit configuration space register on the device and returns its value.
-     @param offset An 8-bit offset into configuration space, of which bits 0-1 are ignored.
-     @result An 32-bit value in host byte order (big endian on PPC). */
+#ifdef HOOK_ALL
+    virtual void configWrite32(IOPCIAddressSpace space, UInt8 offset, UInt32 data);
+    virtual void configWrite16(IOPCIAddressSpace space, UInt8 offset, UInt16 data);
+    virtual void configWrite8(IOPCIAddressSpace space, UInt8 offset, UInt8 data);
+    
     virtual UInt32 configRead32(UInt8 offset);
-    
-    /*! @function configRead16
-     @abstract Reads a 16-bit value from the PCI device's configuration space.
-     @discussion This method reads a 16-bit configuration space register on the device and returns its value.
-     @param offset An 8-bit offset into configuration space, of which bit 0 is ignored.
-     @result An 16-bit value in host byte order (big endian on PPC). */
     virtual UInt16 configRead16(UInt8 offset);
-    
-    /*! @function configRead8
-     @abstract Reads a 8-bit value from the PCI device's configuration space.
-     @discussion This method reads a 8-bit configuration space register on the device and returns its value.
-     @param offset An 8-bit offset into configuration space.
-     @result An 8-bit value. */
     virtual UInt8 configRead8(UInt8 offset);
     
-    /*! @function extendedConfigRead32
-     @abstract Reads a 32-bit value from the PCI device's configuration space.
-     @discussion This method reads a 32-bit configuration space register on the device and returns its value.
-     @param offset A byte offset into configuration space, of which bits 0-1 are ignored.
-     @result An 32-bit value in host byte order (big endian on PPC). */
     UInt32 extendedConfigRead32(IOByteCount offset);
-    
-    /*! @function extendedConfigRead16
-     @abstract Reads a 16-bit value from the PCI device's configuration space.
-     @discussion This method reads a 16-bit configuration space register on the device and returns its value.
-     @param offset A byte offset into configuration space, of which bit 0 is ignored.
-     @result An 16-bit value in host byte order (big endian on PPC). */
     UInt16 extendedConfigRead16(IOByteCount offset);
-    
-    /*! @function extendedConfigRead8
-     @abstract Reads a 8-bit value from the PCI device's configuration space.
-     @discussion This method reads a 8-bit configuration space register on the device and returns its value.
-     @param offset A byte offset into configuration space.
-     @result An 8-bit value. */
     UInt8 extendedConfigRead8(IOByteCount offset);
     
-    /*! @function ioRead32
-     @abstract Reads a 32-bit value from an I/O space aperture.
-     @discussion This method will read a 32-bit value from a 4 byte aligned offset in an I/O space aperture. If a map object is passed in, the value is read relative to it, otherwise to the value is read relative to the I/O space aperture for the bus. This function encapsulates the differences between architectures in generating I/O space operations. An eieio instruction is included on PPC.
-     @param offset An offset into a bus or device's I/O space aperture.
-     @param map If the offset is relative to the beginning of a device's aperture, an IOMemoryMap object for that object should be passed in. Otherwise, passing zero will write the value relative to the beginning of the bus' I/O space.
-     @result The value read in host byte order (big endian on PPC). */
+    virtual UInt32 ioRead32(UInt16 offset, IOMemoryMap * map = 0);
+    virtual UInt16 ioRead16(UInt16 offset, IOMemoryMap * map = 0);
+    virtual UInt8 ioRead8(UInt16 offset, IOMemoryMap * map = 0);
     
-    virtual UInt32 ioRead32( UInt16 offset, IOMemoryMap * map = 0 );
-    
-    /*! @function ioRead16
-     @abstract Reads a 16-bit value from an I/O space aperture.
-     @discussion This method will read a 16-bit value from a 2 byte aligned offset in an I/O space aperture. If a map object is passed in, the value is read relative to it, otherwise to the value is read relative to the I/O space aperture for the bus. This function encapsulates the differences between architectures in generating I/O space operations. An eieio instruction is included on PPC.
-     @param offset An offset into a bus or device's I/O space aperture.
-     @param map If the offset is relative to the beginning of a device's aperture, an IOMemoryMap object for that object should be passed in. Otherwise, passing zero will write the value relative to the beginning of the bus' I/O space.
-     @result The value read in host byte order (big endian on PPC). */
-    
-    virtual UInt16 ioRead16( UInt16 offset, IOMemoryMap * map = 0 );
-    
-    /*! @function ioRead8
-     @abstract Reads a 8-bit value from an I/O space aperture.
-     @discussion This method will read a 8-bit value from an offset in an I/O space aperture. If a map object is passed in, the value is read relative to it, otherwise to the value is read relative to the I/O space aperture for the bus. This function encapsulates the differences between architectures in generating I/O space operations. An eieio instruction is included on PPC.
-     @param offset An offset into a bus or device's I/O space aperture.
-     @param map If the offset is relative to the beginning of a device's aperture, an IOMemoryMap object for that object should be passed in. Otherwise, passing zero will write the value relative to the beginning of the bus' I/O space.
-     @result The value read. */
-    
-    virtual UInt8 ioRead8( UInt16 offset, IOMemoryMap * map = 0 );
+    virtual IODeviceMemory* getDeviceMemoryWithRegister(UInt8 reg);
+    virtual IOMemoryMap* mapDeviceMemoryWithRegister(UInt8 reg, IOOptionBits options = 0);
+    virtual IODeviceMemory* ioDeviceMemory(void);
+    virtual UInt32 extendedFindPCICapability(UInt32 capabilityID, IOByteCount * offset = 0);
 #endif
 };
 
