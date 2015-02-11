@@ -60,8 +60,7 @@ bool FakePCIID::hookProvider(IOService *provider)
                         provider->setProperty(key1, value);
                 }
             }
-            
-            OSSafeRelease(iter);
+            iter->release();
         }
     }
 
