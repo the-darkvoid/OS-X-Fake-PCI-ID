@@ -34,6 +34,27 @@ static inline void setVTable(IOPCIDevice *object, const void *vtable)
 
 OSDefineMetaClassAndStructors(FakePCIID, IOService);
 
+void FakePCIID::mergeFakeProperties(IOService* provider, const char *name, bool force)
+{
+    if (OSDictionary *providerDict = (OSDictionary*)getProperty(name))
+    {
+        if (OSCollectionIterator* iter = OSCollectionIterator::withCollection(providerDict))
+        {
+            // Note: OSDictionary always contains OSSymbol*
+            while (const OSSymbol* key = static_cast<const OSSymbol*>(iter->getNextObject()))
+            {
+                // only overwrite existing properties when force is true
+                if (force || !provider->getProperty(key))
+                {
+                    if (OSObject* value = providerDict->getObject(key))
+                        provider->setProperty(key, value);
+                }
+            }
+            iter->release();
+        }
+    }
+}
+
 bool FakePCIID::hookProvider(IOService *provider)
 {
     if (mDeviceVtable)
@@ -47,22 +68,8 @@ bool FakePCIID::hookProvider(IOService *provider)
     }
 
     // merge FakeProperties into the provider (only properties that do not exist)
-    if (OSDictionary *providerDict = (OSDictionary*)getProperty("FakeProperties"))
-    {
-        if (OSCollectionIterator* iter = OSCollectionIterator::withCollection(providerDict))
-        {
-            // Note: OSDictionary always contains OSSymbol*
-            while (const OSSymbol* key = static_cast<const OSSymbol*>(iter->getNextObject()))
-            {
-                if (!provider->getProperty(key))
-                {
-                    if (OSObject* value = providerDict->getObject(key))
-                        provider->setProperty(key, value);
-                }
-            }
-            iter->release();
-        }
-    }
+    mergeFakeProperties(provider, "FakeProperties", false);
+    mergeFakeProperties(provider, "FakeProperties-Forced", true);
 
     // hook provider IOPCIDevice vtable on attach/start
     mProvider = device;
