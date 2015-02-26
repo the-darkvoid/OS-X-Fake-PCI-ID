@@ -121,7 +121,7 @@ UInt32 PCIDeviceStub::configRead32(IOPCIAddressSpace space, UInt8 offset)
     }
     
     if (newResult != result)
-        AlwaysLog("[%04x:%04x] configRead32(0x%02x), result 0x%08x -> 0x%08x\n",
+        DebugLog("[%04x:%04x] configRead32(0x%02x), result 0x%08x -> 0x%08x\n",
                   deviceInfo & 0xFFFF, deviceInfo >> 16, offset, result, newResult);
 
     return newResult;
@@ -178,7 +178,7 @@ UInt16 PCIDeviceStub::configRead16(IOPCIAddressSpace space, UInt8 offset)
     }
 
     if (newResult != result)
-        AlwaysLog("[%04x:%04x] configRead16(0x%02x), result 0x%04x -> 0x%04x\n",
+        DebugLog("[%04x:%04x] configRead16(0x%02x), result 0x%04x -> 0x%04x\n",
                   deviceInfo & 0xFFFF, deviceInfo >> 16, offset, result, newResult);
 
     return newResult;
@@ -207,7 +207,7 @@ UInt8 PCIDeviceStub::configRead8(IOPCIAddressSpace space, UInt8 offset)
     }
     
     if (newResult != result)
-        AlwaysLog("[%04x:%04x] configRead8(0x%02x), result 0x%02x -> 0x%02x\n",
+        DebugLog("[%04x:%04x] configRead8(0x%02x), result 0x%02x -> 0x%02x\n",
                   deviceInfo & 0xFFFF, deviceInfo >> 16, offset, result, newResult);
     
     return newResult;

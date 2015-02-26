@@ -105,7 +105,7 @@ bool FakePCIID::init(OSDictionary *propTable)
         return false;
     }
 
-    IOLog("FakePCIID v1.0 starting.\n");
+    IOLog("FakePCIID version 1.1.0 starting.\n");
 
     // capture vtable pointer for PCIDeviceStub
     PCIDeviceStub *stub = OSTypeAlloc(PCIDeviceStub);
