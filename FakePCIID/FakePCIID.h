@@ -36,6 +36,7 @@ protected:
 
     bool hookProvider(IOService* provider);
     void unhookProvider();
+    void mergeFakeProperties(IOService* provider, const char* name, bool force);
 
 public:
     virtual bool init(OSDictionary *propTable);
