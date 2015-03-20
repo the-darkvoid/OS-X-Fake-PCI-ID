@@ -5,7 +5,7 @@ KEXT=FakePCIID.kext
 KEXT_WIFI=FakePCIID_BCM94352Z_as_BCM94360CS2.kext
 KEXT_GFX=FakePCIID_HD4600_HD4400.kext
 DIST=RehabMan-FakePCIID
-BUILDDIR=./Build
+BUILDDIR=./Build/Products
 INSTDIR=/System/Library/Extensions
 
 ifeq ($(findstring 32,$(BITS)),32)
