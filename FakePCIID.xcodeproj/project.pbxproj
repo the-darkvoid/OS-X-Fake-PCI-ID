@@ -557,7 +557,7 @@
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				INFOPLIST_FILE = FakePCIID/Info.plist;
-				MODULE_VERSION = 1.1.0;
+				MODULE_VERSION = 1.1.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -567,7 +567,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = FakePCIID/Info.plist;
-				MODULE_VERSION = 1.1.0;
+				MODULE_VERSION = 1.1.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
