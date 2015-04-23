@@ -39,6 +39,8 @@ install_debug:
 	sudo cp -R $(BUILDDIR)/Debug/$(KEXT) $(INSTDIR)
 	sudo rm -Rf $(INSTDIR)/$(KEXT_GFX)
 	sudo cp -R $(BUILDDIR)/Debug/$(KEXT_GFX) $(INSTDIR)
+	if [ "`which tag`" != "" ]; then sudo tag -a Blue $(INSTDIR)/$(KEXT); fi
+	if [ "`which tag`" != "" ]; then sudo tag -a Blue $(INSTDIR)/$(KEXT_GFX); fi
 	make update_kernelcache
 
 .PHONY: install
@@ -47,18 +49,22 @@ install:
 	sudo cp -R $(BUILDDIR)/Release/$(KEXT) $(INSTDIR)
 	sudo rm -Rf $(INSTDIR)/$(KEXT_GFX)
 	sudo cp -R $(BUILDDIR)/Release/$(KEXT_GFX) $(INSTDIR)
+	if [ "`which tag`" != "" ]; then sudo tag -a Blue $(INSTDIR)/$(KEXT); fi
+	if [ "`which tag`" != "" ]; then sudo tag -a Blue $(INSTDIR)/$(KEXT_GFX); fi
 	make update_kernelcache
 
 .PHONY: install_debug_wifi
 install_debug_wifi:
 	sudo rm -Rf $(INSTDIR)/$(KEXT_WIFI)
 	sudo cp -R $(BUILDDIR)/Debug/$(KEXT_WIFI) $(INSTDIR)
+	if [ "`which tag`" != "" ]; then sudo tag -a Blue $(INSTDIR)/$(KEXT_WIFI); fi
 	make install_debug
 
 .PHONY: install_wifi
 install_wifi:
 	sudo rm -Rf $(INSTDIR)/$(KEXT_WIFI)
 	sudo cp -R $(BUILDDIR)/Release/$(KEXT_WIFI) $(INSTDIR)
+	if [ "`which tag`" != "" ]; then sudo tag -a Blue $(INSTDIR)/$(KEXT_WIFI); fi
 	make install
 
 .PHONY: distribute
