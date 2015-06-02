@@ -557,7 +557,7 @@
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				INFOPLIST_FILE = FakePCIID/Info.plist;
-				MODULE_VERSION = 1.1.1;
+				MODULE_VERSION = 1.1.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = kext;
@@ -568,7 +568,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = FakePCIID/Info.plist;
-				MODULE_VERSION = 1.1.1;
+				MODULE_VERSION = 1.1.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = kext;
