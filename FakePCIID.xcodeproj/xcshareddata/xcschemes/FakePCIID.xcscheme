@@ -104,6 +104,20 @@
                ReferencedContainer = "container:FakePCIID.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "841033281B3F629E00349B75"
+               BuildableName = "FakePCIID_XHCIMux.kext"
+               BlueprintName = "FakePCIID_XHCIMux"
+               ReferencedContainer = "container:FakePCIID.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

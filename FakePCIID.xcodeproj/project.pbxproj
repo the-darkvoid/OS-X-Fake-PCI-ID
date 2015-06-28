@@ -14,6 +14,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		841033301B3F629E00349B75 /* FakePCIID_XHCIMux.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID_XHCIMux.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		841033321B3F630B00349B75 /* XHCIMux.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = XHCIMux.plist; path = injectors/XHCIMux.plist; sourceTree = "<group>"; };
 		8431923D1A5890E80022C7A1 /* FakePCIID_AR9280_as_AR946x.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID_AR9280_as_AR946x.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		8431924D1A58913C0022C7A1 /* FakePCIID_HD4600_HD4400.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID_HD4600_HD4400.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		843192601A5892A40022C7A1 /* HD4600_HD4400.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = HD4600_HD4400.plist; path = injectors/HD4600_HD4400.plist; sourceTree = SOURCE_ROOT; };
@@ -37,6 +39,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8410332A1B3F629E00349B75 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		843192391A5890E80022C7A1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -98,6 +107,7 @@
 				843192601A5892A40022C7A1 /* HD4600_HD4400.plist */,
 				843192621A5892AD0022C7A1 /* AR9280_as_AR946x.plist */,
 				D405EF6E1A59104300547072 /* BCM94352Z_as_BCM94360CS2.plist */,
+				841033321B3F630B00349B75 /* XHCIMux.plist */,
 			);
 			name = Injectors;
 			sourceTree = "<group>";
@@ -123,6 +133,7 @@
 				D423B7971A5C0FD8007F2350 /* FakePCIID_Intel_HDMI_Audio.kext */,
 				D43DC86A1A7FA6E5004B2D06 /* FakePCIID_BCM57XX_as_BCM57765.kext */,
 				D410AA971A8A2BC6007FD343 /* FakePCIID_Intel_GbX.kext */,
+				841033301B3F629E00349B75 /* FakePCIID_XHCIMux.kext */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -150,6 +161,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		8410332B1B3F629E00349B75 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8431923A1A5890E80022C7A1 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -204,6 +222,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		841033281B3F629E00349B75 /* FakePCIID_XHCIMux */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8410332D1B3F629E00349B75 /* Build configuration list for PBXNativeTarget "FakePCIID_XHCIMux" */;
+			buildPhases = (
+				841033291B3F629E00349B75 /* Sources */,
+				8410332A1B3F629E00349B75 /* Frameworks */,
+				8410332B1B3F629E00349B75 /* Headers */,
+				8410332C1B3F629E00349B75 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FakePCIID_XHCIMux;
+			productName = FakePCIID_HD4600_HD4400;
+			productReference = 841033301B3F629E00349B75 /* FakePCIID_XHCIMux.kext */;
+			productType = "com.apple.product-type.kernel-extension";
+		};
 		8431923C1A5890E80022C7A1 /* FakePCIID_AR9280_as_AR946x */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 843192451A5890E80022C7A1 /* Build configuration list for PBXNativeTarget "FakePCIID_AR9280_as_AR946x" */;
@@ -381,11 +417,19 @@
 				D423B7961A5C0FD8007F2350 /* FakePCIID_Intel_HDMI_Audio */,
 				D43DC8691A7FA6E5004B2D06 /* FakePCIID_BCM57XX_as_BCM57765 */,
 				D410AA961A8A2BC6007FD343 /* FakePCIID_Intel_GbX */,
+				841033281B3F629E00349B75 /* FakePCIID_XHCIMux */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8410332C1B3F629E00349B75 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8431923B1A5890E80022C7A1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -438,6 +482,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		841033291B3F629E00349B75 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		843192381A5890E80022C7A1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -492,6 +543,26 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		8410332E1B3F629E00349B75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = injectors/XHCIMux.plist;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-XHCIMux";
+				PRODUCT_NAME = FakePCIID_XHCIMux;
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Debug;
+		};
+		8410332F1B3F629E00349B75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = injectors/XHCIMux.plist;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-XHCIMux";
+				PRODUCT_NAME = FakePCIID_XHCIMux;
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Release;
+		};
 		843192461A5890E80022C7A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -557,7 +628,7 @@
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				INFOPLIST_FILE = FakePCIID/Info.plist;
-				MODULE_VERSION = 1.1.2;
+				MODULE_VERSION = 1.2.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = kext;
@@ -568,7 +639,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = FakePCIID/Info.plist;
-				MODULE_VERSION = 1.1.2;
+				MODULE_VERSION = 1.2.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = kext;
@@ -664,6 +735,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8410332D1B3F629E00349B75 /* Build configuration list for PBXNativeTarget "FakePCIID_XHCIMux" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8410332E1B3F629E00349B75 /* Debug */,
+				8410332F1B3F629E00349B75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		843192451A5890E80022C7A1 /* Build configuration list for PBXNativeTarget "FakePCIID_AR9280_as_AR946x" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

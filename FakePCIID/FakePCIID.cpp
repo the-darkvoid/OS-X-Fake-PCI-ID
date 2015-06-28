@@ -105,7 +105,7 @@ bool FakePCIID::init(OSDictionary *propTable)
         return false;
     }
 
-    IOLog("FakePCIID version 1.1.2 starting.\n");
+    IOLog("FakePCIID version 1.2.0 starting.\n");
 
     // capture vtable pointer for PCIDeviceStub
     PCIDeviceStub *stub = OSTypeAlloc(PCIDeviceStub);
@@ -170,3 +170,35 @@ void FakePCIID::detach(IOService *provider)
     return super::detach(provider);
 }
 #endif
+
+
+//////////////////////////////////////////////////////////////////////////////
+
+OSDefineMetaClassAndStructors(FakePCIID_XHCIMux, FakePCIID);
+
+bool FakePCIID_XHCIMux::init(OSDictionary *propTable)
+{
+    DebugLog("FakePCIID_XHCIMux::init\n");
+
+    if (!super::init(propTable))
+        return false;
+
+    // capture vtable pointer for PCIDeviceStub_XHCIMux
+    PCIDeviceStub *stub = OSTypeAlloc(PCIDeviceStub_XHCIMux);
+    mStubVtable = getVTable(stub);
+    stub->release();
+
+    return true;
+}
+
+bool FakePCIID_XHCIMux::hookProvider(IOService *provider)
+{
+    DebugLog("FakePCIID_XHCIMux::hookProvider\n");
+
+    // write initial value to PR2 early...
+    if (!mDeviceVtable)
+        ((PCIDeviceStub_XHCIMux*)provider)->startup();
+
+    return super::hookProvider(provider);
+}
+

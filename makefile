@@ -4,6 +4,7 @@ KEXT=FakePCIID.kext
 #KEXT_WIFI=FakePCIID_AR9280_as_AR946x.kext
 KEXT_WIFI=FakePCIID_BCM94352Z_as_BCM94360CS2.kext
 KEXT_GFX=FakePCIID_HD4600_HD4400.kext
+KEXT_USB=FakePCIID_XHCIMux.kext
 DIST=RehabMan-FakePCIID
 BUILDDIR=./Build/Products
 INSTDIR=/System/Library/Extensions
@@ -39,8 +40,11 @@ install_debug:
 	sudo cp -R $(BUILDDIR)/Debug/$(KEXT) $(INSTDIR)
 	sudo rm -Rf $(INSTDIR)/$(KEXT_GFX)
 	sudo cp -R $(BUILDDIR)/Debug/$(KEXT_GFX) $(INSTDIR)
-	if [ "`which tag`" != "" ]; then sudo tag -a Blue $(INSTDIR)/$(KEXT); fi
-	if [ "`which tag`" != "" ]; then sudo tag -a Blue $(INSTDIR)/$(KEXT_GFX); fi
+	sudo rm -Rf $(INSTDIR)/$(KEXT_WIFI)
+	sudo cp -R $(BUILDDIR)/Debug/$(KEXT_WIFI) $(INSTDIR)
+	if [ "`which tag`" != "" ]; then sudo tag -a Purple $(INSTDIR)/$(KEXT); fi
+	if [ "`which tag`" != "" ]; then sudo tag -a Purple $(INSTDIR)/$(KEXT_GFX); fi
+	if [ "`which tag`" != "" ]; then sudo tag -a Purple $(INSTDIR)/$(KEXT_WIFI); fi
 	make update_kernelcache
 
 .PHONY: install
@@ -49,22 +53,25 @@ install:
 	sudo cp -R $(BUILDDIR)/Release/$(KEXT) $(INSTDIR)
 	sudo rm -Rf $(INSTDIR)/$(KEXT_GFX)
 	sudo cp -R $(BUILDDIR)/Release/$(KEXT_GFX) $(INSTDIR)
-	if [ "`which tag`" != "" ]; then sudo tag -a Blue $(INSTDIR)/$(KEXT); fi
-	if [ "`which tag`" != "" ]; then sudo tag -a Blue $(INSTDIR)/$(KEXT_GFX); fi
-	make update_kernelcache
-
-.PHONY: install_debug_wifi
-install_debug_wifi:
-	sudo rm -Rf $(INSTDIR)/$(KEXT_WIFI)
-	sudo cp -R $(BUILDDIR)/Debug/$(KEXT_WIFI) $(INSTDIR)
-	if [ "`which tag`" != "" ]; then sudo tag -a Blue $(INSTDIR)/$(KEXT_WIFI); fi
-	make install_debug
-
-.PHONY: install_wifi
-install_wifi:
 	sudo rm -Rf $(INSTDIR)/$(KEXT_WIFI)
 	sudo cp -R $(BUILDDIR)/Release/$(KEXT_WIFI) $(INSTDIR)
+	if [ "`which tag`" != "" ]; then sudo tag -a Blue $(INSTDIR)/$(KEXT); fi
+	if [ "`which tag`" != "" ]; then sudo tag -a Blue $(INSTDIR)/$(KEXT_GFX); fi
 	if [ "`which tag`" != "" ]; then sudo tag -a Blue $(INSTDIR)/$(KEXT_WIFI); fi
+	make update_kernelcache
+
+.PHONY: install_debug_usb
+install_debug_usb:
+	sudo rm -Rf $(INSTDIR)/$(KEXT_USB)
+	sudo cp -R $(BUILDDIR)/Debug/$(KEXT_USB) $(INSTDIR)
+	if [ "`which tag`" != "" ]; then sudo tag -a Purple $(INSTDIR)/$(KEXT_USB); fi
+	make install_debug
+
+.PHONY: install_usb
+install_usb:
+	sudo rm -Rf $(INSTDIR)/$(KEXT_USB)
+	sudo cp -R $(BUILDDIR)/Release/$(KEXT_USB) $(INSTDIR)
+	if [ "`which tag`" != "" ]; then sudo tag -a Blue $(INSTDIR)/$(KEXT_USB); fi
 	make install
 
 .PHONY: distribute
