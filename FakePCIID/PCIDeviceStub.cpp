@@ -481,7 +481,8 @@ void PCIDeviceStub_XHCIMux::startup()
     UInt32 mask = getBoolProperty(kPR2HonorPR2M, true) ? super::configRead32(super::space, kXHCI_PCIConfig_PR2M) : chipsetMask;
     UInt32 newData = super::configRead32(super::space, kXHCI_PCIConfig_PR2);
     newData &= ~mask;
-    newData |= getUInt32Property(kPR2Force) & chipsetMask;
+    UInt32 force = getUInt32Property(kPR2Force);
+    newData |= force & chipsetMask;
     AlwaysLog("[%04x:%04x] XHCIMux::startup: newData for PR2: 0x%08x\n", deviceInfo & 0xFFFF, deviceInfo >> 16, newData);
 
     super::configWrite32(super::space, kXHCI_PCIConfig_PR2, newData);

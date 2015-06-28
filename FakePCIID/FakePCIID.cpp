@@ -195,10 +195,14 @@ bool FakePCIID_XHCIMux::hookProvider(IOService *provider)
 {
     DebugLog("FakePCIID_XHCIMux::hookProvider\n");
 
+    // need to run hookProvider first as it injects properties for startup
+    bool init = !mDeviceVtable;
+    bool result = super::hookProvider(provider);
+
     // write initial value to PR2 early...
-    if (!mDeviceVtable)
+    if (init)
         ((PCIDeviceStub_XHCIMux*)provider)->startup();
 
-    return super::hookProvider(provider);
+    return result;
 }
 
