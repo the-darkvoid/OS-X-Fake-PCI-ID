@@ -63,7 +63,7 @@
 			<key>IOMatchCategory</key>
 			<string>FakePCIID_XHCIMux</string>
 			<key>IOPCIPrimaryMatch</key>
-			<string>0x9c318086 0x8c318086 0x8cb18086</string>
+			<string>0x9c318086 0x9cb18086 0x8c318086 0x8cb18086</string>
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>
 			<key>RM,Build</key>
