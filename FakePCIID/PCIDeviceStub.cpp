@@ -444,11 +444,14 @@ void PCIDeviceStub_XHCIMux::configWrite32(IOPCIAddressSpace space, UInt8 offset,
                          deviceInfo & 0xFFFF, deviceInfo >> 16, space.bits, offset, data);
                 return;
             }
-            UInt32 chipsetMask = getUInt32Property(kPR2ChipsetMask);
-            UInt32 mask = getBoolProperty(kPR2HonorPR2M, true) ? super::configRead32(space, kXHCI_PCIConfig_PR2M) : chipsetMask;
+            UInt32 mask;
+            if (getBoolProperty(kPR2HonorPR2M, true))
+                mask = super::configRead32(super::space, kXHCI_PCIConfig_PR2M);
+            else
+                mask = getUInt32Property(kPR2ChipsetMask);
             newData = super::configRead32(space, kXHCI_PCIConfig_PR2);
             newData &= ~mask;
-            newData |= getUInt32Property(kPR2Force) & chipsetMask;
+            newData |= getUInt32Property(kPR2Force) & mask;
         }
         break;
 
@@ -477,12 +480,14 @@ void PCIDeviceStub_XHCIMux::startup()
 {
     UInt32 deviceInfo = super::configRead32(super::space, kIOPCIConfigVendorID);
 
-    UInt32 chipsetMask = getUInt32Property(kPR2ChipsetMask);
-    UInt32 mask = getBoolProperty(kPR2HonorPR2M, true) ? super::configRead32(super::space, kXHCI_PCIConfig_PR2M) : chipsetMask;
+    UInt32 mask;
+    if (getBoolProperty(kPR2HonorPR2M, true))
+        mask = super::configRead32(super::space, kXHCI_PCIConfig_PR2M);
+    else
+        mask = getUInt32Property(kPR2ChipsetMask);
     UInt32 newData = super::configRead32(super::space, kXHCI_PCIConfig_PR2);
     newData &= ~mask;
-    UInt32 force = getUInt32Property(kPR2Force);
-    newData |= force & chipsetMask;
+    newData |= getUInt32Property(kPR2Force) & mask;
     AlwaysLog("[%04x:%04x] XHCIMux::startup: newData for PR2: 0x%08x\n", deviceInfo & 0xFFFF, deviceInfo >> 16, newData);
 
     super::configWrite32(super::space, kXHCI_PCIConfig_PR2, newData);
