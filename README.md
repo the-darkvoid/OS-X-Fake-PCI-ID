@@ -37,10 +37,11 @@ In order to cause the kext to be loaded against a particular device, you must al
   By injecting `0412`, `AppleIntelFramebufferAzul` and `AppleIntelHD5000Graphics` will load.
   And since, FakePCIID will also be attached to these devices, it will successfully fool both kexts that the device an Intel HD4600 Desktop IGPU (0412).
 
+
 - FakePCIID_Intel_HDMI_Audio.kext:
   This kext will attach to `8086:0c0c`, `8086:0d0c`, and `8086:0a0c`
 
-  The purpose is to provide support for unsupported HDAU (usually called B0D3) devices which provide HDMI-audio on Haswell(+) systems.  `8086:0c0c` is the unsupported ID.  The other two `8086:0d0c`, and `8086:0a0c` are supported.  This kext, AppleHDAController, loads by PCI class, so you normally would not inject device-id for it, but to allow FakePCIID to work, you may need to inject RM,device-id (one of the supported IDs).  By default, the kext injects RM,device-id=<0c 0a 00 00> (0x0a0c).  You can override it with a DSDT edit.
+  The purpose is to provide support for unsupported HDAU (usually called B0D3, but renamed to HDAU to match what Apple expects) devices which provide HDMI-audio on Haswell(+) systems.  `8086:0c0c` is the unsupported ID.  The other two `8086:0d0c`, and `8086:0a0c` are supported.  This kext, AppleHDAController, loads by PCI class, so you normally would not inject device-id for it, but to allow FakePCIID to work, you may need to inject RM,device-id (one of the supported IDs).  By default, the kext injects RM,device-id=<0c 0a 00 00> (0x0a0c).  You can override it with a DSDT edit.
 
   For example (_DSM patch for HDAU device for FakePCIID and HDMI audio, if you wanted 0x0d0c instead of 0x0a0c):
 
@@ -66,12 +67,40 @@ end;
   This particular application of FakePCIID.kext is used in a situation where you have an AR9280 re-branded as some other device.  For example, with the Lenovo u430, it is useful to rebrand an AR9280 ias an AR946x as that device is allowed by the BIOS whitelist where AR9280 is not.
   By using FakePCIID, we can remap the PCI IDs back to AR9280 (`168c:002a`) even though the device itself is reporting `168c:0034`.
 
+
 - FakePCIID_BCM94352Z_as_BCM94360CS2:
   This kext will attach to `14e4:43b1` or `14e4:43a0`.
 
   This particular application of FakePCIID.kext is used to emulate an authentic Apple Airport Extreme (BCM94360CS2), when using a BCM94352Z NGFF M.2 WiFi module.
 
 In order to create your own injector, you should be familiar with IOKit matching and kext Info.plist files.  There is ample documentation available on developer.apple.com.  Use the existing injectors as a template to build your own.
+
+
+- FakePCIID_BCM57XX_as_BCM57765.kext:
+   This kext will attach to numerous unsupported BCM57XX Ethernet devices in order to make the native drivers work for a wider variety of BCM Ethernet chipsets that are compatible, but not supported due to probe testing of PCI device-id/subdevice-id values.
+   Further details here: http://www.tonymacx86.com/network/155984-fakepciid-broadcom-bcm57xx-network-oob.html
+
+
+- FakePCIID_Intel_GbX.kext:
+   This kext will attach to a number of Intel Ethernet devices in an attempt to make the Small Tree drivers for Intel chipset based cards work.
+   Further details here: http://www.tonymacx86.com/network/156135-intel-network-adapters-os-x-small-tree-drivers.html
+
+
+- FakePCIID_XHCIMux.kext
+   This kext will attach to `8086:1e31`, `8086:9c31`, `8086:9cb1`, `8086:9c31`, and `8086:8cb1`
+   This injector is a bit of an extension to normal FakePCIID duties.  It doesn't actually fake any PCI IDs.  Rather, it forces certain values to XUSB2PR (PCI config offset 0xD0) on the Intel XHCI USB3 controller.  The effect is to route any USB2 devices attached to the USB2 pins on the XHC ports to EHC1.  In other words, handle USB2 devices with the USB2 drivers instead of the USB3 drivers (AppleUSBEHCI vs. AppleUSBXHCI).
+
+   So normally what is a complex "multiplex" DSDT patch (that is not well understood), is a simple kext install.
+
+   Configuration properties and their defaults:
+    RM,pr2-force <00 00 00 00>.  By default forces all XHCI ports to route USB2 devices to EHC1.
+    RM,pr2-init <01>.  Will write RM,pr2-force value at startup if non-zero.
+    RM,pr2-block <01>.  Will block writes to XUSB2PR if non-zero.
+    RM,pr2m-block <01>.  No evidence that OS X drivers attempt to write XUSB2PRM (offset 0xD4), but since this kext relies on a valid value here (as provided by the BIOS), writes to it are blocked if non-zero.
+    RM,pr2-honor-pr2m <01>:  Changes to XUSB2PR will be masked by XUSB2PRM if this is non-zero.
+    RM,pr2-chipset-mask: Writes to XUSB2PR are masked by this value.  This is defined by the chipset documentation.  Default value depends on chipset.
+
+   Refer to Intel 7/8/9-series chipset data sheet for more info.
 
 
 ### DSDT patches
