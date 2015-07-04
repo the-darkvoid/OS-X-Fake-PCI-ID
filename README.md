@@ -73,9 +73,6 @@ end;
 
   This particular application of FakePCIID.kext is used to emulate an authentic Apple Airport Extreme (BCM94360CS2), when using a BCM94352Z NGFF M.2 WiFi module.
 
-In order to create your own injector, you should be familiar with IOKit matching and kext Info.plist files.  There is ample documentation available on developer.apple.com.  Use the existing injectors as a template to build your own.
-
-
 - FakePCIID_BCM57XX_as_BCM57765.kext:
    This kext will attach to numerous unsupported BCM57XX Ethernet devices in order to make the native drivers work for a wider variety of BCM Ethernet chipsets that are compatible, but not supported due to probe testing of PCI device-id/subdevice-id values.
    Further details here: http://www.tonymacx86.com/network/155984-fakepciid-broadcom-bcm57xx-network-oob.html
@@ -101,6 +98,9 @@ In order to create your own injector, you should be familiar with IOKit matching
     RM,pr2-chipset-mask: Writes to XUSB2PR are masked by this value.  This is defined by the chipset documentation.  Default value depends on chipset.
 
    Refer to Intel 7/8/9-series chipset data sheet for more info.
+
+
+In order to create your own injector, you should be familiar with IOKit matching and kext Info.plist files.  There is ample documentation available on developer.apple.com.  Use the existing injectors as a template to build your own.
 
 
 ### DSDT patches
