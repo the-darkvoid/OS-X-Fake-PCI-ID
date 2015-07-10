@@ -71,4 +71,33 @@ public:
 #endif
 };
 
+#define kXHCI_PCIConfig_PR2     0xd0
+#define kXHCI_PCIConfig_PR2M    0xd4
+
+#define kPR2Force       "RM,pr2-force"
+#define kPR2Init        "RM,pr2-init"
+#define kPR2Block       "RM,pr2-block"
+#define kPR2MBlock      "RM,pr2m-block"
+#define kPR2HonorPR2M   "RM,pr2-honor-pr2m"
+#define kPR2ChipsetMask "RM,pr2-chipset-mask"
+
+class PCIDeviceStub_XHCIMux : public PCIDeviceStub
+{
+    OSDeclareDefaultStructors(PCIDeviceStub_XHCIMux);
+    typedef PCIDeviceStub super;
+
+protected:
+    bool getBoolProperty(const char* name, bool defValue);
+    UInt32 getUInt32Property(const char* name);
+
+public:
+    virtual void configWrite32(IOPCIAddressSpace space, UInt8 offset, UInt32 data);
+#ifdef HOOK_ALL
+    virtual void configWrite16(IOPCIAddressSpace space, UInt8 offset, UInt16 data);
+    virtual void configWrite8(IOPCIAddressSpace space, UInt8 offset, UInt8 data);
+#endif
+
+    void startup();
+};
+
 #endif

@@ -34,7 +34,7 @@ protected:
     const void *mStubVtable;
     IOPCIDevice* mProvider;
 
-    bool hookProvider(IOService* provider);
+    virtual bool hookProvider(IOService* provider);
     void unhookProvider();
     void mergeFakeProperties(IOService* provider, const char* name, bool force);
 
@@ -47,6 +47,16 @@ public:
 #ifdef DEBUG
     virtual void detach(IOService *provider);
 #endif
+};
+
+class FakePCIID_XHCIMux : public FakePCIID
+{
+    OSDeclareDefaultStructors(FakePCIID_XHCIMux);
+    typedef FakePCIID super;
+
+public:
+    virtual bool init(OSDictionary *propTable);
+    virtual bool hookProvider(IOService *provider);
 };
 
 #endif
