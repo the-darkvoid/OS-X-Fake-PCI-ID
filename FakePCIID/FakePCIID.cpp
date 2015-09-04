@@ -22,6 +22,9 @@
 #include "FakePCIID.h"
 #include "PCIDeviceStub.h"
 
+#include <libkern/version.h>
+extern kmod_info_t kmod_info;
+
 static inline const void *getVTable(const IOPCIDevice *object)
 {
     return *(const void *const *)object;
@@ -98,6 +101,9 @@ bool FakePCIID::init(OSDictionary *propTable)
 {
     DebugLog("FakePCIID::init() %p\n", this);
     
+    // announce version
+    IOLog("FakePCIID: Version %s starting on OS X Darwin %d.%d.\n", kmod_info.version, version_major, version_minor);
+
     bool ret = super::init(propTable);
     if (!ret)
     {
@@ -105,7 +111,15 @@ bool FakePCIID::init(OSDictionary *propTable)
         return false;
     }
 
-    IOLog("FakePCIID version 1.2.0 starting.\n");
+    // place version/build info in ioreg properties RM,Build and RM,Version
+    char buf[128];
+    snprintf(buf, sizeof(buf), "%s %s", kmod_info.name, kmod_info.version);
+    setProperty("RM,Version", buf);
+#ifdef DEBUG
+    setProperty("RM,Build", "Debug-" LOGNAME);
+#else
+    setProperty("RM,Build", "Release-" LOGNAME);
+#endif
 
     // capture vtable pointer for PCIDeviceStub
     PCIDeviceStub *stub = OSTypeAlloc(PCIDeviceStub);

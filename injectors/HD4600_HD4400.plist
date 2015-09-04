@@ -34,10 +34,6 @@
 			<string>0x04128086 0x04168086 0x0a168086 0x0a1e8086 0x041e8086 0x041a8086</string>
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>
-			<key>RM,Build</key>
-			<string>${CONFIGURATION}-${LOGNAME}</string>
-			<key>RM,Version</key>
-			<string>${PRODUCT_NAME} ${MODULE_VERSION}</string>
 			<key>FakeProperties</key>
 			<dict>
 				<key>RM,device-id</key>

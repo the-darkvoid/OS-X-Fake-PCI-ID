@@ -47,10 +47,6 @@
 			<string>0x0034168c 0x002a168c</string>
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>
-			<key>RM,Build</key>
-			<string>${CONFIGURATION}-${LOGNAME}</string>
-			<key>RM,Version</key>
-			<string>${PRODUCT_NAME} ${MODULE_VERSION}</string>
 			<key>FakeProperties</key>
 			<dict>
 				<key>RM,device-id</key>
