@@ -5,11 +5,11 @@
 	<key>Source Code</key>
 	<string>https://github.com/RehabMan/FakePCIID</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.rehabman.injector.FakePCIID-BCM94352Z-as-BCM94360CS2</string>
+	<string>org.rehabman.injector.FakePCIID-Broadcom-WiFi</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>FakePCIID_BCM94352Z_as_BCM94360CS2</string>
+	<string>FakePCIID_Broadcom_WiFi</string>
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
@@ -50,7 +50,6 @@
 			<string>FakePCIID</string>
 			<key>IONameMatch</key>
 			<array>
-				<string>pci14e4,43a0</string>
 				<string>pci14e4,4357</string>
 				<string>pci14e4,43b1</string>
 			</array>
@@ -78,12 +77,12 @@
 			<string>FakePCIID</string>
 			<key>IONameMatch</key>
 			<array>
+				<string>pci14e4,43a0</string>
 				<string>pci14e4,4331</string>
 				<string>pci14e4,4353</string>
 				<string>pci14e4,432b</string>
 				<string>pci14e4,43ba</string>
 				<string>pci14e4,43a3</string>
-				<string>pci14e4,43a0</string>
 			</array>
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>

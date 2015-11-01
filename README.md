@@ -5,7 +5,7 @@ The purpose of this kext is to attach to any IOPCIDevice so it can provide alter
 In order to attach FakePCIID to a given IOPCIDevice, an injector kext must be built that IOKit can use to match against. 
 The FakePCIID.kext Info.plist has no built-in IOKitPersonalities, as it is generic and not built to suit a specific purpose.  The distribution ZIP provide has four such injector kexts, which are described below.  Custom injector kexts can be created for other devices.
 
-Note: FakePCIID_HD4600_HD4400.kext works for HD4400 mobile, HD4600 mobile, HD4200 mobile, and HD4600 desktop.
+Note: FakePCIID_Intel_HD_Graphics.kext works for HD4400 mobile, HD4600 mobile, HD4200 mobile, and HD4600 desktop.
 
 In any case, a DSDT patch, FakeID configuration (Clover), or FakeProperties dictionary in the injector's Info.plist will be required to inject the properties that FakePCIID can read on the IOPCIDevice.  The properties used by FakePCIID are described later in this post.  The properties must be present on the PCIDevice that is being hooked (the direct parent of FakePCIID).
 
@@ -23,7 +23,7 @@ In all cases, FakePCIID.kext must be installed with a kext installer (such as Ke
 
 In order to cause the kext to be loaded against a particular device, you must also install the appropriate injector kext.  Currently, four injectors are provided:
 
-- FakePCIID_HD4600_HD4400.kext: 
+- FakePCIID_Intel_HD_Graphics.kext (formerly FakePCIID_HD4600_HD4400.kext): 
   This kext will attach to `8086:0412`, `8086:0416`, `8086:0a1e`, `8086:041e`, `8086:0a16`, and `8086:041a`.
 
   - `8086:0412` is HD4600 desktop (now the only GT2 device supported in Yosemite as of 10.10.2)
@@ -68,10 +68,12 @@ end;
   By using FakePCIID, we can remap the PCI IDs back to AR9280 (`168c:002a`) even though the device itself is reporting `168c:0034`.
 
 
-- FakePCIID_BCM94352Z_as_BCM94360CS2:
-  This kext will attach to `14e4:43b1` or `14e4:43a0`.
+- FakePCIID_Broadcom_WiFi.kext (formerly FakePCIID_BCM94352Z_as_BCM94360CS2.kext)
+  This kext will attach to `14e4:43b1`, `14e4:4357`, `14e4:4331`, `14e4:4353`, `14e4:432b`, `14e4:43ba`, `14e4:43a3`, `14e4:4357`, or `14e4:43a0`.
+  And also `106b:4e`, `14e4:4331`, `14e4:4312`, `14e4:4313`, `14e4:4318`, `14e4:4319`, `14e4:431a`, `14e4:4320`, `14e4:4324`, `14e4:4325`, `14e4:4328`, `14e4:432c`, `14e4:432d`,
 
-  This particular application of FakePCIID.kext is used to emulate an authentic Apple Airport Extreme (BCM94360CS2), when using a BCM94352Z NGFF M.2 WiFi module.
+  Originally created for BCM94352Z, this particular application of FakePCIID.kext is used to emulate an authentic Apple Airport Extreme, when using a variety of supported Broadcom WiFi devices.
+
 
 - FakePCIID_BCM57XX_as_BCM57765.kext:
    This kext will attach to numerous unsupported BCM57XX Ethernet devices in order to make the native drivers work for a wider variety of BCM Ethernet chipsets that are compatible, but not supported due to probe testing of PCI device-id/subdevice-id values.

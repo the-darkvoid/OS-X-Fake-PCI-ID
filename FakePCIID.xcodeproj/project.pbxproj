@@ -17,15 +17,15 @@
 		841033301B3F629E00349B75 /* FakePCIID_XHCIMux.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID_XHCIMux.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		841033321B3F630B00349B75 /* XHCIMux.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = XHCIMux.plist; path = injectors/XHCIMux.plist; sourceTree = "<group>"; };
 		8431923D1A5890E80022C7A1 /* FakePCIID_AR9280_as_AR946x.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID_AR9280_as_AR946x.kext; sourceTree = BUILT_PRODUCTS_DIR; };
-		8431924D1A58913C0022C7A1 /* FakePCIID_HD4600_HD4400.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID_HD4600_HD4400.kext; sourceTree = BUILT_PRODUCTS_DIR; };
-		843192601A5892A40022C7A1 /* HD4600_HD4400.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = HD4600_HD4400.plist; path = injectors/HD4600_HD4400.plist; sourceTree = SOURCE_ROOT; };
+		8431924D1A58913C0022C7A1 /* FakePCIID_Intel_HD_Graphics.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID_Intel_HD_Graphics.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		843192601A5892A40022C7A1 /* Intel_HD_Graphics.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Intel_HD_Graphics.plist; path = injectors/Intel_HD_Graphics.plist; sourceTree = SOURCE_ROOT; };
 		843192621A5892AD0022C7A1 /* AR9280_as_AR946x.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AR9280_as_AR946x.plist; path = injectors/AR9280_as_AR946x.plist; sourceTree = SOURCE_ROOT; };
 		84F11DE71A588B8A003DC874 /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; usesTabs = 1; };
 		84F11DE81A588B8A003DC874 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D401A4031A530B9800CD5616 /* PCIDeviceStub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PCIDeviceStub.h; sourceTree = "<group>"; };
 		D401A4051A530DC600CD5616 /* PCIDeviceStub.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PCIDeviceStub.cpp; sourceTree = "<group>"; };
-		D405EF6E1A59104300547072 /* BCM94352Z_as_BCM94360CS2.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = BCM94352Z_as_BCM94360CS2.plist; path = injectors/BCM94352Z_as_BCM94360CS2.plist; sourceTree = "<group>"; };
-		D405EF741A5910E000547072 /* FakePCIID_BCM94352Z_as_BCM94360CS2.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID_BCM94352Z_as_BCM94360CS2.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		D405EF6E1A59104300547072 /* Broadcom_WiFi.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Broadcom_WiFi.plist; path = injectors/Broadcom_WiFi.plist; sourceTree = "<group>"; };
+		D405EF741A5910E000547072 /* FakePCIID_Broadcom_WiFi.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID_Broadcom_WiFi.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4096F801A52FCED005C037A /* FakePCIID.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4096F841A52FCED005C037A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4096F851A52FCED005C037A /* FakePCIID.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FakePCIID.h; sourceTree = "<group>"; };
@@ -101,12 +101,12 @@
 		84A7B1A61A588D6F00110310 /* Injectors */ = {
 			isa = PBXGroup;
 			children = (
-				D410AAA01A8A2C00007FD343 /* Intel_GbX.plist */,
-				D43DC8631A7FA447004B2D06 /* BCM57XX_as_BCM57765.plist */,
+				843192601A5892A40022C7A1 /* Intel_HD_Graphics.plist */,
 				D423B7A01A5C0FF6007F2350 /* Intel_HDMI_Audio.plist */,
-				843192601A5892A40022C7A1 /* HD4600_HD4400.plist */,
 				843192621A5892AD0022C7A1 /* AR9280_as_AR946x.plist */,
-				D405EF6E1A59104300547072 /* BCM94352Z_as_BCM94360CS2.plist */,
+				D405EF6E1A59104300547072 /* Broadcom_WiFi.plist */,
+				D43DC8631A7FA447004B2D06 /* BCM57XX_as_BCM57765.plist */,
+				D410AAA01A8A2C00007FD343 /* Intel_GbX.plist */,
 				841033321B3F630B00349B75 /* XHCIMux.plist */,
 			);
 			name = Injectors;
@@ -128,8 +128,8 @@
 			children = (
 				D4096F801A52FCED005C037A /* FakePCIID.kext */,
 				8431923D1A5890E80022C7A1 /* FakePCIID_AR9280_as_AR946x.kext */,
-				8431924D1A58913C0022C7A1 /* FakePCIID_HD4600_HD4400.kext */,
-				D405EF741A5910E000547072 /* FakePCIID_BCM94352Z_as_BCM94360CS2.kext */,
+				8431924D1A58913C0022C7A1 /* FakePCIID_Intel_HD_Graphics.kext */,
+				D405EF741A5910E000547072 /* FakePCIID_Broadcom_WiFi.kext */,
 				D423B7971A5C0FD8007F2350 /* FakePCIID_Intel_HDMI_Audio.kext */,
 				D43DC86A1A7FA6E5004B2D06 /* FakePCIID_BCM57XX_as_BCM57765.kext */,
 				D410AA971A8A2BC6007FD343 /* FakePCIID_Intel_GbX.kext */,
@@ -236,7 +236,7 @@
 			dependencies = (
 			);
 			name = FakePCIID_XHCIMux;
-			productName = FakePCIID_HD4600_HD4400;
+			productName = FakePCIID_Intel_HD_Graphics;
 			productReference = 841033301B3F629E00349B75 /* FakePCIID_XHCIMux.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
@@ -258,9 +258,9 @@
 			productReference = 8431923D1A5890E80022C7A1 /* FakePCIID_AR9280_as_AR946x.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
-		8431924C1A58913C0022C7A1 /* FakePCIID_HD4600_HD4400 */ = {
+		8431924C1A58913C0022C7A1 /* FakePCIID_Intel_HD_Graphics */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 843192551A58913C0022C7A1 /* Build configuration list for PBXNativeTarget "FakePCIID_HD4600_HD4400" */;
+			buildConfigurationList = 843192551A58913C0022C7A1 /* Build configuration list for PBXNativeTarget "FakePCIID_Intel_HD_Graphics" */;
 			buildPhases = (
 				843192481A58913C0022C7A1 /* Sources */,
 				843192491A58913C0022C7A1 /* Frameworks */,
@@ -271,14 +271,14 @@
 			);
 			dependencies = (
 			);
-			name = FakePCIID_HD4600_HD4400;
-			productName = FakePCIID_HD4600_HD4400;
-			productReference = 8431924D1A58913C0022C7A1 /* FakePCIID_HD4600_HD4400.kext */;
+			name = FakePCIID_Intel_HD_Graphics;
+			productName = FakePCIID_Intel_HD_Graphics;
+			productReference = 8431924D1A58913C0022C7A1 /* FakePCIID_Intel_HD_Graphics.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
-		D405EF731A5910E000547072 /* FakePCIID_BCM94352Z_as_BCM94360CS2 */ = {
+		D405EF731A5910E000547072 /* FakePCIID_Broadcom_WiFi */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D405EF7A1A5910E000547072 /* Build configuration list for PBXNativeTarget "FakePCIID_BCM94352Z_as_BCM94360CS2" */;
+			buildConfigurationList = D405EF7A1A5910E000547072 /* Build configuration list for PBXNativeTarget "FakePCIID_Broadcom_WiFi" */;
 			buildPhases = (
 				D405EF6F1A5910E000547072 /* Sources */,
 				D405EF701A5910E000547072 /* Frameworks */,
@@ -289,9 +289,9 @@
 			);
 			dependencies = (
 			);
-			name = FakePCIID_BCM94352Z_as_BCM94360CS2;
-			productName = FakePCIID_BCM94352Z_as_BCM94360CS2;
-			productReference = D405EF741A5910E000547072 /* FakePCIID_BCM94352Z_as_BCM94360CS2.kext */;
+			name = FakePCIID_Broadcom_WiFi;
+			productName = FakePCIID_Broadcom_WiFi;
+			productReference = D405EF741A5910E000547072 /* FakePCIID_Broadcom_WiFi.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
 		D4096F7F1A52FCED005C037A /* FakePCIID */ = {
@@ -411,10 +411,10 @@
 			projectRoot = "";
 			targets = (
 				D4096F7F1A52FCED005C037A /* FakePCIID */,
-				8431923C1A5890E80022C7A1 /* FakePCIID_AR9280_as_AR946x */,
-				8431924C1A58913C0022C7A1 /* FakePCIID_HD4600_HD4400 */,
-				D405EF731A5910E000547072 /* FakePCIID_BCM94352Z_as_BCM94360CS2 */,
+				8431924C1A58913C0022C7A1 /* FakePCIID_Intel_HD_Graphics */,
 				D423B7961A5C0FD8007F2350 /* FakePCIID_Intel_HDMI_Audio */,
+				8431923C1A5890E80022C7A1 /* FakePCIID_AR9280_as_AR946x */,
+				D405EF731A5910E000547072 /* FakePCIID_Broadcom_WiFi */,
 				D43DC8691A7FA6E5004B2D06 /* FakePCIID_BCM57XX_as_BCM57765 */,
 				D410AA961A8A2BC6007FD343 /* FakePCIID_Intel_GbX */,
 				841033281B3F629E00349B75 /* FakePCIID_XHCIMux */,
@@ -586,8 +586,8 @@
 		843192561A58913C0022C7A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = injectors/HD4600_HD4400.plist;
-				MODULE_NAME = "org.rehabman.injector.FakePCIID-HD4600-HD4400";
+				INFOPLIST_FILE = injectors/Intel_HD_Graphics.plist;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-Intel-HD-Graphics";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -596,8 +596,8 @@
 		843192571A58913C0022C7A1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = injectors/HD4600_HD4400.plist;
-				MODULE_NAME = "org.rehabman.injector.FakePCIID-HD4600-HD4400";
+				INFOPLIST_FILE = injectors/Intel_HD_Graphics.plist;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-Intel-HD-Graphics";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -606,8 +606,8 @@
 		D405EF7B1A5910E000547072 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = injectors/BCM94352Z_as_BCM94360CS2.plist;
-				MODULE_NAME = "org.rehabman.injector.FakePCIID-BCM94352Z-as-BCM94360CS2";
+				INFOPLIST_FILE = injectors/Broadcom_WiFi.plist;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-Broadcom-WiFi";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -616,8 +616,8 @@
 		D405EF7C1A5910E000547072 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = injectors/BCM94352Z_as_BCM94360CS2.plist;
-				MODULE_NAME = "org.rehabman.injector.FakePCIID-BCM94352Z-as-BCM94360CS2";
+				INFOPLIST_FILE = injectors/Broadcom_WiFi.plist;
+				MODULE_NAME = "org.rehabman.injector.FakePCIID-Broadcom-WiFi";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = kext;
 			};
@@ -631,7 +631,7 @@
 					"LOGNAME=\\\"${LOGNAME}\\\"",
 				);
 				INFOPLIST_FILE = FakePCIID/Info.plist;
-				MODULE_VERSION = 1.2.1;
+				MODULE_VERSION = 1.2.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = kext;
@@ -643,7 +643,7 @@
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = "LOGNAME=\\\"${LOGNAME}\\\"";
 				INFOPLIST_FILE = FakePCIID/Info.plist;
-				MODULE_VERSION = 1.2.1;
+				MODULE_VERSION = 1.2.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = kext;
@@ -756,7 +756,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		843192551A58913C0022C7A1 /* Build configuration list for PBXNativeTarget "FakePCIID_HD4600_HD4400" */ = {
+		843192551A58913C0022C7A1 /* Build configuration list for PBXNativeTarget "FakePCIID_Intel_HD_Graphics" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				843192561A58913C0022C7A1 /* Debug */,
@@ -765,7 +765,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D405EF7A1A5910E000547072 /* Build configuration list for PBXNativeTarget "FakePCIID_BCM94352Z_as_BCM94360CS2" */ = {
+		D405EF7A1A5910E000547072 /* Build configuration list for PBXNativeTarget "FakePCIID_Broadcom_WiFi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D405EF7B1A5910E000547072 /* Debug */,
