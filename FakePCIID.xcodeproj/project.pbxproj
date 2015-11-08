@@ -11,11 +11,13 @@
 		D401A4061A530DC600CD5616 /* PCIDeviceStub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D401A4051A530DC600CD5616 /* PCIDeviceStub.cpp */; };
 		D4096F861A52FCED005C037A /* FakePCIID.h in Headers */ = {isa = PBXBuildFile; fileRef = D4096F851A52FCED005C037A /* FakePCIID.h */; };
 		D4096F881A52FCED005C037A /* FakePCIID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4096F871A52FCED005C037A /* FakePCIID.cpp */; };
+		EDE8DE1D1BEA5F76009F8ED2 /* FakePCIID_XHCIMux.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDE8DE1B1BEA5F76009F8ED2 /* FakePCIID_XHCIMux.cpp */; };
+		EDE8DE1E1BEA5F76009F8ED2 /* FakePCIID_XHCIMux.h in Headers */ = {isa = PBXBuildFile; fileRef = EDE8DE1C1BEA5F76009F8ED2 /* FakePCIID_XHCIMux.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		841033301B3F629E00349B75 /* FakePCIID_XHCIMux.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID_XHCIMux.kext; sourceTree = BUILT_PRODUCTS_DIR; };
-		841033321B3F630B00349B75 /* XHCIMux.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = XHCIMux.plist; path = injectors/XHCIMux.plist; sourceTree = "<group>"; };
+		841033321B3F630B00349B75 /* XHCIMux.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = XHCIMux.plist; path = ../injectors/XHCIMux.plist; sourceTree = "<group>"; };
 		8431923D1A5890E80022C7A1 /* FakePCIID_AR9280_as_AR946x.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID_AR9280_as_AR946x.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		8431924D1A58913C0022C7A1 /* FakePCIID_Intel_HD_Graphics.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID_Intel_HD_Graphics.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		843192601A5892A40022C7A1 /* Intel_HD_Graphics.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Intel_HD_Graphics.plist; path = injectors/Intel_HD_Graphics.plist; sourceTree = SOURCE_ROOT; };
@@ -36,6 +38,8 @@
 		D423B7A01A5C0FF6007F2350 /* Intel_HDMI_Audio.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Intel_HDMI_Audio.plist; path = injectors/Intel_HDMI_Audio.plist; sourceTree = "<group>"; };
 		D43DC8631A7FA447004B2D06 /* BCM57XX_as_BCM57765.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = BCM57XX_as_BCM57765.plist; path = injectors/BCM57XX_as_BCM57765.plist; sourceTree = "<group>"; };
 		D43DC86A1A7FA6E5004B2D06 /* FakePCIID_BCM57XX_as_BCM57765.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID_BCM57XX_as_BCM57765.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDE8DE1B1BEA5F76009F8ED2 /* FakePCIID_XHCIMux.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FakePCIID_XHCIMux.cpp; sourceTree = "<group>"; };
+		EDE8DE1C1BEA5F76009F8ED2 /* FakePCIID_XHCIMux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakePCIID_XHCIMux.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +111,6 @@
 				D405EF6E1A59104300547072 /* Broadcom_WiFi.plist */,
 				D43DC8631A7FA447004B2D06 /* BCM57XX_as_BCM57765.plist */,
 				D410AAA01A8A2C00007FD343 /* Intel_GbX.plist */,
-				841033321B3F630B00349B75 /* XHCIMux.plist */,
 			);
 			name = Injectors;
 			sourceTree = "<group>";
@@ -145,6 +148,8 @@
 				D4096F871A52FCED005C037A /* FakePCIID.cpp */,
 				D401A4031A530B9800CD5616 /* PCIDeviceStub.h */,
 				D401A4051A530DC600CD5616 /* PCIDeviceStub.cpp */,
+				EDE8DE1C1BEA5F76009F8ED2 /* FakePCIID_XHCIMux.h */,
+				EDE8DE1B1BEA5F76009F8ED2 /* FakePCIID_XHCIMux.cpp */,
 				D4096F831A52FCED005C037A /* Supporting Files */,
 			);
 			path = FakePCIID;
@@ -154,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				D4096F841A52FCED005C037A /* Info.plist */,
+				841033321B3F630B00349B75 /* XHCIMux.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -165,6 +171,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDE8DE1E1BEA5F76009F8ED2 /* FakePCIID_XHCIMux.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,6 +493,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDE8DE1D1BEA5F76009F8ED2 /* FakePCIID_XHCIMux.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,7 +639,7 @@
 					"LOGNAME=\\\"${LOGNAME}\\\"",
 				);
 				INFOPLIST_FILE = FakePCIID/Info.plist;
-				MODULE_VERSION = 1.2.2;
+				MODULE_VERSION = 1.2.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = kext;
@@ -643,7 +651,7 @@
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = "LOGNAME=\\\"${LOGNAME}\\\"";
 				INFOPLIST_FILE = FakePCIID/Info.plist;
-				MODULE_VERSION = 1.2.2;
+				MODULE_VERSION = 1.2.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = kext;

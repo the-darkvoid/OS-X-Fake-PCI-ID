@@ -30,6 +30,43 @@
 
 #include <IOKit/pci/IOPCIDevice.h>
 
+// We want ioreg to still see the normal class hierarchy for hooked
+// provider IOPCIDevice
+//
+// Normal:
+//  IOPCIDevice : IOService : IORegistryEntry : OSObject
+//
+// Without this hack:
+//  PCIDeviceStub : IOPCIDevice : IOService : IORegistryEntry : OSObject
+//
+
+#define hack_OSDefineMetaClassAndStructors(className, superclassName) \
+    hack_OSDefineMetaClassAndStructorsWithInit(className, superclassName, )
+
+#define hack_OSDefineMetaClassAndStructorsWithInit(className, superclassName, init) \
+    hack_OSDefineMetaClassWithInit(className, superclassName, init) \
+    OSDefineDefaultStructors(className, superclassName)
+
+// trick played with getMetaClass to return IOPCIDevice::gMetaClass...
+#define hack_OSDefineMetaClassWithInit(className, superclassName, init)       \
+    /* Class global data */                                                   \
+    className ::MetaClass className ::gMetaClass;                             \
+    const OSMetaClass * const className ::metaClass =                         \
+        & className ::gMetaClass;                                             \
+    const OSMetaClass * const className ::superClass =                        \
+        & superclassName ::gMetaClass;                                        \
+    /* Class member functions */                                              \
+    className :: className(const OSMetaClass *meta)                           \
+        : superclassName (meta) { }                                           \
+    className ::~ className() { }                                             \
+    const OSMetaClass * className ::getMetaClass() const                      \
+        { return &IOPCIDevice::gMetaClass; }                                  \
+    /* The ::MetaClass constructor */                                         \
+    className ::MetaClass::MetaClass()                                        \
+        : OSMetaClass(#className, className::superClass, sizeof(className))   \
+        { init; }
+
+
 class FakePCIID;
 
 //#define HOOK_ALL
@@ -69,35 +106,6 @@ public:
     virtual IODeviceMemory* ioDeviceMemory(void);
     virtual UInt32 extendedFindPCICapability(UInt32 capabilityID, IOByteCount * offset = 0);
 #endif
-};
-
-#define kXHCI_PCIConfig_PR2     0xd0
-#define kXHCI_PCIConfig_PR2M    0xd4
-
-#define kPR2Force       "RM,pr2-force"
-#define kPR2Init        "RM,pr2-init"
-#define kPR2Block       "RM,pr2-block"
-#define kPR2MBlock      "RM,pr2m-block"
-#define kPR2HonorPR2M   "RM,pr2-honor-pr2m"
-#define kPR2ChipsetMask "RM,pr2-chipset-mask"
-
-class PCIDeviceStub_XHCIMux : public PCIDeviceStub
-{
-    OSDeclareDefaultStructors(PCIDeviceStub_XHCIMux);
-    typedef PCIDeviceStub super;
-
-protected:
-    bool getBoolProperty(const char* name, bool defValue);
-    UInt32 getUInt32Property(const char* name);
-
-public:
-    virtual void configWrite32(IOPCIAddressSpace space, UInt8 offset, UInt32 data);
-#ifdef HOOK_ALL
-    virtual void configWrite16(IOPCIAddressSpace space, UInt8 offset, UInt16 data);
-    virtual void configWrite8(IOPCIAddressSpace space, UInt8 offset, UInt8 data);
-#endif
-
-    void startup();
 };
 
 #endif

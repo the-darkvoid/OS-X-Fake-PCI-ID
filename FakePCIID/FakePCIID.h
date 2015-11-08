@@ -38,6 +38,11 @@ protected:
     void unhookProvider();
     void mergeFakeProperties(IOService* provider, const char* name, bool force);
 
+    static inline const void *getVTable(const IOPCIDevice *object)
+        { return *(const void *const *)object; }
+    static inline void setVTable(IOPCIDevice *object, const void *vtable)
+        { *(const void **)object = vtable; }
+
 public:
     virtual bool init(OSDictionary *propTable);
     virtual bool attach(IOService *provider);
@@ -49,14 +54,5 @@ public:
 #endif
 };
 
-class FakePCIID_XHCIMux : public FakePCIID
-{
-    OSDeclareDefaultStructors(FakePCIID_XHCIMux);
-    typedef FakePCIID super;
-
-public:
-    virtual bool init(OSDictionary *propTable);
-    virtual bool hookProvider(IOService *provider);
-};
 
 #endif
