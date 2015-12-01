@@ -17,7 +17,7 @@
 
 /* Begin PBXFileReference section */
 		841033301B3F629E00349B75 /* FakePCIID_XHCIMux.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID_XHCIMux.kext; sourceTree = BUILT_PRODUCTS_DIR; };
-		841033321B3F630B00349B75 /* XHCIMux.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = XHCIMux.plist; path = ../injectors/XHCIMux.plist; sourceTree = "<group>"; };
+		841033321B3F630B00349B75 /* XHCIMux.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = XHCIMux.plist; path = injectors/XHCIMux.plist; sourceTree = "<group>"; };
 		8431923D1A5890E80022C7A1 /* FakePCIID_AR9280_as_AR946x.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID_AR9280_as_AR946x.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		8431924D1A58913C0022C7A1 /* FakePCIID_Intel_HD_Graphics.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakePCIID_Intel_HD_Graphics.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		843192601A5892A40022C7A1 /* Intel_HD_Graphics.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Intel_HD_Graphics.plist; path = injectors/Intel_HD_Graphics.plist; sourceTree = SOURCE_ROOT; };
@@ -111,6 +111,7 @@
 				D405EF6E1A59104300547072 /* Broadcom_WiFi.plist */,
 				D43DC8631A7FA447004B2D06 /* BCM57XX_as_BCM57765.plist */,
 				D410AAA01A8A2C00007FD343 /* Intel_GbX.plist */,
+				841033321B3F630B00349B75 /* XHCIMux.plist */,
 			);
 			name = Injectors;
 			sourceTree = "<group>";
@@ -159,7 +160,6 @@
 			isa = PBXGroup;
 			children = (
 				D4096F841A52FCED005C037A /* Info.plist */,
-				841033321B3F630B00349B75 /* XHCIMux.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
