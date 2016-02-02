@@ -39,7 +39,7 @@ In order to cause the kext to be loaded against a particular device, you must al
 
 
 - FakePCIID_Intel_HDMI_Audio.kext:
-  This kext will attach to `8086:0c0c`, `8086:0d0c`, and `8086:0a0c`
+  This kext will attach to `8086:0c0c`
 
   The purpose is to provide support for unsupported HDAU (usually called B0D3, but renamed to HDAU to match what Apple expects) devices which provide HDMI-audio on Haswell(+) systems.  `8086:0c0c` is the unsupported ID.  The other two `8086:0d0c`, and `8086:0a0c` are supported.  This kext, AppleHDAController, loads by PCI class, so you normally would not inject device-id for it, but to allow FakePCIID to work, you may need to inject RM,device-id (one of the supported IDs).  By default, the kext injects RM,device-id=<0c 0a 00 00> (0x0a0c).  You can override it with a DSDT edit.
 
