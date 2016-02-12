@@ -22,6 +22,8 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(MODULE_VERSION)</string>
+	<key>OSBundleCompatibleVersion</key>
+	<string>$(MODULE_VERSION)</string>
 	<key>OSBundleLibraries</key>
 	<dict>
 		<key>com.apple.iokit.IOPCIFamily</key>

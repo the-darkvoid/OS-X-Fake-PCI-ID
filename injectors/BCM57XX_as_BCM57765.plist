@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Source Code</key>
+	<string>https://github.com/RehabMan/FakePCIID</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.rehabman.injector.BCM57XX-as-BCM57765</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -147,10 +149,6 @@
 			</array>
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>
-			<key>RM,Build</key>
-			<string>${CONFIGURATION}-${LOGNAME}</string>
-			<key>RM,Version</key>
-			<string>${PRODUCT_NAME} ${MODULE_VERSION}</string>
 			<key>FakeProperties</key>
 			<dict>
 				<key>RM,device-id</key>
@@ -166,7 +164,5 @@
 	</dict>
 	<key>OSBundleRequired</key>
 	<string>Network-Root</string>
-	<key>Source Code</key>
-	<string>https://github.com/RehabMan/FakePCIID</string>
 </dict>
 </plist>

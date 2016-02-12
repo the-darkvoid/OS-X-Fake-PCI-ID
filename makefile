@@ -1,13 +1,17 @@
-# really just some handy scripts...
-
 KEXT=FakePCIID.kext
 #KEXT_WIFI=FakePCIID_AR9280_as_AR946x.kext
-KEXT_WIFI=FakePCIID_BCM94352Z_as_BCM94360CS2.kext
-KEXT_GFX=FakePCIID_HD4600_HD4400.kext
+KEXT_WIFI=FakePCIID_Broadcom_WiFi.kext
+KEXT_GFX=FakePCIID_Intel_HD_Graphics.kext
 KEXT_USB=FakePCIID_XHCIMux.kext
 DIST=RehabMan-FakePCIID
 BUILDDIR=./Build/Products
-INSTDIR=/System/Library/Extensions
+
+VERSION_ERA=$(shell ./print_version.sh)
+ifeq "$(VERSION_ERA)" "10.10-"
+	INSTDIR=/System/Library/Extensions
+else
+	INSTDIR=/Library/Extensions
+endif
 
 ifeq ($(findstring 32,$(BITS)),32)
 OPTIONS:=$(OPTIONS) -arch i386

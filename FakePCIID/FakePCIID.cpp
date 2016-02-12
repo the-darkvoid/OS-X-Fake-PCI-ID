@@ -22,15 +22,8 @@
 #include "FakePCIID.h"
 #include "PCIDeviceStub.h"
 
-static inline const void *getVTable(const IOPCIDevice *object)
-{
-    return *(const void *const *)object;
-}
-
-static inline void setVTable(IOPCIDevice *object, const void *vtable)
-{
-    *(const void **)object = vtable;
-}
+#include <libkern/version.h>
+extern kmod_info_t kmod_info;
 
 OSDefineMetaClassAndStructors(FakePCIID, IOService);
 
@@ -98,6 +91,9 @@ bool FakePCIID::init(OSDictionary *propTable)
 {
     DebugLog("FakePCIID::init() %p\n", this);
     
+    // announce version
+    IOLog("FakePCIID: Version %s starting on OS X Darwin %d.%d.\n", kmod_info.version, version_major, version_minor);
+
     bool ret = super::init(propTable);
     if (!ret)
     {
@@ -105,7 +101,15 @@ bool FakePCIID::init(OSDictionary *propTable)
         return false;
     }
 
-    IOLog("FakePCIID version 1.2.0 starting.\n");
+    // place version/build info in ioreg properties RM,Build and RM,Version
+    char buf[128];
+    snprintf(buf, sizeof(buf), "%s %s", kmod_info.name, kmod_info.version);
+    setProperty("RM,Version", buf);
+#ifdef DEBUG
+    setProperty("RM,Build", "Debug-" LOGNAME);
+#else
+    setProperty("RM,Build", "Release-" LOGNAME);
+#endif
 
     // capture vtable pointer for PCIDeviceStub
     PCIDeviceStub *stub = OSTypeAlloc(PCIDeviceStub);
@@ -172,37 +176,4 @@ void FakePCIID::detach(IOService *provider)
 #endif
 
 
-//////////////////////////////////////////////////////////////////////////////
-
-OSDefineMetaClassAndStructors(FakePCIID_XHCIMux, FakePCIID);
-
-bool FakePCIID_XHCIMux::init(OSDictionary *propTable)
-{
-    DebugLog("FakePCIID_XHCIMux::init\n");
-
-    if (!super::init(propTable))
-        return false;
-
-    // capture vtable pointer for PCIDeviceStub_XHCIMux
-    PCIDeviceStub *stub = OSTypeAlloc(PCIDeviceStub_XHCIMux);
-    mStubVtable = getVTable(stub);
-    stub->release();
-
-    return true;
-}
-
-bool FakePCIID_XHCIMux::hookProvider(IOService *provider)
-{
-    DebugLog("FakePCIID_XHCIMux::hookProvider\n");
-
-    // need to run hookProvider first as it injects properties for startup
-    bool init = !mDeviceVtable;
-    bool result = super::hookProvider(provider);
-
-    // write initial value to PR2 early...
-    if (init)
-        ((PCIDeviceStub_XHCIMux*)provider)->startup();
-
-    return result;
-}
 

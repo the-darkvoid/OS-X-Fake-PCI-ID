@@ -4,14 +4,20 @@
 <dict>
 	<key>Source Code</key>
 	<string>https://github.com/RehabMan/FakePCIID</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.rehabman.injector.FakePCIID-XHCIMux</string>
+	<string>org.rehabman.driver.FakePCIID.XHCIMux</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>FakePCIID_XHCIMux</string>
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$MODULE_VERSION</string>
 	<key>CFBundleVersion</key>
@@ -21,7 +27,7 @@
 		<key>XHCIMux 7-series</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
-			<string>org.rehabman.driver.FakePCIID</string>
+			<string>org.rehabman.driver.FakePCIID.XHCIMux</string>
 			<key>IOClass</key>
 			<string>FakePCIID_XHCIMux</string>
 			<key>IOProbeScore</key>
@@ -32,10 +38,6 @@
 			<string>0x1e318086</string>
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>
-			<key>RM,Build</key>
-			<string>${CONFIGURATION}-${LOGNAME}</string>
-			<key>RM,Version</key>
-			<string>${PRODUCT_NAME} ${MODULE_VERSION}</string>
 			<key>FakeProperties</key>
 			<dict>
 				<key>RM,pr2-force</key>
@@ -55,7 +57,7 @@
 		<key>XHCIMux 8 and 9-series</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
-			<string>org.rehabman.driver.FakePCIID</string>
+			<string>org.rehabman.driver.FakePCIID.XHCIMux</string>
 			<key>IOProbeScore</key>
 			<integer>9001</integer>
 			<key>IOClass</key>
@@ -63,13 +65,9 @@
 			<key>IOMatchCategory</key>
 			<string>FakePCIID_XHCIMux</string>
 			<key>IOPCIPrimaryMatch</key>
-			<string>0x9c318086 0x9cb18086 0x8c318086 0x8cb18086</string>
+			<string>0x9c318086 0x9cb18086 0x8c318086 0x8cb18086 0x8d318086</string>
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>
-			<key>RM,Build</key>
-			<string>${CONFIGURATION}-${LOGNAME}</string>
-			<key>RM,Version</key>
-			<string>${PRODUCT_NAME} ${MODULE_VERSION}</string>
 			<key>FakeProperties</key>
 			<dict>
 				<key>RM,pr2-force</key>
@@ -86,6 +84,23 @@
 				<data>/z8AAA==</data>
 			</dict>
 		</dict>
+	</dict>
+	<key>OSBundleLibraries</key>
+	<dict>
+		<key>org.rehabman.driver.FakePCIID</key>
+		<string>$MODULE_VERSION</string>
+		<key>com.apple.iokit.IOPCIFamily</key>
+		<string>1.0.0b1</string>
+		<key>com.apple.kpi.bsd</key>
+		<string>8.0.0</string>
+		<key>com.apple.kpi.iokit</key>
+		<string>8.0.0</string>
+		<key>com.apple.kpi.libkern</key>
+		<string>8.0.0</string>
+		<key>com.apple.kpi.mach</key>
+		<string>8.0.0</string>
+		<key>com.apple.kpi.unsupported</key>
+		<string>8.0.0</string>
 	</dict>
 	<key>OSBundleRequired</key>
 	<string>Root</string>
