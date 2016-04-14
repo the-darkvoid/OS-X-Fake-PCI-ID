@@ -53,7 +53,7 @@
 			<key>IOPCIClassMatch</key>
 			<string>0x03000000&amp;0xff000000</string>
 			<key>IOPCIPrimaryMatch</key>
-			<string>0x19068086 0x19138086 0x191e8086 0x191680866 0x191b8086 </string>
+			<string>0x19068086 0x19138086 0x191e8086 0x19168086 0x191b8086</string>
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>
 			<key>FakeProperties</key>
@@ -75,7 +75,7 @@
 			<key>IOPCIClassMatch</key>
 			<string>0x03000000&amp;0xff000000</string>
 			<key>IOPCIPrimaryMatch</key>
-			<string>0x19268086 0x19278086 0x193b8086 </string>
+			<string>0x19268086 0x19278086 0x193b8086</string>
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>
 			<key>FakeProperties</key>
