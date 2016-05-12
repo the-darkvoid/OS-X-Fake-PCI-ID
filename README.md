@@ -32,10 +32,12 @@ In order to cause the kext to be loaded against a particular device, you must al
   - `8086:0a1e` is HD4200 mobile.
   - `8086:041e` is HD4400 desktop.
   - `8086:041a` is P4600 server.
+  - `8086:016a' is P4000 server.
   
   Normally, a fake device-id of `8086:0412` will be injected for Yosemite, as Yosemite does not natively recognize `8086:0416`.  `8086:0412` is the native device-id for HD4600 desktop.
   By injecting `0412`, `AppleIntelFramebufferAzul` and `AppleIntelHD5000Graphics` will load.
   And since, FakePCIID will also be attached to these devices, it will successfully fool both kexts that the device an Intel HD4600 Desktop IGPU (0412).
+  For P4000 support, inject device-id 0166 (HD4000).
 
 
 - FakePCIID_Intel_HDMI_Audio.kext:
