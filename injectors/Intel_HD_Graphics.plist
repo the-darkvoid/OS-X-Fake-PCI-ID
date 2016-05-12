@@ -18,6 +18,28 @@
 	<string>$MODULE_VERSION</string>
 	<key>IOKitPersonalities</key>
 	<dict>
+		<key>P4000</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>org.rehabman.driver.FakePCIID</string>
+			<key>IOProbeScore</key>
+			<integer>9001</integer>
+			<key>IOClass</key>
+			<string>FakePCIID</string>
+			<key>IOMatchCategory</key>
+			<string>FakePCIID</string>
+			<key>IOPCIClassMatch</key>
+			<string>0x03000000&amp;0xff000000</string>
+			<key>IOPCIPrimaryMatch</key>
+			<string>0x01668086 0x016a8086</string>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>FakeProperties</key>
+			<dict>
+				<key>RM,device-id</key>
+				<data>ZgEAAA==</data>
+			</dict>
+		</dict>
 		<key>HD4200 HD4400 HD4600 P4600</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
@@ -53,7 +75,7 @@
 			<key>IOPCIClassMatch</key>
 			<string>0x03000000&amp;0xff000000</string>
 			<key>IOPCIPrimaryMatch</key>
-			<string>0x19068086 0x19138086 0x191e8086 0x19168086 0x191b8086</string>
+			<string>0x19068086 0x19138086 0x191e8086 0x19168086 0x191b8086 0x19028086</string>
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>
 			<key>FakeProperties</key>
