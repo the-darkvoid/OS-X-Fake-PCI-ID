@@ -43,7 +43,7 @@ In order to cause the kext to be loaded against a particular device, you must al
 
 
 - FakePCIID_Intel_HDMI_Audio.kext:
-  This kext will attach to `8086:0c0c`
+  This kext will attach to `8086:0c0c` or `8086:9d70`
 
   The purpose is to provide support for unsupported HDAU (usually called B0D3, but renamed to HDAU to match what Apple expects) devices which provide HDMI-audio on Haswell(+) systems.  `8086:0c0c` is the unsupported ID.  The other two `8086:0d0c`, and `8086:0a0c` are supported.  This kext, AppleHDAController, loads by PCI class, so you normally would not inject device-id for it, but to allow FakePCIID to work, you may need to inject RM,device-id (one of the supported IDs).  By default, the kext injects RM,device-id=<0c 0a 00 00> (0x0a0c).  You can override it with a DSDT edit.
 
@@ -64,6 +64,9 @@ Method (_DSM, 4, NotSerialized)\n
 }\n
 end;
 ```
+
+  In the case of Skylake 8086:9d70, it is attaching to the HDEF device (usually called HDAS, but renamed to HDEF to match what Aple expects).  Skylake HDMI/DP audio codec is on HDEF along with onboard audio.  It injects RM,device-id=<70 a1 00 00> as that device-id is native and allows HDMI audio to work.  This was discovered by noting that Skylake HDMI audio works on the NUC6i7KYK (Skull Canyon), but not the other NUC6 devices.
+
 
 - FakePCIID_AR9280_as_AR946x:
   This kext will attach to `168c:0034` or `168c:002a`.

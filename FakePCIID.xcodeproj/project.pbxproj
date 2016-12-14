@@ -639,7 +639,7 @@
 					"LOGNAME=\\\"${LOGNAME}\\\"",
 				);
 				INFOPLIST_FILE = FakePCIID/Info.plist;
-				MODULE_VERSION = 1.3.3;
+				MODULE_VERSION = 1.3.4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = kext;
@@ -651,7 +651,7 @@
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = "LOGNAME=\\\"${LOGNAME}\\\"";
 				INFOPLIST_FILE = FakePCIID/Info.plist;
-				MODULE_VERSION = 1.3.3;
+				MODULE_VERSION = 1.3.4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = kext;
