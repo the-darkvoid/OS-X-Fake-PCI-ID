@@ -18,7 +18,25 @@
 	<string>$MODULE_VERSION</string>
 	<key>IOKitPersonalities</key>
 	<dict>
-		<key>Intel HDMI Audio</key>
+		<key>Intel HDMI Audio - Skylake</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>org.rehabman.driver.FakePCIID</string>
+			<key>IOClass</key>
+			<string>FakePCIID</string>
+			<key>IOMatchCategory</key>
+			<string>FakePCIID</string>
+			<key>IOPCIPrimaryMatch</key>
+			<string>0x9d708086</string>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>FakeProperties</key>
+			<dict>
+				<key>RM,device-id</key>
+				<data>cKEAAA==</data>
+			</dict>
+		</dict>
+		<key>Intel HDMI Audio - Haswell</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>org.rehabman.driver.FakePCIID</string>

@@ -32,16 +32,18 @@ In order to cause the kext to be loaded against a particular device, you must al
   - `8086:0a1e` is HD4200 mobile.
   - `8086:041e` is HD4400 desktop.
   - `8086:041a` is P4600 server.
-  - `8086:016a' is P4000 server.
+  - `8086:016a` is P4000 server.
+  - `8086:191d` is P530 server.
   
   Normally, a fake device-id of `8086:0412` will be injected for Yosemite, as Yosemite does not natively recognize `8086:0416`.  `8086:0412` is the native device-id for HD4600 desktop.
   By injecting `0412`, `AppleIntelFramebufferAzul` and `AppleIntelHD5000Graphics` will load.
   And since, FakePCIID will also be attached to these devices, it will successfully fool both kexts that the device an Intel HD4600 Desktop IGPU (0412).
   For P4000 support, inject device-id 0166 (HD4000).
+  For P530 support, inject device-id 1912 (HD530).
 
 
 - FakePCIID_Intel_HDMI_Audio.kext:
-  This kext will attach to `8086:0c0c`
+  This kext will attach to `8086:0c0c` or `8086:9d70`
 
   The purpose is to provide support for unsupported HDAU (usually called B0D3, but renamed to HDAU to match what Apple expects) devices which provide HDMI-audio on Haswell(+) systems.  `8086:0c0c` is the unsupported ID.  The other two `8086:0d0c`, and `8086:0a0c` are supported.  This kext, AppleHDAController, loads by PCI class, so you normally would not inject device-id for it, but to allow FakePCIID to work, you may need to inject RM,device-id (one of the supported IDs).  By default, the kext injects RM,device-id=<0c 0a 00 00> (0x0a0c).  You can override it with a DSDT edit.
 
@@ -62,6 +64,9 @@ Method (_DSM, 4, NotSerialized)\n
 }\n
 end;
 ```
+
+  In the case of Skylake 8086:9d70, it is attaching to the HDEF device (usually called HDAS, but renamed to HDEF to match what Aple expects).  Skylake HDMI/DP audio codec is on HDEF along with onboard audio.  It injects RM,device-id=<70 a1 00 00> as that device-id is native and allows HDMI audio to work.  This was discovered by noting that Skylake HDMI audio works on the NUC6i7KYK (Skull Canyon), but not the other NUC6 devices.
+
 
 - FakePCIID_AR9280_as_AR946x:
   This kext will attach to `168c:0034` or `168c:002a`.

@@ -34,38 +34,11 @@
 				<string>pci14e4,43b2</string>
 			</array>
 			<key>IOProbeScore</key>
-			<integer>901</integer>
+			<integer>1110</integer>
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>
 			<key>TruePowerOff</key>
 			<true/>
-		</dict>
-		<key>Broadcom FakePCIID WiFi 43a0</key>
-		<dict>
-			<key>CFBundleIdentifier</key>
-			<string>org.rehabman.driver.FakePCIID</string>
-			<key>IOClass</key>
-			<string>FakePCIID</string>
-			<key>IOMatchCategory</key>
-			<string>FakePCIID</string>
-			<key>IONameMatch</key>
-			<array>
-				<string>pci14e4,4357</string>
-				<string>pci14e4,43b1</string>
-			</array>
-			<key>IOProviderClass</key>
-			<string>IOPCIDevice</string>
-			<key>FakeProperties</key>
-			<dict>
-				<key>RM,device-id</key>
-				<data>oEMAAA==</data>
-				<key>RM,vendor-id</key>
-				<data>5BQAAA==</data>
-				<key>RM,subsystem-id</key>
-				<data>NAEAAA==</data>
-				<key>RM,subsystem-vendor-id</key>
-				<data>axAAAA==</data>
-			</dict>
 		</dict>
 		<key>Broadcom FakePCIID WiFi no device-id</key>
 		<dict>
@@ -77,35 +50,14 @@
 			<string>FakePCIID</string>
 			<key>IONameMatch</key>
 			<array>
+				<string>pci14e4,4357</string>
+				<string>pci14e4,43b1</string>
 				<string>pci14e4,43a0</string>
 				<string>pci14e4,4331</string>
 				<string>pci14e4,4353</string>
 				<string>pci14e4,432b</string>
 				<string>pci14e4,43ba</string>
 				<string>pci14e4,43a3</string>
-			</array>
-			<key>IOProviderClass</key>
-			<string>IOPCIDevice</string>
-			<key>FakeProperties</key>
-			<dict>
-				<key>RM,vendor-id</key>
-				<data>5BQAAA==</data>
-				<key>RM,subsystem-id</key>
-				<data>NAEAAA==</data>
-				<key>RM,subsystem-vendor-id</key>
-				<data>axAAAA==</data>
-			</dict>
-		</dict>
-		<key>Broadcom FakePCIID WiFi 43224</key>
-		<dict>
-			<key>CFBundleIdentifier</key>
-			<string>org.rehabman.driver.FakePCIID</string>
-			<key>IOClass</key>
-			<string>FakePCIID</string>
-			<key>IOMatchCategory</key>
-			<string>FakePCIID</string>
-			<key>IONameMatch</key>
-			<array>
 				<string>pci106b,4e</string>
 				<string>pci14e4,4311</string>
 				<string>pci14e4,4312</string>
