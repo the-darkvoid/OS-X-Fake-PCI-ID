@@ -126,8 +126,14 @@ bool FakePCIID::attach(IOService* provider)
 {
     DebugLog("FakePCIID::attach() %p\n", this);
 
-    if (provider && provider->getProperty("RM,disable_FakePCIID"))
-        return false;
+    if (provider)
+    {
+        if (OSNumber* num = OSDynamicCast(OSNumber, provider->getProperty("RM,disable_FakePCIID")))
+        {
+            if (1 == num->unsigned32BitValue())
+                return false;
+        }
+    }
 
     if (!hookProvider(provider))
         return false;
