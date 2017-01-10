@@ -43,7 +43,7 @@ In order to cause the kext to be loaded against a particular device, you must al
 
 
 - FakePCIID_Intel_HDMI_Audio.kext:
-  This kext will attach to `8086:0c0c` or `8086:9d70`
+  This kext will attach to `8086:0c0c` or `8086:9d70` or `8086:a170`
 
   The purpose is to provide support for unsupported HDAU (usually called B0D3, but renamed to HDAU to match what Apple expects) devices which provide HDMI-audio on Haswell(+) systems.  `8086:0c0c` is the unsupported ID.  The other two `8086:0d0c`, and `8086:0a0c` are supported.  This kext, AppleHDAController, loads by PCI class, so you normally would not inject device-id for it, but to allow FakePCIID to work, you may need to inject RM,device-id (one of the supported IDs).  By default, the kext injects RM,device-id=<0c 0a 00 00> (0x0a0c).  You can override it with a DSDT edit.
 
@@ -65,7 +65,9 @@ Method (_DSM, 4, NotSerialized)\n
 end;
 ```
 
-  In the case of Skylake 8086:9d70, it is attaching to the HDEF device (usually called HDAS, but renamed to HDEF to match what Aple expects).  Skylake HDMI/DP audio codec is on HDEF along with onboard audio.  It injects RM,device-id=<70 a1 00 00> as that device-id is native and allows HDMI audio to work.  This was discovered by noting that Skylake HDMI audio works on the NUC6i7KYK (Skull Canyon), but not the other NUC6 devices.
+  In the case of Skylake 8086:9d70 or 8086:1a70, it is attaching to the HDEF device (usually called HDAS, but renamed to HDEF to match what Aple expects).  Skylake HDMI/DP audio codec is on HDEF along with onboard audio.  It injects RM,device-id=<70 a1 00 00> for 0x9d70 and RM,device-id=<70 9d 00 00> for 0xa170.  In other words, with these two device-ids, it will reverse them.  Try it if you have everything set correctly for HDMI/DP audio, but it is not working.  This was discovered by noting that Skylake HDMI audio works on the NUC6i7KYK (Skull Canyon), but not the other NUC6 devices.  It is quite system dependent.  Some computers need them swapped, others do not.  So test both with and without.
+
+  This kext won't fix other problems/mistakes you may have with your HDMI/DP setup (eg. missing "hda-gfx", mismatched "layout-id" injection, incorrect or wrong framebuffer patches, or missing ACPI renames).
 
 
 - FakePCIID_AR9280_as_AR946x:
