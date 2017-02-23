@@ -14,7 +14,7 @@ In any case, a DSDT patch, FakeID configuration (Clover), or FakeProperties dict
 
 Downloads are available on Bitbucket:
 
-https://bitbucket.org/RehabMan/os-x-fake-pci-id/downloads
+https://bitbucket.org/RehabMan/os-x-fake-pci-id/downloads/
 
 
 ### How to Install
