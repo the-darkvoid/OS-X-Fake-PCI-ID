@@ -18,7 +18,7 @@
 	<string>$MODULE_VERSION</string>
 	<key>IOKitPersonalities</key>
 	<dict>
-		<key>Intel HDMI Audio - Skylake 0xa170</key>
+		<key>Intel HDMI Audio - 100-series 0xa170</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>org.rehabman.driver.FakePCIID</string>
@@ -36,7 +36,7 @@
 				<data>cJ0AAA==</data>
 			</dict>
 		</dict>
-		<key>Intel HDMI Audio - Skylake 0x9d70</key>
+		<key>Intel HDMI Audio - 100-series 0x9d70</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>org.rehabman.driver.FakePCIID</string>
@@ -70,6 +70,42 @@
 			<dict>
 				<key>RM,device-id</key>
 				<data>DAoAAA==</data>
+			</dict>
+		</dict>
+		<key>Intel HDMI Audio - 100-series 0x9d71</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>org.rehabman.driver.FakePCIID</string>
+			<key>IOClass</key>
+			<string>FakePCIID</string>
+			<key>IOMatchCategory</key>
+			<string>FakePCIID</string>
+			<key>IOPCIPrimaryMatch</key>
+			<string>0x9d718086</string>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>FakeProperties</key>
+			<dict>
+				<key>RM,device-id</key>
+				<data>cKEAAA==</data>
+			</dict>
+		</dict>
+		<key>Intel HDMI Audio - 200-series 0xa2f0</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>org.rehabman.driver.FakePCIID</string>
+			<key>IOClass</key>
+			<string>FakePCIID</string>
+			<key>IOMatchCategory</key>
+			<string>FakePCIID</string>
+			<key>IOPCIPrimaryMatch</key>
+			<string>0xa2f08086</string>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>FakeProperties</key>
+			<dict>
+				<key>RM,device-id</key>
+				<data>cKEAAA==</data>
 			</dict>
 		</dict>
 	</dict>
