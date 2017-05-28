@@ -36,6 +36,24 @@
 				<data>cJ0AAA==</data>
 			</dict>
 		</dict>
+		<key>Intel HDMI Audio - 100-series 0xa171</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>org.rehabman.driver.FakePCIID</string>
+			<key>IOClass</key>
+			<string>FakePCIID</string>
+			<key>IOMatchCategory</key>
+			<string>FakePCIID</string>
+			<key>IOPCIPrimaryMatch</key>
+			<string>0xa1718086</string>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>FakeProperties</key>
+			<dict>
+				<key>RM,device-id</key>
+				<data>cKEAAA==</data>
+			</dict>
+		</dict>
 		<key>Intel HDMI Audio - 100-series 0x9d70</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
