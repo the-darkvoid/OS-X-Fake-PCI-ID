@@ -80,8 +80,8 @@ end;
 
 
 - FakePCIID_Broadcom_WiFi.kext (formerly FakePCIID_BCM94352Z_as_BCM94360CS2.kext)
-  This kext will attach to `14e4:43b1`, `14e4:4357`, `14e4:4331`, `14e4:4353`, `14e4:432b`, `14e4:43ba`, `14e4:43a3`, `14e4:4357`, or `14e4:43a0`.
-  And also `106b:4e`, `14e4:4331`, `14e4:4312`, `14e4:4313`, `14e4:4318`, `14e4:4319`, `14e4:431a`, `14e4:4320`, `14e4:4324`, `14e4:4325`, `14e4:4328`, `14e4:432c`, `14e4:432d`,
+  This kext will attach to `14e4:43b1`, `14e4:4357`, `14e4:4331`, `14e4:4353`, `14e4:432b`, `14e4:43ba`, `14e4:43a3`, or `14e4:43a0`.
+  And also `106b:4e`, `14e4:4312`, `14e4:4313`, `14e4:4318`, `14e4:4319`, `14e4:431a`, `14e4:4320`, `14e4:4324`, `14e4:4325`, `14e4:4328`, `14e4:432c`, `14e4:432d`.
 
   Originally created for BCM94352Z, this particular application of FakePCIID.kext is used to emulate an authentic Apple Airport Extreme, when using a variety of supported Broadcom WiFi devices.
 
