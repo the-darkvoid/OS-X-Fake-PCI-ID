@@ -24,7 +24,7 @@ In all cases, FakePCIID.kext must be installed with a kext installer (such as Ke
 In order to cause the kext to be loaded against a particular device, you must also install the appropriate injector kext.  Currently, four injectors are provided:
 
 - FakePCIID_Intel_HD_Graphics.kext (formerly FakePCIID_HD4600_HD4400.kext): 
-  This kext will attach to `8086:0412`, `8086:0416`, `8086:0a1e`, `8086:041e`, `8086:0a16`, and `8086:041a`.
+  This kext will attach to `8086:0412`, `8086:0416`, `8086:0a1e`, `8086:041e`, `8086:0a16`, `8086:041a`, `8086:016a`, `8086:191d`, or `8086:162a`
 
   - `8086:0412` is HD4600 desktop (now the only GT2 device supported in Yosemite as of 10.10.2)
   - `8086:0a16` is HD4400 mobile.
@@ -34,12 +34,14 @@ In order to cause the kext to be loaded against a particular device, you must al
   - `8086:041a` is P4600 server.
   - `8086:016a` is P4000 server.
   - `8086:191d` is P530 server.
+  - `8086:162a` is P6300 server.
   
   Normally, a fake device-id of `8086:0412` will be injected for Yosemite, as Yosemite does not natively recognize `8086:0416`.  `8086:0412` is the native device-id for HD4600 desktop.
   By injecting `0412`, `AppleIntelFramebufferAzul` and `AppleIntelHD5000Graphics` will load.
   And since, FakePCIID will also be attached to these devices, it will successfully fool both kexts that the device an Intel HD4600 Desktop IGPU (0412).
   For P4000 support, inject device-id 0166 (HD4000).
   For P530 support, inject device-id 1912 (HD530).
+  For P6300 support, inject device-id 1622 (HD6200)
 
 
 - FakePCIID_Intel_HDMI_Audio.kext:
@@ -78,8 +80,8 @@ end;
 
 
 - FakePCIID_Broadcom_WiFi.kext (formerly FakePCIID_BCM94352Z_as_BCM94360CS2.kext)
-  This kext will attach to `14e4:43b1`, `14e4:4357`, `14e4:4331`, `14e4:4353`, `14e4:432b`, `14e4:43ba`, `14e4:43a3`, `14e4:4357`, or `14e4:43a0`.
-  And also `106b:4e`, `14e4:4331`, `14e4:4312`, `14e4:4313`, `14e4:4318`, `14e4:4319`, `14e4:431a`, `14e4:4320`, `14e4:4324`, `14e4:4325`, `14e4:4328`, `14e4:432c`, `14e4:432d`,
+  This kext will attach to `14e4:43b1`, `14e4:4357`, `14e4:4331`, `14e4:4353`, `14e4:432b`, `14e4:43ba`, `14e4:43a3`, or `14e4:43a0`.
+  And also `106b:4e`, `14e4:4312`, `14e4:4313`, `14e4:4318`, `14e4:4319`, `14e4:431a`, `14e4:4320`, `14e4:4324`, `14e4:4325`, `14e4:4328`, `14e4:432c`, `14e4:432d`.
 
   Originally created for BCM94352Z, this particular application of FakePCIID.kext is used to emulate an authentic Apple Airport Extreme, when using a variety of supported Broadcom WiFi devices.
 
